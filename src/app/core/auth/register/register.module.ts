@@ -7,13 +7,12 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
-import { CustomMatErrorComponent } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.component';
+import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 
 
 @NgModule({
   declarations: [
-    RegisterComponent,
-    // CustomMatErrorComponent
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +22,8 @@ import { CustomMatErrorComponent } from 'src/app/shared/helper/custom-mat-error/
     InputTextModule,
     FormsModule,
     PasswordModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CustomMatErrorModule
   ]
 })
 export class RegisterModule { }

@@ -11,15 +11,15 @@
                             <div class="field col">
                                 <label htmlFor="name">Name</label>
                                 <input pInputText id="name" type="text" formControlName="name" />
-                                <span class="block mb-5" style="color: red;">
-                                    <!-- <custom-mat-error [control]="errorControl['userName']"></custom-mat-error> -->
+                                <span class="block" style="color: red;">
+                                    <custom-mat-error [control]="errorControl['name']"></custom-mat-error>
                                 </span>
                             </div>
                             <div class="field col">
                                 <label htmlFor="email">Email</label>
                                 <input pInputText id="email" type="email" formControlName="email" />
-                                <span class="block mb-5" style="color: red;">
-                                    <!-- <custom-mat-error [control]="errorControl['userName']"></custom-mat-error> -->
+                                <span class="block" style="color: red;">
+                                    <custom-mat-error [control]="errorControl['email']"></custom-mat-error>
                                 </span>
                             </div>
                         </div>
@@ -28,15 +28,15 @@
                             <div class="field col">
                                 <label htmlFor="username">Username</label>
                                 <input pInputText id="username" type="text" formControlName="userName" />
-                                <span class="block mb-5" style="color: red;">
-                                    <!-- <custom-mat-error [control]="errorControl['userName']"></custom-mat-error> -->
+                                <span class="block" style="color: red;">
+                                    <custom-mat-error [control]="errorControl['userName']"></custom-mat-error>
                                 </span>
                             </div>
                             <div class="field col">
                                 <label htmlFor="mobile">Mobile</label>
                                 <input pInputText id="mobile" type="text" formControlName="mobileNo" />
-                                <span class="block mb-5" style="color: red;">
-                                    <!-- <custom-mat-error [control]="errorControl['userName']"></custom-mat-error> -->
+                                <span class="block" style="color: red;">
+                                    <custom-mat-error [control]="errorControl['mobileNo']"></custom-mat-error>
                                 </span>
                             </div>
                         </div>
@@ -46,8 +46,8 @@
                                 <label for="password1">Password</label>
                                 <p-password id="password1" formControlName="password" placeholder="Password"
                                     [toggleMask]="true"></p-password>
-                                <span class="block mb-5" style="color: red;">
-                                    <!-- <custom-mat-error [control]="errorControl['userName']"></custom-mat-error> -->
+                                <span class="block" style="color: red;">
+                                    <custom-mat-error [control]="errorControl['password']"></custom-mat-error>
                                 </span>
                             </div>
 
@@ -56,16 +56,15 @@
                                     Password</label>
                                 <p-password id="confirmpassword" formControlName="confirmPassword"
                                     placeholder="Confirm Password" [toggleMask]="true"></p-password>
-                                <span class="block mb-5" style="color: red;">
-                                    <!-- <custom-mat-error [control]="errorControl['userName']"></custom-mat-error> -->
+                                <span class="block" style="color: red;">
+                                    <custom-mat-error [control]="errorControl['confirmPassword']"></custom-mat-error>
                                 </span>
                             </div>
                         </div>
 
                     </div>
                 </form>
-                <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl" [routerLink]="['/login']"
-                    (click)="register()"></button>
+                <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl" (click)="register()"></button>
             </div>
         </div>
     </div>

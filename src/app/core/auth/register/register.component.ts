@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../services/validation.service';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   valCheck: string[] = ['remember'];
 
   registerForm: FormGroup;
-  constructor(public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private router: Router) { }
+  constructor(public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -32,6 +33,19 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm);
+    if (this.registerForm.valid) {
+      this.apiService.register(this.registerForm.value).subscribe(resp => {
+        if (resp.apiStatus == 1) {
+          this.registerForm.reset();
+          this.router.navigate(['/login'])
+        } else {
+          this.registerForm.reset();
+          this.registerForm.markAllAsTouched();
+        }
+      });
+    } else {
+      this.registerForm.markAllAsTouched();
+      alert("Please fill all the fields carefully..!");
+    }
   }
 }

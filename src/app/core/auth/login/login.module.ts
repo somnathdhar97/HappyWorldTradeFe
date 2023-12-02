@@ -7,7 +7,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
-import { CustomMatErrorComponent } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.component';
+import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 // import { ToastModule } from 'primeng/toast';
 
 @NgModule({
@@ -20,8 +20,9 @@ import { CustomMatErrorComponent } from 'src/app/shared/helper/custom-mat-error/
         FormsModule,
         PasswordModule,
         ReactiveFormsModule,
+        CustomMatErrorModule
         // ToastModule
     ],
-    declarations: [LoginComponent, CustomMatErrorComponent]
+    declarations: [LoginComponent]
 })
 export class LoginModule { }
