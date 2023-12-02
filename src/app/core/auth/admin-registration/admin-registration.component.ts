@@ -41,18 +41,19 @@ export class AdminRegistrationComponent implements OnInit {
     return this.adminRegistrationForm.controls;
   }
 
-  register() {
+  create() {
     if (this.adminRegistrationForm.valid) {
       // this.apiService.register(this.adminRegistrationForm.value).subscribe(resp => {
       //   if (resp.apiStatus == 1) {
+      //     alert("Created successfully..!")
       //     this.adminRegistrationForm.reset();
-      //     this.router.navigate(['/login'])
+      //     this.router.navigate(['/dashboard'])
       //   } else {
       //     this.adminRegistrationForm.reset();
       //     this.adminRegistrationForm.markAllAsTouched();
       //   }
       // });
-      this.router.navigate(['/login'])
+      this.router.navigate(['/dashboard'])
     } else {
       this.adminRegistrationForm.markAllAsTouched();
       alert("Please fill all the fields carefully..!");

@@ -10,7 +10,7 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'login', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
             { path: 'register', loadChildren: () => import('./core/auth/register/register.module').then(m => m.RegisterModule) },
-            { path: 'adminregistration', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
+            { path: 'admin', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
             {
                 path: 'dashboard', component: AppLayoutComponent,
                 children: [
@@ -22,7 +22,8 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) }
                 ]
             },
-            { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
+            // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
+            // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
             { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
