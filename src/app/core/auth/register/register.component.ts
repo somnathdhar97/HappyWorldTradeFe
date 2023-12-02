@@ -34,15 +34,16 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
-      this.apiService.register(this.registerForm.value).subscribe(resp => {
-        if (resp.apiStatus == 1) {
-          this.registerForm.reset();
-          this.router.navigate(['/login'])
-        } else {
-          this.registerForm.reset();
-          this.registerForm.markAllAsTouched();
-        }
-      });
+      // this.apiService.register(this.registerForm.value).subscribe(resp => {
+      //   if (resp.apiStatus == 1) {
+      //     this.registerForm.reset();
+      //     this.router.navigate(['/login'])
+      //   } else {
+      //     this.registerForm.reset();
+      //     this.registerForm.markAllAsTouched();
+      //   }
+      // });
+      this.router.navigate(['/login'])
     } else {
       this.registerForm.markAllAsTouched();
       alert("Please fill all the fields carefully..!");
