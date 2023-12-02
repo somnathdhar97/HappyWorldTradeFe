@@ -1,12 +1,15 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { AppLayoutComponent } from "./layout/app.layout.component";
+import { AppLayoutComponent } from './core/layout/app.layout.component';
+// import { AppLayoutComponent } from "./layout/app.layout.component";
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            { path: '', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
+            { path: '', redirectTo: 'login', pathMatch: 'full' },
+            { path: 'login', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
+            { path: 'register', loadChildren: () => import('./core/auth/register/register.module').then(m => m.RegisterModule) },
             {
                 path: 'dashboard', component: AppLayoutComponent,
                 children: [

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -13,11 +14,24 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
         }
     `]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
     valCheck: string[] = ['remember'];
 
-    password!: string;
+    loginForm: FormGroup;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, public fb: FormBuilder) {
+
+    }
+
+    ngOnInit(): void {
+        this.loginForm = this.fb.group({
+            userName: ['', Validators.required],
+            password: ['', Validators.required],
+        })
+    }
+
+    login() {
+        console.log(this.loginForm.value);
+    }
 }
