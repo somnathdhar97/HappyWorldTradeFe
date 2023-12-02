@@ -6,8 +6,9 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
 @NgModule({
     imports: [
         RouterModule.forRoot([
+            { path: '', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
             {
-                path: '', component: AppLayoutComponent,
+                path: 'dashboard', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
