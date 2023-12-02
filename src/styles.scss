@@ -25,3 +25,9 @@ $gutter: 1rem; //for primeflex grid system
     box-shadow: var(--card-shadow);
     border-radius: 12px;
 }
+
+input.error,
+p-password.error {
+    border: 1px solid red;
+    color: red;
+}

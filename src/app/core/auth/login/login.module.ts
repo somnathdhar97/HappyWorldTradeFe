@@ -7,6 +7,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import { CustomMatErrorComponent } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.component';
+// import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
@@ -17,8 +19,9 @@ import { InputTextModule } from 'primeng/inputtext';
         InputTextModule,
         FormsModule,
         PasswordModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        // ToastModule
     ],
-    declarations: [LoginComponent]
+    declarations: [LoginComponent, CustomMatErrorComponent]
 })
 export class LoginModule { }

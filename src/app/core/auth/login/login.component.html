@@ -15,11 +15,20 @@
 
                     <label for="username" class="block text-900 text-xl font-medium mb-2">Username</label>
                     <input id="username" type="text" placeholder="Username" formControlName="userName" pInputText
-                        class="w-full md:w-30rem mb-5" style="padding:1rem">
+                        class="w-full md:w-30rem" style="padding:1rem"
+                        [class.error]="errorControl['userName'].touched && errorControl['userName'].invalid">
+                    <span class="block mb-5" style="color: red;">
+                        <custom-mat-error [control]="errorControl['userName']"></custom-mat-error>
+                    </span>
+
 
                     <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
                     <p-password id="password1" formControlName="password" placeholder="Password" [toggleMask]="true"
-                        styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                        inputStyleClass="w-full p-3 md:w-30rem"
+                        [class.error]="errorControl['password'].touched && errorControl['password'].invalid"></p-password>
+                    <span class="block mb-5" style="color: red;">
+                        <custom-mat-error [control]="errorControl['password']"></custom-mat-error>
+                    </span>
 
                     <div class="flex align-items-center justify-content-between mb-5 gap-5">
                         <div class="flex align-items-center">
@@ -30,8 +39,7 @@
                             style="color: var(--primary-color)">Forgot password?</a>
                     </div>
 
-                    <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" [routerLink]="['/dashboard']"
-                        (click)="login()"></button>
+                    <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" (click)="login()"></button>
                 </form>
             </div>
         </div>

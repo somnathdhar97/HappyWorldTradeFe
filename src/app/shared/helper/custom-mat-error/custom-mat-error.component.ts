@@ -1,4 +1,4 @@
-import { ValidationService } from '@S/validation.service';
+import { ValidationService } from '../../../core/services/validation.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 

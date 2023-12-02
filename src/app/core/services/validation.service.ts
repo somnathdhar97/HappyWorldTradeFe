@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ValidationObj } from 'app/helper/patternValidation';
+import { ValidationObj } from '../../shared/helper/patternValidation';
 
 @Injectable({
     providedIn: 'root',
