@@ -23,7 +23,7 @@ export class InvestmentComponent implements OnInit {
       schemeName: this.vs.validation('Required', 0, 100, 100),
       tenure: this.vs.validation('Required', 0, 100, 100),
       amount: this.vs.validation('Required', 0, 100, 100),
-      returnAmout: this.vs.validation('Required', 0, 100, 100),
+      returnAmout: this.vs.validation('Disable', 0, 100, 100),
       rate: this.vs.validation('Required', 0, 100, 100),
       investmentDate: this.vs.validation('Required', 0, 100, 100),
     });

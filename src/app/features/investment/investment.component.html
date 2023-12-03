@@ -28,7 +28,7 @@
                 </span>
             </div>
             <div class="field col">
-                <label htmlFor="returnamount">Retutn Amount</label>
+                <label htmlFor="returnamount">Return Amount</label>
                 <input pInputText id="returnamount" type="number" formControlName="returnAmout" />
                 <span class="block" style="color: red;">
                     <custom-mat-error [control]="errorControl['returnAmout']"></custom-mat-error>
@@ -56,6 +56,6 @@
             </div>
         </div>
 
-        <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" (click)="invest()"></button>
+        <button pButton pRipple label="Invest" class="w-full p-3 text-xl" (click)="invest()"></button>
     </div>
 </form>

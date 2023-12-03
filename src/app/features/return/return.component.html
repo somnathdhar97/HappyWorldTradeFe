@@ -1,1 +1,80 @@
-<p>return works!</p>
+<form [formGroup]="returnPaymentForm">
+    <div class="card p-fluid" style="background-color: lavender;">
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label for="user">User</label>
+                <p-dropdown [options]="cities" formControlName="userId" placeholder="Select an user"
+                    [showClear]="true"></p-dropdown>
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['userId']"></custom-mat-error>
+                </span>
+            </div>
+            <div class="field col">
+                <label for="investment">Investment ID</label>
+                <p-dropdown [options]="cities" formControlName="investmentId" placeholder="Select investment"
+                    [showClear]="true"></p-dropdown>
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['investmentId']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label for="schemename">Scheme Name</label>
+                <p-dropdown [options]="cities" formControlName="schemeName" placeholder="Select a Scheme"
+                    [showClear]="true"></p-dropdown>
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['schemeName']"></custom-mat-error>
+                </span>
+            </div>
+            <div class="field col">
+                <label for="tenure">Tenure</label>
+                <p-dropdown [options]="cities" formControlName="tenure" placeholder="Select Tenure"
+                    [showClear]="true"></p-dropdown>
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['tenure']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label htmlFor="amount">Amount</label>
+                <input pInputText id="amount" type="number" formControlName="amount" placeholder="Enter amount." />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['amount']"></custom-mat-error>
+                </span>
+            </div>
+            <div class="field col">
+                <label htmlFor="returnamount">Return Amount</label>
+                <input pInputText id="returnamount" type="number" formControlName="returnAmout" />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['returnAmout']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label htmlFor="perRate">Percenatge Rate</label>
+                <input pInputText id="perRate" type="number" formControlName="rate"
+                    placeholder="Enter percentage rate" />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['rate']"></custom-mat-error>
+                </span>
+            </div>
+
+            <div class="field col">
+                <label htmlFor="investdate">Investment Date</label>
+                <input pInputText id="investdate" type="date" formControlName="investmentDate"
+                    placeholder="Enter investment date." />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['investmentDate']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <button pButton pRipple label="Return" class="w-full p-3 text-xl" (click)="returnPayment()"></button>
+    </div>
+</form>
