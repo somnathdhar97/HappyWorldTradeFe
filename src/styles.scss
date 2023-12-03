@@ -13,6 +13,10 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
 
+body {
+    background-color: rgb(175, 216, 212);
+}
+
 .min-w-screen {
     min-width: 98vw !important;
 }

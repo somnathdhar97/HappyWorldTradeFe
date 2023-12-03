@@ -1,81 +1,61 @@
-<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
-    <div class="flex flex-column align-items-center justify-content-center">
-        <!-- <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);"> -->
-        <!-- <div class="w-full surface-card py-6 px-8 sm:px-6" style="border-radius:53px"> -->
-        <h5 class="flex align-items-center justify-content-center">Create User</h5>
-        <form [formGroup]="adminRegistrationForm">
-            <div class="p-fluid">
-
-                <div class="p-formgrid grid">
-                    <div class="field col">
-                        <label htmlFor="name">Name</label>
-                        <input pInputText id="name" type="text" formControlName="name" />
-                        <span class="block" style="color: red;">
-                            <custom-mat-error [control]="errorControl['name']"></custom-mat-error>
-                        </span>
-                    </div>
-                    <div class="field col">
-                        <label htmlFor="email">Email</label>
-                        <input pInputText id="email" type="email" formControlName="email" />
-                        <span class="block" style="color: red;">
-                            <custom-mat-error [control]="errorControl['email']"></custom-mat-error>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="p-formgrid grid">
-                    <div class="field col">
-                        <label htmlFor="username">Username</label>
-                        <input pInputText id="username" type="text" formControlName="userName" />
-                        <span class="block" style="color: red;">
-                            <custom-mat-error [control]="errorControl['userName']"></custom-mat-error>
-                        </span>
-                    </div>
-                    <div class="field col">
-                        <label htmlFor="mobile">Mobile</label>
-                        <input pInputText id="mobile" type="text" formControlName="mobileNo" />
-                        <span class="block" style="color: red;">
-                            <custom-mat-error [control]="errorControl['mobileNo']"></custom-mat-error>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="p-formgrid grid">
-                    <div class="field col">
-                        <label for="role">Role</label>
-                        <p-dropdown [options]="cities" formControlName="role" placeholder="Select a Role"
-                            [showClear]="true"></p-dropdown>
-                        <span class="block" style="color: red;">
-                            <custom-mat-error [control]="errorControl['role']"></custom-mat-error>
-                        </span>
-                    </div>
-
-                    <div class="field col">
-                        <label for="password1">Password</label>
-                        <p-password id="password1" formControlName="password" placeholder="Password"
-                            [toggleMask]="true"></p-password>
-                        <span class="block" style="color: red;">
-                            <custom-mat-error [control]="errorControl['password']"></custom-mat-error>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="p-formgrid grid">
-                    <div class="field col">
-                        <label for="confirmpassword">Confirm
-                            Password</label>
-                        <p-password id="confirmpassword" formControlName="confirmPassword"
-                            placeholder="Confirm Password" [toggleMask]="true"></p-password>
-                        <span class="block" style="color: red;">
-                            <custom-mat-error [control]="errorControl['confirmPassword']"></custom-mat-error>
-                        </span>
-                    </div>
-                </div>
-
+<form [formGroup]="investmentForm">
+    <div class="card p-fluid" style="background-color: lavender;">
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label for="schemename">Scheme Name</label>
+                <p-dropdown [options]="cities" formControlName="schemeName" placeholder="Select a Scheme"
+                    [showClear]="true"></p-dropdown>
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['schemeName']"></custom-mat-error>
+                </span>
             </div>
-        </form>
-        <button pButton pRipple label="Create" class="w-full p-3 text-xl" (click)="create()"></button>
-        <!-- </div> -->
-        <!-- </div> -->
+            <div class="field col">
+                <label for="tenure">Tenure</label>
+                <p-dropdown [options]="cities" formControlName="tenure" placeholder="Select Tenure"
+                    [showClear]="true"></p-dropdown>
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['tenure']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label htmlFor="amount">Amount</label>
+                <input pInputText id="amount" type="number" formControlName="amount" placeholder="Enter amount." />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['amount']"></custom-mat-error>
+                </span>
+            </div>
+            <div class="field col">
+                <label htmlFor="returnamount">Retutn Amount</label>
+                <input pInputText id="returnamount" type="number" formControlName="returnAmout" />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['returnAmout']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label htmlFor="perRate">Percenatge Rate</label>
+                <input pInputText id="perRate" type="number" formControlName="rate"
+                    placeholder="Enter percentage rate" />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['rate']"></custom-mat-error>
+                </span>
+            </div>
+
+            <div class="field col">
+                <label htmlFor="investdate">Investment Date</label>
+                <input pInputText id="investdate" type="date" formControlName="investmentDate"
+                    placeholder="Enter investment date." />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['investmentDate']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" (click)="invest()"></button>
     </div>
-</div>
+</form>

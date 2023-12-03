@@ -14,7 +14,7 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
             {
                 path: 'dashboard', component: AppLayoutComponent,
                 children: [
-                    { path: '', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
+                    { path: '', loadChildren: () => import('./core/layout/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'invest', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
                     { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
                     // { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
