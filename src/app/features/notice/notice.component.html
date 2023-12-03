@@ -1,1 +1,34 @@
-<p>notice works!</p>
+<form [formGroup]="noticeForm">
+    <div class="card p-fluid" style="background-color: lavender;">
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label for="noticehead">Notice Heading</label>
+                <input pInputText id="noticehead" type="text" formControlName="noticeHeading"
+                    placeholder="Enter notice heading" />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['noticeHeading']"></custom-mat-error>
+                </span>
+            </div>
+            <div class="field col">
+                <label for="noticemessage">Notice Message</label>
+                <input pInputText id="noticemessage" type="text" formControlName="noticeMessage"
+                    placeholder="Enter notice message" />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['noticeMessage']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label htmlFor="remarks">Remarks</label>
+                <input pInputText id="remarks" type="text" formControlName="remarks" placeholder="Enter remarks." />
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['remarks']"></custom-mat-error>
+                </span>
+            </div>
+        </div>
+
+        <button pButton pRipple label="Create" class="w-full p-3 text-xl" (click)="create()"></button>
+    </div>
+</form>
