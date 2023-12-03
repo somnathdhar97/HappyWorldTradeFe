@@ -1,5 +1,5 @@
 .layout-topbar {
-    position: fixed;
+    //position: fixed;
     height: 5rem;
     z-index: 997;
     left: 0;
@@ -63,7 +63,7 @@
     }
 
     .layout-menu-button {
-        margin-left: 2rem;
+        margin-left: 0rem;
     }
 
     .layout-topbar-menu-button {
@@ -146,4 +146,22 @@
             }
         }
     }
+}
+.p-breadcrumb {
+    background: rgba(255, 255, 255, 0.1);
+    border: 0px solid #dee2e6;
+    border-radius: 0px;
+}
+.sub-nav{
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid #dee2e6;
+    // border-radius: 6px;
+}
+.sub-nav-dark {
+    backdrop-filter: blur(10px);
+    background: rgba(7, 20, 38, 0.7); /* Dark background color with reduced opacity */
+    // border: 1px solid #333; /* Adjust border color for dark mode */
+    // border-radius: 6px;
+    color: #fff; /* Text color for dark mode */
 }

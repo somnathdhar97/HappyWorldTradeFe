@@ -12,6 +12,8 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { AppLayoutModule } from './core/layout/app.layout.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from './core/interceptors/api.interceptor';
 
 @NgModule({
     declarations: [
@@ -23,6 +25,7 @@ import { AppLayoutModule } from './core/layout/app.layout.module';
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
+        {provide: HTTP_INTERCEPTORS,useClass: ApiInterceptor,multi:true},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService
     ],

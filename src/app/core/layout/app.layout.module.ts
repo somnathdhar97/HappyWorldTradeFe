@@ -17,6 +17,11 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { LoadingIndeterminateComponent } from './loading-indeterminate/loading-indeterminate.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+import {BreadcrumbModule} from "primeng/breadcrumb";
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     declarations: [
@@ -26,6 +31,8 @@ import { AppLayoutComponent } from "./app.layout.component";
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        LoadingIndeterminateComponent,
+        BreadcrumbComponent,
     ],
     imports: [
         BrowserModule,
@@ -39,7 +46,10 @@ import { AppLayoutComponent } from "./app.layout.component";
         InputSwitchModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        ProgressBarModule,
+        BreadcrumbModule,
+        ButtonModule
     ],
     exports: [AppLayoutComponent]
 })
