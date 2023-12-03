@@ -10,13 +10,14 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'login', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
             { path: 'register', loadChildren: () => import('./core/auth/register/register.module').then(m => m.RegisterModule) },
-            { path: 'admin', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
             {
                 path: 'dashboard', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./core/layout/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'invest', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
                     { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
+                    { path: 'createuser', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
+
                     // { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     // { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
                     // { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },

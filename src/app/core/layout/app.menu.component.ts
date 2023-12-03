@@ -17,7 +17,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Create',
                 items: [
-                    { label: 'Create User', icon: 'pi pi-fw pi-user-plus', routerLink: ['/admin/registration'] }
+                    { label: 'Create User', icon: 'pi pi-fw pi-user-plus', routerLink: ['createuser'] }
                 ]
             },
             {
