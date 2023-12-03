@@ -17,6 +17,7 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
                     { path: 'invest', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
                     { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
                     { path: 'createuser', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
+                    { path: 'createnotice', loadChildren: () => import('./features/notice/notice.module').then(m => m.NoticeModule) },
 
                     // { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     // { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
