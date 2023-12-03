@@ -15,6 +15,7 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
                 path: 'dashboard', component: AppLayoutComponent,
                 children: [
                     { path: 'invest', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
+                    { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
                     { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
