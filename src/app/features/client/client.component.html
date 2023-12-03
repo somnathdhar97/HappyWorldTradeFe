@@ -161,9 +161,10 @@
                                 </td>
                                 <td class="text-center">
                                     <span class="p-buttonset">
-                                        <button pButton pRipple label="New Invast" icon="pi pi-plus"></button>
+                                        <button pButton pRipple label="New Invast" icon="pi pi-plus" *ngIf="client.status!=3"></button>
                                         <button pButton pRipple label="Update" icon="pi pi-user-edit" class="p-button-secondary"></button>
-                                        <button pButton pRipple label="Deactivate" icon="pi pi-ban" class="p-button-danger"></button>
+                                        <button pButton pRipple label="Deactivate" icon="pi pi-ban" class="p-button-danger" (click)="changeUserStatus(client.id,3)" *ngIf="client.status!=3"></button>
+                                        <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-success" (click)="changeUserStatus(client.id,2)" *ngIf="client.status==3"></button>
                                     </span>
                                 </td>
                             </tr>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IClient, IStatusWiseClient } from 'src/app/core/models/IClient';
+import { IChangeStatus, IClient, IStatusWiseClient } from 'src/app/core/models/IClient';
 import { ClientService } from 'src/app/core/services/client.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 
@@ -11,6 +11,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 export class ClientComponent implements OnInit {
   clients:IClient [][];
   allTypesOfClients:IStatusWiseClient;
+  updateUserStatus:IChangeStatus;
   loading: boolean = true;
   constructor(
     private clientService: ClientService,
@@ -35,6 +36,21 @@ export class ClientComponent implements OnInit {
     this.clientService.getStatusWiseClients().subscribe((response)=>{
       if(response.apiResponseStatus==1){
         this.allTypesOfClients = response.result;
+      }else{
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+  changeUserStatus(userId:number,status:number){
+    this.updateUserStatus= {
+      id:userId,
+      status:status
+    }
+    this.clientService.updateUserStatus(this.updateUserStatus).subscribe((response)=>{
+      if(response.apiResponseStatus==1){
+        this.toastService.showSuccess(response.message);
+        this.getAllClient();
+        this.getUserCountStatusWise();
       }else{
         this.toastService.showError(response.message);
       }

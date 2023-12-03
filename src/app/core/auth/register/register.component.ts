@@ -5,6 +5,8 @@ import { ValidationService } from '../../services/validation.service';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { INewClient } from '../../models/IClient';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -13,9 +15,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   valCheck: string[] = ['remember'];
-
+  newClientData: INewClient;
   registerForm: FormGroup;
-  constructor(public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
+  constructor(private toastService: ToastService,public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -43,7 +45,21 @@ export class RegisterComponent implements OnInit {
       //     this.registerForm.markAllAsTouched();
       //   }
       // });
-      this.router.navigate(['/login'])
+      this.newClientData ={
+        name : this.registerForm.value.name,
+        username:this.registerForm.value.userName,
+        mobileNumber:this.registerForm.value.mobileNo,
+        password:this.registerForm.value.confirmPassword,
+        email:this.registerForm.value.email,
+      }
+      this.authService.regisertNewClient(this.newClientData).subscribe((response)=>{
+        if(response.apiResponseStatus==1){
+          this.toastService.showSuccess(response.message);
+          this.router.navigate(['/auth/login']);
+        }else{
+          this.toastService.showError(response.message);
+        }
+      });
     } else {
       this.registerForm.markAllAsTouched();
       alert("Please fill all the fields carefully..!");
