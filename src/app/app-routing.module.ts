@@ -7,18 +7,23 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
 @NgModule({
     imports: [
         RouterModule.forRoot([
+            {
+                path: '', component: AppLayoutComponent,
+                children: [
+                    { path: '', loadChildren: () => import('./core/layout/dashboard/dashboard.module').then(m => m.DashboardModule) },
+                    { path: 'invest', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
+                    { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
+                    { path: 'createuser', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
+                    { path: 'client', loadChildren: () => import('./features/client/client.module').then(m => m.ClientModule) },
+                ]
+            },
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'login', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
             { path: 'register', loadChildren: () => import('./core/auth/register/register.module').then(m => m.RegisterModule) },
             {
                 path: 'dashboard', component: AppLayoutComponent,
                 children: [
-                    { path: '', loadChildren: () => import('./core/layout/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                    { path: 'invest', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
-                    { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
-                    { path: 'createuser', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
-                    { path: 'createnotice', loadChildren: () => import('./features/notice/notice.module').then(m => m.NoticeModule) },
-
+                    
                     // { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     // { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
                     // { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
@@ -27,9 +32,8 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
                     // { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) }
                 ]
             },
-            // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
-            // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
-            { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
+            // { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
+            { path: 'auth', loadChildren: () => import('./core/auth/auth.module').then(m => m.AuthModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
