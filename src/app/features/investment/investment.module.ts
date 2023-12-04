@@ -1,31 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PasswordModule } from 'primeng/password';
-import { InputTextModule } from 'primeng/inputtext';
-import { InvestmentRoutingModule } from './investment-routing.module';
-import { InvestmentComponent } from './investment.component';
-import { DropdownModule } from 'primeng/dropdown';
-import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 
+import { InvestmentRoutingModule } from './investment-routing.module';
+import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { InvestmentComponent } from './investment.component';
 
 @NgModule({
-  declarations: [
-    InvestmentComponent
-  ],
+  declarations: [InvestmentComponent],
   imports: [
     CommonModule,
     InvestmentRoutingModule,
+    CardModule,
     ButtonModule,
-    CheckboxModule,
-    InputTextModule,
-    FormsModule,
-    PasswordModule,
-    ReactiveFormsModule,
-    CustomMatErrorModule,
-    DropdownModule
+    ToolbarModule,
+    TableModule,
+    InputTextModule
   ]
 })
 export class InvestmentModule { }

@@ -1,62 +1,67 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LayoutService } from 'src/app/core/layout/service/app.layout.service';
-import { ApiService } from 'src/app/core/services/api.service';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { ValidationService } from 'src/app/core/services/validation.service';
+import { IInvestments, IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
+import { InvesmentService } from 'src/app/core/services/invesment.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-investment',
   templateUrl: './investment.component.html',
   styleUrls: ['./investment.component.scss']
 })
-export class InvestmentComponent implements OnInit {
-
-  investmentForm: FormGroup;
-  cities: any[] = [];
-
-  constructor(public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
-
+export class InvestmentComponent implements OnInit  {
+  investments:IInvestments [][];
+  invesmentsCouts:IStatusWiseInvesment;
+  loading: boolean = true;
+  selectedCard:number;
+  constructor(
+    private invesmentService: InvesmentService,
+    private toastService: ToastService
+) {}
   ngOnInit(): void {
-    this.investmentForm = this.fb.group({
-      schemeName: this.vs.validation('Required', 0, 100, 100),
-      tenure: this.vs.validation('Required', 0, 100, 100),
-      amount: this.vs.validation('Required', 0, 100, 100),
-      returnAmout: this.vs.validation('Disable', 0, 100, 100),
-      rate: this.vs.validation('Required', 0, 100, 100),
-      investmentDate: this.vs.validation('Required', 0, 100, 100),
-    });
-    this.cities = [
-      { label: 'New York', value: { id: 1, name: 'New York', code: 'NY' } },
-      { label: 'Rome', value: { id: 2, name: 'Rome', code: 'RM' } },
-      { label: 'London', value: { id: 3, name: 'London', code: 'LDN' } },
-      { label: 'Istanbul', value: { id: 4, name: 'Istanbul', code: 'IST' } },
-      { label: 'Paris', value: { id: 5, name: 'Paris', code: 'PRS' } }
-    ];
+    this.investmentsByStatus(0);
+    this.countInvesments();
   }
-
-  get errorControl() {
-    return this.investmentForm.controls;
-  }
-
-  invest() {
-    if (this.investmentForm.valid) {
-      console.log(this.investmentForm.value);
-      // this.apiService.register(this.investmentForm.value).subscribe(resp => {
-      //   if (resp.apiStatus == 1) {
-      //     alert("Created successfully..!")
-      //     this.investmentForm.reset();
-      //     this.router.navigate(['/dashboard'])
-      //   } else {
-      //     this.investmentForm.reset();
-      //     this.investmentForm.markAllAsTouched();
-      //   }
-      // });
-      // this.router.navigate(['/dashboard'])
-    } else {
-      this.investmentForm.markAllAsTouched();
-      alert("Please fill all the fields carefully..!");
+  cardClicked(cardId:number,statusId:number) {
+    this.selectedCard = (this.selectedCard==cardId)?null:cardId;
+    if(this.selectedCard!=null){
+    this.investmentsByStatus(statusId);
     }
+    this.investmentsByStatus(0);
+  }
+  isSelected(cardId:number):boolean{
+    return this.selectedCard==cardId;
+  }
+  countInvesments(){
+    this.invesmentService.getStatusWiseInvesmentCount().subscribe((response)=>{
+      if(response.apiResponseStatus==1){
+        this.invesmentsCouts = response.result;
+        console.log(this.invesmentsCouts);
+        
+      }else{
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+  investmentsByStatus(statusId:number){
+    this.loading = true;
+    this.invesmentService.getInvesmentsByStatus(statusId).subscribe((response)=>{
+      if(response.apiResponseStatus==1){
+        this.investments = response.result;
+        this.loading = false;
+      }else{
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+  allInvestments(){
+    this.loading = true;
+    this.invesmentService.getAllInvesments().subscribe((response)=>{
+      if(response.apiResponseStatus==1){
+        this.investments = response.result;
+        this.loading = false;
+      }else{
+        this.toastService.showError(response.message);
+      }
+    });
   }
 }
