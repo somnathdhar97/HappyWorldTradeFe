@@ -1,0 +1,109 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="grid">
+            <div class="col">
+                <div class="grid nested-grid">
+                    <!-- <div class="col-fixed">
+                        <img
+                            src="assets/layout/images/icons/application/{{
+                                'scope-type' | lowercase
+                            }}.png"
+                            alt="logo"
+                            height="60"
+                        />
+                    </div> -->
+                    <div class="col-11">
+                        <div class="text-900 font-bold text-3xl mb-1">
+                            Invesment
+                        </div>
+                        <div class="text-700 text-1xl line-height-3">
+                            New Invesment.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-fixed">
+                <p-button
+                    [routerLink]="['/invest']"
+                    label="Close"
+                    styleClass="p-button-rounded p-button-raised p-button-danger"
+                    icon="pi pi-times"
+                ></p-button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="title"> New Invesment Details </ng-template>
+                <ng-template pTemplate="subtitle">
+                    <!-- Enter Permisiion Name -->
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <form
+                    [formGroup]="investmentForm"
+                    class="p-fluid p-formgrid grid"
+                >
+                    <div class="field col-12 md:col-6">
+                        <label for="schemename">Scheme Name</label>
+                        <p-dropdown [options]="cities" formControlName="schemeName" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Scheme"
+                            [showClear]="true"></p-dropdown>
+                        <span class="block" style="color: red;">
+                            <custom-mat-error [control]="errorControl['schemeName']"></custom-mat-error>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="tenure">Tenure</label>
+                        <p-dropdown [options]="cities" formControlName="tenure" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select Tenure"
+                            [showClear]="true"></p-dropdown>
+                        <span class="block" style="color: red;">
+                            <custom-mat-error [control]="errorControl['tenure']"></custom-mat-error>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="amount">Amount</label>
+                        <input pInputText id="amount" type="number" formControlName="amount" placeholder="Enter amount." />
+                        <span class="block" style="color: red;">
+                            <custom-mat-error [control]="errorControl['amount']"></custom-mat-error>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="returnamount">Return Amount</label>
+                        <input pInputText id="returnamount" type="number" formControlName="returnAmout" />
+                        <span class="block" style="color: red;">
+                            <custom-mat-error [control]="errorControl['returnAmout']"></custom-mat-error>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="perRate">Percenatge Rate</label>
+                        <input pInputText id="perRate" type="number" formControlName="rate"
+                            placeholder="Enter percentage rate" />
+                        <span class="block" style="color: red;">
+                            <custom-mat-error [control]="errorControl['rate']"></custom-mat-error>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="investdate">Investment Date</label>
+                        <!-- <input pInputText id="investdate" type="date" formControlName="investmentDate"
+                            placeholder="Enter investment date." /> -->
+                            <p-calendar [showIcon]="true" inputId="icon" id="investdate" formControlName="investmentDate"></p-calendar>
+                        <span class="block" style="color: red;">
+                            <custom-mat-error [control]="errorControl['investmentDate']"></custom-mat-error>
+                        </span>
+                    </div>
+                </form>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="grid grid-nogutter justify-content-end">
+                        <p-button
+                            label="Submit"
+                            icon="pi pi-save"
+                            styleClass="p-button-raised p-button-success"
+                            (onClick)="submit()"
+                        ></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>

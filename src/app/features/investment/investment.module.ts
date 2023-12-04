@@ -8,7 +8,6 @@ import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { InvestmentComponent } from './investment.component';
-
 @NgModule({
   declarations: [InvestmentComponent],
   imports: [

@@ -4,6 +4,7 @@ import { InvestmentComponent } from './investment.component';
 
 const routes: Routes = [
   { path: '', component: InvestmentComponent},
+  { path: 'new-investment', loadChildren: () => import('./new-investment/new-investment.module').then(m => m.NewInvestmentModule) },
 ];
 
 @NgModule({
