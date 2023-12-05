@@ -21,14 +21,25 @@
 
         <div class="p-formgrid grid">
             <div class="field col">
-                <label htmlFor="remarks">Remarks</label>
-                <input pInputText id="remarks" type="text" formControlName="remarks" placeholder="Enter remarks." />
+                <label htmlFor="effectivefrom">Effective From</label>
+                <p-calendar [showIcon]="true" inputId="icon" id="effectivefrom"
+                    formControlName="effectiveFrom"></p-calendar>
                 <span class="block" style="color: red;">
-                    <custom-mat-error [control]="errorControl['remarks']"></custom-mat-error>
+                    <custom-mat-error [control]="errorControl['effectiveFrom']"></custom-mat-error>
+                </span>
+            </div>
+
+            <div class="field col">
+                <label htmlFor="effectiveto">Effective To</label>
+                <p-calendar [showIcon]="true" inputId="icon" id="effectiveto"
+                    formControlName="effectiveTo"></p-calendar>
+                <span class="block" style="color: red;">
+                    <custom-mat-error [control]="errorControl['effectiveTo']"></custom-mat-error>
                 </span>
             </div>
         </div>
 
         <button pButton pRipple label="Create" class="w-full p-3 text-xl" (click)="create()"></button>
+
     </div>
 </form>

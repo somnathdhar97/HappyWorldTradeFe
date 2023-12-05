@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 import { NoticeRoutingModule } from './notice-routing.module';
 import { NoticeComponent } from './notice.component';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NoticeComponent } from './notice.component';
     PasswordModule,
     ReactiveFormsModule,
     CustomMatErrorModule,
-    DropdownModule
+    DropdownModule,
+    CalendarModule,
   ]
 })
 export class NoticeModule { }
