@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewInvestmentRoutingModule } from './new-investment-routing.module';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -10,6 +10,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { NewInvestmentComponent } from './new-investment.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from "primeng/calendar";
+import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 @NgModule({
   declarations: [NewInvestmentComponent],
   imports: [
@@ -21,7 +22,10 @@ import { CalendarModule } from "primeng/calendar";
     TableModule,
     InputTextModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CustomMatErrorModule,
   ]
 })
 export class NewInvestmentModule { }

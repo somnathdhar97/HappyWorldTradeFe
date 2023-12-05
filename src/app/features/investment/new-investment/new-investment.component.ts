@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IScheme, ITenure } from 'src/app/core/models/master';
+import { IInvestment, IPaymentMethod, IScheme, ITenure, IUser } from 'src/app/core/models/master';
 import { MasterService } from 'src/app/core/services/master.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidationService } from 'src/app/core/services/validation.service';
@@ -14,49 +14,89 @@ export class NewInvestmentComponent implements OnInit {
   investmentForm: FormGroup;
   schemes: IScheme[] = [];
   tenures: ITenure[] = [];
-  constructor(private fb: FormBuilder,private vs: ValidationService,private toastService: ToastService,private masterService:MasterService){}
+  users: IUser[] = [];
+  paymentMethods: IPaymentMethod[] = [];
+
+  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService) { }
   ngOnInit(): void {
     this.investmentForm = this.fb.group({
-      schemeName: this.vs.validation('Required', 0, 100, 100),
+      userName: this.vs.validation('Required', 0, 100, 100),
+      scheme: this.vs.validation('Required', 0, 100, 100),
       tenure: this.vs.validation('Required', 0, 100, 100),
       amount: this.vs.validation('Required', 0, 100, 100),
       returnAmout: this.vs.validation('Disable', 0, 100, 100),
       rate: this.vs.validation('Required', 0, 100, 100),
+      paymentMethod: this.vs.validation('Required', 0, 100, 100),
+      documentNo: this.vs.validation('Required', 0, 100, 100),
       investmentDate: this.vs.validation('Required', 0, 100, 100),
     });
     this.allScheme();
     this.allTenure();
+    this.allUser();
+    this.allPaymentMethod();
   }
-  allTenure(){
-    this.masterService.getTenures().subscribe((response)=>{
-      if(response.apiResponseStatus==1){
+
+  allTenure() {
+    this.masterService.getTenures().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
         this.tenures = response.result;
-        
-      }else{
+
+      } else {
         this.toastService.showError(response.message);
       }
     });
   }
-  allScheme(){
-    this.masterService.getSchemes().subscribe((response)=>{
-      if(response.apiResponseStatus==1){
+
+  allScheme() {
+    this.masterService.getSchemes().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
         this.schemes = response.result;
-        
-      }else{
+
+      } else {
         this.toastService.showError(response.message);
       }
     });
   }
+
+  allUser() {
+    this.masterService.getUsers().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
+        this.users = response.result;
+
+      } else {
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+
+  allPaymentMethod() {
+    this.masterService.getPaymentMethods().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
+        this.paymentMethods = response.result;
+      } else {
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+
   get errorControl() {
     return this.investmentForm.controls;
   }
 
-  submit(){
-    console.log(this.investmentForm.value);
-
+  submit() {
+    let investPayload: IInvestment = {
+      UserId: this.investmentForm.value.userName.id,
+      SchemeId: this.investmentForm.value.scheme.id,
+      TenureId: this.investmentForm.value.tenure.id,
+      Amount: this.investmentForm.value.amount,
+      // RatePer: this.investmentForm.getRawValue().returnAmout,
+      RatePer: this.investmentForm.value.rate,
+      PaymentMethod: this.investmentForm.value.paymentMethod.id,
+      DocumnetNumber: this.investmentForm.value.documentNo,
+      InvesmentDate: this.investmentForm.value.investmentDate,
+    };
     if (this.investmentForm.valid) {
-      console.log(this.investmentForm.value);
-      // this.apiService.register(this.investmentForm.value).subscribe(resp => {
+      // this.apiService.register(investPayload).subscribe(resp => {
       //   if (resp.apiStatus == 1) {
       //     alert("Created successfully..!")
       //     this.investmentForm.reset();

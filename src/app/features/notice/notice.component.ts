@@ -22,6 +22,8 @@ export class NoticeComponent implements OnInit {
       noticeHeading: this.vs.validation('Required', 0, 100, 100),
       noticeMessage: this.vs.validation('Required', 0, 100, 100),
       remarks: this.vs.validation('Required', 0, 100, 100),
+      effectiveForm: this.vs.validation('Required', 0, 100, 100),
+      effectiveTo: this.vs.validation('Required', 0, 100, 100),
     });
   }
 

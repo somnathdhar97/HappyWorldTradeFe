@@ -9,23 +9,45 @@ import { ToastService } from './toast.service';
 })
 export class MasterService {
 
-  constructor(private http: HttpClient,private toastService: ToastService) { }
+  constructor(private http: HttpClient, private toastService: ToastService) { }
   getSchemes(): Observable<IapiResponce> {
     return this.http
-        .get<IapiResponce>('v1/Scheme/GetSehemes')
-        .pipe(
-            catchError((error) => {
-                throw this.toastService.showError(error.message);
-            }),
-        );
+      .get<IapiResponce>('v1/Scheme/GetSehemes')
+      .pipe(
+        catchError((error) => {
+          throw this.toastService.showError(error.message);
+        }),
+      );
   }
+
   getTenures(): Observable<IapiResponce> {
     return this.http
-        .get<IapiResponce>('v1/Tenure/GetTenures')
-        .pipe(
-            catchError((error) => {
-                throw this.toastService.showError(error.message);
-            }),
-        );
+      .get<IapiResponce>('v1/Tenure/GetTenures')
+      .pipe(
+        catchError((error) => {
+          throw this.toastService.showError(error.message);
+        }),
+      );
   }
+
+  getUsers(): Observable<IapiResponce> {
+    return this.http
+      .get<IapiResponce>('v1/User/GetClients')
+      .pipe(
+        catchError((error) => {
+          throw this.toastService.showError(error.message);
+        }),
+      );
+  }
+
+  getPaymentMethods(): Observable<IapiResponce> {
+    return this.http
+      .get<IapiResponce>('v1/PaymentMethod/GetPaymentMethods')
+      .pipe(
+        catchError((error) => {
+          throw this.toastService.showError(error.message);
+        }),
+      );
+  }
+
 }
