@@ -44,7 +44,7 @@
                 >
                     <div class="field col-12 md:col-6">
                         <label for="schemename">Scheme Name</label>
-                        <p-dropdown [options]="cities" formControlName="schemeName" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Scheme"
+                        <p-dropdown [options]="schemes" formControlName="schemeName" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Scheme"
                             [showClear]="true"></p-dropdown>
                         <span class="block" style="color: red;">
                             <custom-mat-error [control]="errorControl['schemeName']"></custom-mat-error>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="field col-12 md:col-6">
                         <label for="tenure">Tenure</label>
-                        <p-dropdown [options]="cities" formControlName="tenure" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select Tenure"
+                        <p-dropdown [options]="tenures" formControlName="tenure" optionLabel="name" [filter]="true"  filterBy="name" [showClear]="true" placeholder="Select Tenure"
                             [showClear]="true"></p-dropdown>
                         <span class="block" style="color: red;">
                             <custom-mat-error [control]="errorControl['tenure']"></custom-mat-error>
