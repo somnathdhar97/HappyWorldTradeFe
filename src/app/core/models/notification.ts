@@ -1,9 +1,9 @@
 export interface INotification {
-    id: number;
+    id?: number;
     name: string;
     message: string;
     type: number;
-    status: number;
+    status?: number;
     validFrom: Date;
     validTo: Date;
 }
