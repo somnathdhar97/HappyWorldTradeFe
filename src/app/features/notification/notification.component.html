@@ -113,7 +113,11 @@
                                     {{notification.statusId}}
                                 </td> -->
                                 <td class="text-center">
-                                    
+                                    <span class="p-buttonset" >
+                                        <button pButton pRipple label="Update" icon="pi pi-user-edit" class="p-button-sm p-button-secondary"></button>
+                                        <button pButton pRipple label="Deactivate" icon="pi pi-ban" class="p-button-sm p-button-danger" *ngIf="notification.status==1" (click)="changeNotificationStatus(notification.id,0)"></button>
+                                        <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-sm p-button-success" *ngIf="notification.status==0" (click)="changeNotificationStatus(notification.id,1)"></button>
+                                    </span>
                                 </td>
                             </tr>
                         </ng-template>
