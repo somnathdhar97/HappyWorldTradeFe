@@ -20,6 +20,15 @@ export class NotificationService {
             }),
         );
   }
+  getActiveNotifications(): Observable<IapiResponce> {
+    return this.http
+        .get<IapiResponce>('v1/Notification/GetActiveNotifications')
+        .pipe(
+            catchError((error) => {
+                throw this.toastService.showError(error.message);
+            }),
+        );
+  }
   setNewNotification(newNotificationData:INotification): Observable<IapiResponce> {
     return this.http
         .post<IapiResponce>('v1/Notification/NewNotification',newNotificationData)
