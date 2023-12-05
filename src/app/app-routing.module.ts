@@ -15,6 +15,7 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
                     { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
                     { path: 'createuser', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
                     { path: 'client', loadChildren: () => import('./features/client/client.module').then(m => m.ClientModule) },
+                    { path: 'notification', loadChildren: () => import('./features/notification/notification.module').then(m => m.NotificationModule) },
                 ]
             },
             { path: '', redirectTo: 'login', pathMatch: 'full' },
