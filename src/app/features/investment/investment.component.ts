@@ -25,8 +25,10 @@ export class InvestmentComponent implements OnInit  {
     this.selectedCard = (this.selectedCard==cardId)?null:cardId;
     if(this.selectedCard!=null){
     this.investmentsByStatus(statusId);
+    }else{
+      this.investmentsByStatus(0);
     }
-    this.investmentsByStatus(0);
+    
   }
   isSelected(cardId:number):boolean{
     return this.selectedCard==cardId;
