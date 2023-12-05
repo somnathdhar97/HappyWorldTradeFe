@@ -13,25 +13,5 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
 
-body {
-    background-color: rgb(175, 216, 212);
-}
-
-.min-w-screen {
-    min-width: 98vw !important;
-}
-
-.card {
-    background: var(--surface-card);
-    border: 1px solid var(--surface-border);
-    padding: .5rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--card-shadow);
-    border-radius: 12px;
-}
-
-input.error,
-p-password.error {
-    border: 1px solid red;
-    color: red;
-}
+/* Material Icons*/
+// @import 'material-icons/iconfont/material-icons.css';
