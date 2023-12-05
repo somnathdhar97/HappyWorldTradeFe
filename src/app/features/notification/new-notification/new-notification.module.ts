@@ -10,6 +10,8 @@ import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from "primeng/calendar";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 
 @NgModule({
   declarations: [NewNotificationComponent],
@@ -22,7 +24,10 @@ import { CalendarModule } from "primeng/calendar";
     TableModule,
     ToolbarModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CustomMatErrorModule
   ]
 })
 export class NewNotificationModule { }

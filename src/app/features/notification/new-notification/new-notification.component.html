@@ -4,11 +4,7 @@
             <div class="col">
                 <div class="grid nested-grid">
                     <div class="col-fixed">
-                        <img
-                            src="assets/layout/images/icons/notification.png"
-                            alt="logo"
-                            height="60"
-                        />
+                        <img src="assets/layout/images/icons/notification.png" alt="logo" height="60" />
                     </div>
                     <div class="col-11">
                         <div class="text-900 font-bold text-3xl mb-1">
@@ -21,12 +17,8 @@
                 </div>
             </div>
             <div class="col-fixed">
-                <p-button
-                    [routerLink]="['/notification']"
-                    label="Close"
-                    styleClass="p-button-rounded p-button-raised p-button-danger"
-                    icon="pi pi-times"
-                ></p-button>
+                <p-button [routerLink]="['/notification']" label="Close"
+                    styleClass="p-button-rounded p-button-raised p-button-danger" icon="pi pi-times"></p-button>
             </div>
         </div>
     </div>
@@ -38,16 +30,55 @@
                     <!-- Enter Permisiion Name -->
                 </ng-template>
                 <ng-template pTemplate="content">
-                    //FROME HERE
+                    <!-- //FROME HERE -->
+                    <form [formGroup]="noticeForm">
+                        <div class="p-fluid">
+                            <div class="p-formgrid grid">
+                                <div class="field col">
+                                    <label for="noticehead">Notice Heading</label>
+                                    <input pInputText id="noticehead" type="text" formControlName="noticeHeading"
+                                        placeholder="Enter notice heading" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['noticeHeading']"></custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col">
+                                    <label for="noticemessage">Notice Message</label>
+                                    <input pInputText id="noticemessage" type="text" formControlName="noticeMessage"
+                                        placeholder="Enter notice message" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['noticeMessage']"></custom-mat-error>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="p-formgrid grid">
+                                <div class="field col">
+                                    <label htmlFor="effectivefrom">Effective From</label>
+                                    <p-calendar [showIcon]="true" inputId="icon" id="effectivefrom"
+                                        formControlName="effectiveFrom"></p-calendar>
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['effectiveFrom']"></custom-mat-error>
+                                    </span>
+                                </div>
+
+                                <div class="field col">
+                                    <label htmlFor="effectiveto">Effective To</label>
+                                    <p-calendar [showIcon]="true" inputId="icon" id="effectiveto"
+                                        formControlName="effectiveTo"></p-calendar>
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['effectiveTo']"></custom-mat-error>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
                 </ng-template>
                 <ng-template pTemplate="footer">
                     <div class="grid grid-nogutter justify-content-end">
-                        <p-button
-                            label="Submit"
-                            icon="pi pi-save"
-                            styleClass="p-button-raised p-button-success"
-                            (onClick)="submit()"
-                        ></p-button>
+                        <p-button label="Submit" icon="pi pi-save" styleClass="p-button-raised p-button-success"
+                            (onClick)="create()"></p-button>
                     </div>
                 </ng-template>
             </p-card>
