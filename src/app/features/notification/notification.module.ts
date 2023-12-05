@@ -8,6 +8,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
+import { NewNotificationComponent } from './new-notification/new-notification.component';
 @NgModule({
   declarations: [NotificationComponent],
   imports: [

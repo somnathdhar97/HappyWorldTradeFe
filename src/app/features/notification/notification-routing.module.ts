@@ -5,6 +5,7 @@ import { NotificationComponent } from './notification.component';
 
 const routes: Routes = [
   { path: '', component: NotificationComponent},
+  { path: 'new-notification', loadChildren: () => import('./new-notification/new-notification.module').then(m => m.NewNotificationModule) },
 ];
 
 @NgModule({

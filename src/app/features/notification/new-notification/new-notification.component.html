@@ -1,0 +1,56 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="grid">
+            <div class="col">
+                <div class="grid nested-grid">
+                    <div class="col-fixed">
+                        <img
+                            src="assets/layout/images/icons/notification.png"
+                            alt="logo"
+                            height="60"
+                        />
+                    </div>
+                    <div class="col-11">
+                        <div class="text-900 font-bold text-3xl mb-1">
+                            Notification
+                        </div>
+                        <div class="text-700 text-1xl line-height-3">
+                            New Notification.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-fixed">
+                <p-button
+                    [routerLink]="['/notification']"
+                    label="Close"
+                    styleClass="p-button-rounded p-button-raised p-button-danger"
+                    icon="pi pi-times"
+                ></p-button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="title"> New Notification Details </ng-template>
+                <ng-template pTemplate="subtitle">
+                    <!-- Enter Permisiion Name -->
+                </ng-template>
+                <ng-template pTemplate="content">
+                    //FROME HERE
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="grid grid-nogutter justify-content-end">
+                        <p-button
+                            label="Submit"
+                            icon="pi pi-save"
+                            styleClass="p-button-raised p-button-success"
+                            (onClick)="submit()"
+                        ></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>
