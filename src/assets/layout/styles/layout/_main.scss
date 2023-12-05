@@ -26,3 +26,19 @@ a {
 .layout-wrapper {
     min-height: 100vh;
 }
+.blinear-gradient-background{
+    // background: linear-gradient(
+    //     0deg,
+    //     rgba(255, 255, 255, 0.2),
+    //     rgba(255, 255, 255, 0.2)
+    // ),
+    // radial-gradient(
+    //     77.36% 256.97% at 77.36% 57.52%,
+    //     #eeefaf 0%,
+    //     #c3e3fa 100%
+    // );
+    background: #acb6e5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #86fde8, #acb6e5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #86fde8, #acb6e5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
