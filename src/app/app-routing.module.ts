@@ -10,7 +10,7 @@ import { AppLayoutComponent } from './core/layout/app.layout.component';
             {
                 path: '', component: AppLayoutComponent,
                 children: [
-                    { path: '', loadChildren: () => import('./core/layout/dashboard/dashboard.module').then(m => m.DashboardModule) },
+                    { path: '', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'invest', loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
                     { path: 'return', loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
                     { path: 'createuser', loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },

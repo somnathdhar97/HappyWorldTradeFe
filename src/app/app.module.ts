@@ -17,6 +17,8 @@ import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { NotificationComponent } from './features/notification/notification.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { MenuCardComponent } from './shared/menu-card/menu-card.component';
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent,
