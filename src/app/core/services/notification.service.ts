@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { IapiResponce } from '../models/iapi-responce';
 import { ToastService } from './toast.service';
-import { INotification } from '../models/notification';
+import { INotification, INotificationStatus } from '../models/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,12 @@ export class NotificationService {
                 throw this.toastService.showError(error.message);
             }),
         );
+  }
+  updateUserStatus(newStatusDeatils:INotificationStatus) : Observable<IapiResponce> {
+    return this.http.post<IapiResponce>('v1/Notification/NotificationStatusUpdate',newStatusDeatils).pipe(
+      catchError((error) => {
+          throw this.toastService.showError(error.message);
+      })
+    );
   }
 }

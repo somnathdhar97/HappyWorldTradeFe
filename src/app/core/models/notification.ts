@@ -7,3 +7,7 @@ export interface INotification {
     validFrom: Date;
     validTo: Date;
 }
+export interface INotificationStatus {
+    id?: number;
+    status: number;
+}
