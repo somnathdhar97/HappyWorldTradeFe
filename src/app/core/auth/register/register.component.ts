@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
       this.authService.regisertNewClient(this.newClientData).subscribe((response)=>{
         if(response.apiResponseStatus==1){
           this.toastService.showSuccess(response.message);
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['login']);
         }else{
           this.toastService.showError(response.message);
         }

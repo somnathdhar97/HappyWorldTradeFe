@@ -21,10 +21,10 @@ import { ToastService } from '../../services/toast.service';
     `]
 })
 export class LoginComponent implements OnInit {
-    logingcredentials:ILogincredentials;
+    logingcredentials: ILogincredentials;
     loginForm: FormGroup;
 
-    constructor(private toastService: ToastService,public layoutService: LayoutService, public fb: FormBuilder, public vs: ValidationService, public apiService: ApiService, private router: Router, private authService: AuthService) { }
+    constructor(private toastService: ToastService, public layoutService: LayoutService, public fb: FormBuilder, public vs: ValidationService, public apiService: ApiService, private router: Router, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.loginForm = this.fb.group({
@@ -39,23 +39,22 @@ export class LoginComponent implements OnInit {
 
     login() {
         if (this.loginForm.valid) {
-            this.logingcredentials={
+            this.logingcredentials = {
                 username: this.loginForm.value.userName,
-                password:this.loginForm.value.password
+                password: this.loginForm.value.password
             };
-            this.authService.userLogin(this.logingcredentials).subscribe((response)=>{
-                if(response.apiResponseStatus==1){
+            this.authService.userLogin(this.logingcredentials).subscribe((response) => {
+                if (response.apiResponseStatus == 1) {
                     this.authService.setToken(response.result);
                     this.toastService.showSuccess(response.message);
                     this.router.navigate(['/']);
-                  }else{
+                } else {
                     this.toastService.showError(response.message);
-                  }
+                }
             });
-            // this.router.navigate(['/dashboard'])
         } else {
             this.loginForm.markAllAsTouched();
-            alert("Please fill all the fields carefully..!");
+            this.toastService.showError("Please fill all the fields carefully..!");
         }
     }
 }

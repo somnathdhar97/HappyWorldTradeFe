@@ -22,21 +22,18 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  // getDecodedAccessToken(): any {
-  //   try {
-  //     const token = this.getToken();
-  //     return jwt_decode(token ? token : '');
-  //   } catch (Error) {
-  //     return null;
-  //   }
-  // }
-  userLogin(logingcredentials:ILogincredentials):Observable<IapiResponce>{
-    return this.http.post<IapiResponce>('v1/Auth/login',logingcredentials).pipe(
+  clearLocalStorage(){
+    localStorage.clear();
+  }
+
+  userLogin(logingcredentials: ILogincredentials): Observable<IapiResponce> {
+    return this.http.post<IapiResponce>('v1/Auth/login', logingcredentials).pipe(
       catchError((error) => {
-          throw this.toastService.showError(error.message);
+        throw this.toastService.showError(error.message);
       })
     );
   }
+
   getDecodedAccessToken(): any {
     try {
       const token = this.getToken();
