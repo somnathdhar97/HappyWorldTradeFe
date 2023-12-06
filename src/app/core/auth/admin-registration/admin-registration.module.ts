@@ -9,6 +9,7 @@ import { AdminRegistrationRoutingModule } from './admin-registration-routing.mod
 import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 import { AdminRegistrationComponent } from './admin-registration.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { CardModule } from 'primeng/card';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DropdownModule } from 'primeng/dropdown';
     PasswordModule,
     ReactiveFormsModule,
     CustomMatErrorModule,
-    DropdownModule
+    DropdownModule,
+    CardModule
   ]
 })
 export class AdminRegistrationModule { }
