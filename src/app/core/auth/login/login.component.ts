@@ -5,6 +5,8 @@ import { ValidationService } from '../../services/validation.service';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ILogincredentials } from '../../models/iauth';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-login',
@@ -19,10 +21,10 @@ import { AuthService } from '../../services/auth.service';
     `]
 })
 export class LoginComponent implements OnInit {
-
+    logingcredentials:ILogincredentials;
     loginForm: FormGroup;
 
-    constructor(public layoutService: LayoutService, public fb: FormBuilder, public vs: ValidationService, public apiService: ApiService, private router: Router, private authService: AuthService) { }
+    constructor(private toastService: ToastService,public layoutService: LayoutService, public fb: FormBuilder, public vs: ValidationService, public apiService: ApiService, private router: Router, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.loginForm = this.fb.group({
@@ -37,17 +39,20 @@ export class LoginComponent implements OnInit {
 
     login() {
         if (this.loginForm.valid) {
-            // this.apiService.login(this.loginForm.value).subscribe(resp => {
-            //     if (resp.apiStatus == 1) {
-            //         this.loginForm.reset();
-            //         this.authService.setToken(resp.token);
-            //         this.router.navigate(['/dashboard'])
-            //     } else {
-            //         this.loginForm.reset();
-            //         this.loginForm.markAllAsTouched();
-            //     }
-            // });
-            this.router.navigate(['/dashboard'])
+            this.logingcredentials={
+                username: this.loginForm.value.userName,
+                password:this.loginForm.value.password
+            };
+            this.authService.userLogin(this.logingcredentials).subscribe((response)=>{
+                if(response.apiResponseStatus==1){
+                    this.authService.setToken(response.result);
+                    this.toastService.showSuccess(response.message);
+                    this.router.navigate(['/']);
+                  }else{
+                    this.toastService.showError(response.message);
+                  }
+            });
+            // this.router.navigate(['/dashboard'])
         } else {
             this.loginForm.markAllAsTouched();
             alert("Please fill all the fields carefully..!");

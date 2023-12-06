@@ -4,6 +4,7 @@ import { ToastService } from './toast.service';
 import { Observable, catchError } from 'rxjs';
 import { IapiResponce } from '../models/iapi-responce';
 import { INewClient } from '../models/IClient';
+import { ILogincredentials } from '../models/iauth';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,13 @@ export class AuthService {
   //     return null;
   //   }
   // }
-
+  userLogin(logingcredentials:ILogincredentials):Observable<IapiResponce>{
+    return this.http.post<IapiResponce>('v1/Auth/login',logingcredentials).pipe(
+      catchError((error) => {
+          throw this.toastService.showError(error.message);
+      })
+    );
+  }
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
