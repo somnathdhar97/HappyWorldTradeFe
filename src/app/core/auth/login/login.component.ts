@@ -47,7 +47,11 @@ export class LoginComponent implements OnInit {
                 if (response.apiResponseStatus == 1) {
                     this.authService.setToken(response.result);
                     this.toastService.showSuccess(response.message);
-                    this.router.navigate(['/']);
+                    if (this.authService.getRole() == 'client') {
+                        this.router.navigate(['clientDashboard'])
+                    } else if (this.authService.getRole() == 'admin') {
+                        this.router.navigate(['/']);
+                    }
                 } else {
                     this.toastService.showError(response.message);
                 }

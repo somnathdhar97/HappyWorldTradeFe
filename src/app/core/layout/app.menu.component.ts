@@ -14,7 +14,7 @@ export class AppMenuComponent implements OnInit {
     constructor(public layoutService: LayoutService, private authService: AuthService) { }
 
     ngOnInit() {
-        if (this.authService.getDecodedAccessToken().role == 'admin') {
+        if (this.authService.getRole() == 'admin') {
             this.model = [
                 {
                     label: 'Create',
@@ -36,7 +36,7 @@ export class AppMenuComponent implements OnInit {
                     ]
                 }
             ];
-        } else if (this.authService.getDecodedAccessToken().role == 'client') {
+        } else if (this.authService.getRole() == 'client') {
             this.model = [
                 {
                     label: 'Invest',

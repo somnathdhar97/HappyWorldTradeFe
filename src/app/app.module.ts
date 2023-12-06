@@ -19,6 +19,7 @@ import { MessageService } from 'primeng/api';
 import { NotificationComponent } from './features/notification/notification.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { MenuCardComponent } from './shared/menu-card/menu-card.component';
+import { ClientDashboardComponent } from './features/client-dashboard/client-dashboard.component';
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent,
@@ -30,8 +31,8 @@ import { MenuCardComponent } from './shared/menu-card/menu-card.component';
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        {provide: HTTP_INTERCEPTORS,useClass: ApiInterceptor,multi:true},
-        CountryService, CustomerService,MessageService, EventService, IconService, NodeService,
+        { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+        CountryService, CustomerService, MessageService, EventService, IconService, NodeService,
         PhotoService, ProductService
     ],
     bootstrap: [AppComponent]
