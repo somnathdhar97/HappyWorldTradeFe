@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { IInvestments, IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { InvesmentService } from 'src/app/core/services/invesment.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 
@@ -14,13 +15,16 @@ export class InvestmentComponent implements OnInit {
   invesmentsCouts: IStatusWiseInvesment;
   loading: boolean = true;
   selectedCard: number;
+  userRole : string;
   constructor(
     private invesmentService: InvesmentService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService : AuthService
   ) { }
   ngOnInit(): void {
     this.allInvestments();;
     this.countInvesments();
+    this.userRole = this.authService.getRole();
   }
   cardClicked(cardId: number, statusId: number) {
     this.selectedCard = (this.selectedCard == cardId) ? null : cardId;

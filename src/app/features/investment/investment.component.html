@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-fixed">
+            <div class="col-fixed" *ngIf="userRole == 'admin'">
                 <p-button [routerLink]="['new-investment']" label="New Invesment"
                     styleClass="p-button-rounded p-button-raised" icon="pi pi-plus"></p-button>
             </div>

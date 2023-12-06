@@ -21,18 +21,8 @@ export class ClientDashboardComponent {
     private toastService: ToastService
   ) { }
   ngOnInit(): void {
-    this.countUsers();
     this.countInvesments();
     this.allActiveNotifications();
-  }
-  countUsers() {
-    this.clientService.getStatusWiseClients().subscribe((response) => {
-      if (response.apiResponseStatus == 1) {
-        this.clientsCounts = response.result;
-      } else {
-        this.toastService.showError(response.message);
-      }
-    });
   }
   countInvesments() {
     this.invesmentService.getStatusWiseInvesmentCount().subscribe((response) => {
