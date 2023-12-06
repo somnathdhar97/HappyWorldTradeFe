@@ -7,13 +7,13 @@
             <div class="flex justify-content-between mb-3">
                 <div>
                     <span class="block text-500 font-medium mb-3">Investments</span>
-                    <div class="text-900 font-medium text-xl">{{invesmentsCouts.allInvesments}}</div>
+                    <div class="text-900 font-medium text-xl">{{invesmentsCouts?.allInvesments}}</div>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">{{invesmentsCouts.activeInvesments}} Active </span>
+            <span class="text-green-500 font-medium">{{invesmentsCouts?.activeInvesments}} Active </span>
             <span class="text-500">Currently</span>
         </div>
     </div>
@@ -37,13 +37,13 @@
             <div class="flex justify-content-between mb-3">
                 <div>
                     <span class="block text-500 font-medium mb-3">Returend</span>
-                    <div class="text-900 font-medium text-xl">{{invesmentsCouts.returnedInvesments}}</div>
+                    <div class="text-900 font-medium text-xl">{{invesmentsCouts?.returnedInvesments}}</div>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-reply text-cyan-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">{{invesmentsCouts.retrunPendingInvesments}}</span>
+            <span class="text-green-500 font-medium">{{invesmentsCouts?.retrunPendingInvesments}}</span>
             <span class="text-500">Return Pending</span>
         </div>
     </div>
@@ -52,13 +52,13 @@
             <div class="flex justify-content-between mb-3">
                 <div>
                     <span class="block text-500 font-medium mb-3">Clients</span>
-                    <div class="text-900 font-medium text-xl">{{clientsCounts.subscriber}} Active</div>
+                    <div class="text-900 font-medium text-xl">{{clientsCounts?.subscriber}} Active</div>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-purple-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-users text-purple-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">{{clientsCounts.newUser}} </span>
+            <span class="text-green-500 font-medium">{{clientsCounts?.newUser}} </span>
             <span class="text-500">New Clients</span>
         </div>
     </div>
@@ -97,7 +97,7 @@
             </div>
 
             <!-- <span class="block text-600 font-medium mb-3">TODAY</span> -->
-            <div *ngIf="notifications.length > 0; else noNotifications">
+            <div *ngIf="notifications?.length > 0; else noNotifications">
             <ul class="p-0 mx-0 mt-0 mb-4 list-none">
                 <li *ngFor="let notification of notifications" class="flex align-items-center py-2 border-bottom-1 surface-border">
                   <div class="w-3rem h-3rem flex align-items-center justify-content-center border-circle" [ngClass]="getBackgroundColorClass(notification.type)">
