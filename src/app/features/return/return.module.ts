@@ -9,6 +9,7 @@ import { ReturnRoutingModule } from './return-routing.module';
 import { ReturnComponent } from './return.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/cus
     PasswordModule,
     ReactiveFormsModule,
     CustomMatErrorModule,
-    DropdownModule
+    DropdownModule,
+    CardModule
   ]
 })
 export class ReturnModule { }

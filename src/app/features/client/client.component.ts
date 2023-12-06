@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IChangeStatus, IClient, IStatusWiseClient } from 'src/app/core/models/IClient';
 import { ClientService } from 'src/app/core/services/client.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { Table } from 'primeng/table';
+
 
 @Component({
   selector: 'app-client',
@@ -9,51 +11,55 @@ import { ToastService } from 'src/app/core/services/toast.service';
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent implements OnInit {
-  clients:IClient [][];
-  allTypesOfClients:IStatusWiseClient;
-  updateUserStatus:IChangeStatus;
+  clients: IClient[][];
+  allTypesOfClients: IStatusWiseClient;
+  updateUserStatus: IChangeStatus;
   loading: boolean = true;
   constructor(
     private clientService: ClientService,
     private toastService: ToastService
-) {}
+  ) { }
   ngOnInit(): void {
     this.getAllClient();
     this.getUserCountStatusWise();
   }
-  getAllClient(){
+  getAllClient() {
     this.loading = true;
-    this.clientService.getClients().subscribe((responce)=>{
-      if(responce.apiResponseStatus==1){
+    this.clientService.getClients().subscribe((responce) => {
+      if (responce.apiResponseStatus == 1) {
         this.clients = responce.result;
-      }else{
+      } else {
         this.toastService.showError(responce.message);
       }
       this.loading = false;
     });
   }
-  getUserCountStatusWise(){
-    this.clientService.getStatusWiseClients().subscribe((response)=>{
-      if(response.apiResponseStatus==1){
+  getUserCountStatusWise() {
+    this.clientService.getStatusWiseClients().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
         this.allTypesOfClients = response.result;
-      }else{
+      } else {
         this.toastService.showError(response.message);
       }
     });
   }
-  changeUserStatus(userId:number,status:number){
-    this.updateUserStatus= {
-      id:userId,
-      status:status
+  changeUserStatus(userId: number, status: number) {
+    this.updateUserStatus = {
+      id: userId,
+      status: status
     }
-    this.clientService.updateUserStatus(this.updateUserStatus).subscribe((response)=>{
-      if(response.apiResponseStatus==1){
+    this.clientService.updateUserStatus(this.updateUserStatus).subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
         this.toastService.showSuccess(response.message);
         this.getAllClient();
         this.getUserCountStatusWise();
-      }else{
+      } else {
         this.toastService.showError(response.message);
       }
     });
+  }
+
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 }

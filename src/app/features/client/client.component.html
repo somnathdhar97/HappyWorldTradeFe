@@ -128,19 +128,19 @@
                                 <th style="min-width: 12rem">
                                     <div class="flex justify-content-between align-items-center">
                                         Mobile
-                                        <p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
+                                        <p-columnFilter type="text" field="mobileNumber" display="menu" placeholder="Search by mobile no."></p-columnFilter>
                                     </div>
                                 </th>
                                 <th style="min-width: 10rem">
                                     <div class="flex justify-content-between align-items-center">
                                         Email
-                                        <p-columnFilter type="date" field="date" display="menu" placeholder="mm/dd/yyyy"></p-columnFilter>
+                                        <p-columnFilter type="text" field="email" display="menu" placeholder="Search by email"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th style="min-width: 12rem">
                                     <div class="flex justify-content-between align-items-center">
                                         Status
-                                        <p-columnFilter field="status" matchMode="equals" display="menu">
+                                        <p-columnFilter type="numeric" field="status" matchMode="equals" display="menu">
                                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                                                 <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [style]="{'min-width': '12rem'}" >
                                                     <ng-template let-option pTemplate="item">
