@@ -45,7 +45,14 @@ export class AuthService {
       return null;
     }
   }
-
+  getRole(){
+    try {
+      const decodeToken = this.getDecodedAccessToken();
+      return decodeToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    } catch (Error) {
+      return null;
+    }
+  }
   isLoggedIn(): boolean {
     return !!this.getToken();
   }

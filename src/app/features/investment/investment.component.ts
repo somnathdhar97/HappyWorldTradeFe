@@ -19,7 +19,7 @@ export class InvestmentComponent implements OnInit {
     private toastService: ToastService
   ) { }
   ngOnInit(): void {
-    this.investmentsByStatus(0);
+    this.allInvestments();;
     this.countInvesments();
   }
   cardClicked(cardId: number, statusId: number) {
