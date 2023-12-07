@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { IInsertInvestment } from 'src/app/core/models/Iinvesment';
 import { IInvestment, IPaymentMethod, IScheme, ITenure, IUser } from 'src/app/core/models/master';
+import { InvesmentService } from 'src/app/core/services/invesment.service';
 import { MasterService } from 'src/app/core/services/master.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidationService } from 'src/app/core/services/validation.service';
@@ -12,12 +14,13 @@ import { ValidationService } from 'src/app/core/services/validation.service';
 })
 export class NewInvestmentComponent implements OnInit {
   investmentForm: FormGroup;
+  investmentData:IInsertInvestment;
   schemes: IScheme[] = [];
   tenures: ITenure[] = [];
   users: IUser[] = [];
   paymentMethods: IPaymentMethod[] = [];
 
-  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService) { }
+  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService,private invesmentService:InvesmentService) { }
   ngOnInit(): void {
     this.investmentForm = this.fb.group({
       userName: this.vs.validation('Required', 0, 100, 100),
@@ -96,17 +99,23 @@ export class NewInvestmentComponent implements OnInit {
       InvesmentDate: this.investmentForm.value.investmentDate,
     };
     if (this.investmentForm.valid) {
-      // this.apiService.register(investPayload).subscribe(resp => {
-      //   if (resp.apiStatus == 1) {
-      //     alert("Created successfully..!")
-      //     this.investmentForm.reset();
-      //     this.router.navigate(['/dashboard'])
-      //   } else {
-      //     this.investmentForm.reset();
-      //     this.investmentForm.markAllAsTouched();
-      //   }
-      // });
-      // this.router.navigate(['/dashboard'])
+      this.investmentData = {
+        userId: this.investmentForm.value.userName.id,
+        schemeId: this.investmentForm.value.scheme.id,
+        tenureId: this.investmentForm.value.tenure.id,
+        amount: this.investmentForm.value.amount,
+        ratePer: this.investmentForm.value.rate,
+        paymentMethodId: this.investmentForm.value.paymentMethod.id,
+        paymentMethodDoc: this.investmentForm.value.documentNo,
+        investmentDate: this.investmentForm.value.investmentDate,
+      }
+      this.invesmentService.setNewInvesment(this.investmentData).subscribe((response)=>{
+        if (response.apiResponseStatus == 1) {
+          this.toastService.showSuccess(response.message);
+        } else {
+          this.toastService.showError(response.message);
+        }
+      });
     } else {
       this.investmentForm.markAllAsTouched();
       this.toastService.showError("Please fill all the fields carefully..!");
