@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastService } from './toast.service';
 import { Observable, catchError } from 'rxjs';
 import { IapiResponce } from '../models/iapi-responce';
-import { INewClient } from '../models/IClient';
+import { INewUser } from '../models/IClient';
 import { ILogincredentials } from '../models/iauth';
 import { jwtDecode } from 'jwt-decode';
 
@@ -56,8 +56,16 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  regisertNewClient(newClitentDetails: INewClient): Observable<IapiResponce> {
-    return this.http.post<IapiResponce>('v1/User/NewUser', newClitentDetails).pipe(
+  regisertNewClient(newClitentDetails: INewUser): Observable<IapiResponce> {
+    return this.http.post<IapiResponce>('v1/User/ClientRegister', newClitentDetails).pipe(
+      catchError((error) => {
+        throw this.toastService.showError(error.message);
+      })
+    );
+  }
+
+  CraeteNewAdmin(newAdminDetails: INewUser): Observable<IapiResponce> {
+    return this.http.post<IapiResponce>('v1/User/NewUser', newAdminDetails).pipe(
       catchError((error) => {
         throw this.toastService.showError(error.message);
       })

@@ -5,7 +5,7 @@ import { ValidationService } from '../../services/validation.service';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { INewClient } from '../../models/IClient';
+import { INewUser } from '../../models/IClient';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class RegisterComponent implements OnInit {
   valCheck: string[] = ['remember'];
-  newClientData: INewClient;
+  newClientData: INewUser;
   registerForm: FormGroup;
   constructor(private toastService: ToastService,public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 

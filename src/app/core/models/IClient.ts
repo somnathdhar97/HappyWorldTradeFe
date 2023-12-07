@@ -5,7 +5,7 @@ export interface IClient {
     email?: string;
     status:string
 } 
-export interface INewClient {
+export interface INewUser {
     name: string;
     username:string;
     password: string
