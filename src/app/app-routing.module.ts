@@ -16,6 +16,7 @@ import { authGuard } from './core/guards/auth.guard';
                     { path: 'createuser', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
                     { path: 'client', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./features/client/client.module').then(m => m.ClientModule) },
                     { path: 'notification', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./features/notification/notification.module').then(m => m.NotificationModule) },
+                    { path: 'admin-user', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./features/admin-user/admin-user.module').then(m => m.AdminUserModule) },
                 ]
             },
             { path: '', redirectTo: 'login', pathMatch: 'full' },
