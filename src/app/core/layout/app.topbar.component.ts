@@ -20,10 +20,20 @@ export class AppTopBarComponent {
 
   @ViewChild('topbarmenu') menu!: ElementRef;
 
+  decodedToken: string;
+  userRole: string;
+  userName: string;
+  userId: string;
+
   // constructor(public layoutService: LayoutService, private authService: AuthService) {
   // }
   constructor(public layoutService: LayoutService, private authService: AuthService, private router: Router) {
+    this.decodedToken = this.authService.getDecodedAccessToken();
+    this.userId = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    this.userName = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    this.userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
+
   logOut() {
     this.authService.clearLocalStorage();
     this.router.navigate(['login']);

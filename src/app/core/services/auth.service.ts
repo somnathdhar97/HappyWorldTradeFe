@@ -42,6 +42,7 @@ export class AuthService {
       return null;
     }
   }
+
   getRole(){
     try {
       const decodeToken = this.getDecodedAccessToken();
@@ -50,6 +51,7 @@ export class AuthService {
       return null;
     }
   }
+  
   isLoggedIn(): boolean {
     return !!this.getToken();
   }

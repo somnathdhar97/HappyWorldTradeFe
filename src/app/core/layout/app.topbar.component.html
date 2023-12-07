@@ -1,47 +1,43 @@
 <div style="position: fixed; height: 5rem; width: 100%; z-index: 997">
     <div class="layout-topbar">
-        <button
-            #menubutton
-            class="p-link layout-menu-button layout-topbar-button"
-            (click)="layoutService.onMenuToggle()"
-        >
+        <button #menubutton class="p-link layout-menu-button layout-topbar-button"
+            (click)="layoutService.onMenuToggle()">
             <i class="pi pi-bars"></i>
         </button>
         <a class="layout-topbar-logo" routerLink="">
-            <img
-                src="assets/layout/images/{{
+            <img src="assets/layout/images/{{
                     layoutService.config.colorScheme === 'light'
                         ? 'logo'
                         : 'logo_dark'
-                }}.png"
-                alt="logo"
-            />
+                }}.png" alt="logo" />
             <!-- <img src="assets/layout/images/logo.png" alt="logo" /> -->
             <span>Happy World Trade</span>
         </a>
 
-        <button
-            #topbarmenubutton
-            class="p-link layout-topbar-menu-button layout-topbar-button"
-            (click)="layoutService.showProfileSidebar()"
-        >
+        <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button"
+            (click)="layoutService.showProfileSidebar()">
             <i class="pi pi-ellipsis-v"></i>
         </button>
 
-        <div
-            #topbarmenu
-            class="layout-topbar-menu"
-            [ngClass]="{
-                'layout-topbar-menu-mobile-active':
-                    layoutService.state.profileSidebarVisible
-            }"
-        >
+        <div #topbarmenu class="layout-topbar-menu" [ngClass]="{
+            'layout-topbar-menu-mobile-active':
+                layoutService.state.profileSidebarVisible
+        }">
             <button class="p-link layout-topbar-button" type="button" (click)="op1.toggle($event)">
                 <i class="pi pi-user"></i>
                 <span>Profile</span>
             </button>
-            <p-overlayPanel #op1 [showCloseIcon]="true" [style]="{width: '250px'}">
-                <button pButton pRipple type="button" label="Edit" class="p-button-raised p-button-danger"></button>
+            <p-overlayPanel #op1 [showCloseIcon]="true" [style]="{width: '350px'}">
+                <div class="text-xl text-center font-light mt-3">
+                    <span>User : {{userName}}</span><br>
+                </div>
+                <div class="text-xl text-center text-orange-300 mt-3">
+                    <span>Role : {{userRole}}</span><br>
+                </div>
+                <div class="text-center mt-3">
+                    <button pButton pRipple type="button" label="Edit" class="p-button-raised p-button-danger" style="width: 100%;"></button>
+                </div>
+
             </p-overlayPanel>
 
             <button class="p-link layout-topbar-button" (click)="logOut()">
