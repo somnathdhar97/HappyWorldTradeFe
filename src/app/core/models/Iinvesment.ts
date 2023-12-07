@@ -1,4 +1,4 @@
-export interface IStatusWiseInvesment{
+export interface IStatusWiseInvesment {
     allInvesments: number;
     activeInvesments: number;
     returnedInvesments: number;
@@ -12,5 +12,16 @@ export interface IInvestments {
     amount: number;
     ratePer: number;
     invesmentDate: string;
-    statusId:number;
-  }
+    statusId: number;
+}
+
+export interface IInsertInvestment {
+    userId: number;
+    schemeId: number;
+    tenureId: number;
+    amount: number;
+    ratePer: number;
+    paymentMethodId: number;
+    paymentMethodDoc: string;
+    investmentDate: Date;
+}
