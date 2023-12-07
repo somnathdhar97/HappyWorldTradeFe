@@ -55,7 +55,6 @@ export class ReturnComponent implements OnInit {
         Remarks: this.returnPaymentForm.value.remarks,
         Amount: this.returnPaymentForm.value.amount,
       };
-      console.log(returnPayload);
       // this.apiService.register(returnPayload).subscribe(resp => {
       //   if (resp.apiStatus == 1) {
       //     this.toastService.showSuccess("Created successfully..!")
