@@ -22,6 +22,7 @@ import { LoadingIndeterminateComponent } from './loading-indeterminate/loading-i
 import { ProgressBarModule } from 'primeng/progressbar';
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import { ButtonModule } from 'primeng/button';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { ButtonModule } from 'primeng/button';
         AppConfigModule,
         ProgressBarModule,
         BreadcrumbModule,
-        ButtonModule
+        ButtonModule,
+        OverlayPanelModule
     ],
     exports: [AppLayoutComponent]
 })

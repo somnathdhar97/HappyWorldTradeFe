@@ -1,10 +1,21 @@
 <div style="position: fixed; height: 5rem; width: 100%; z-index: 997">
     <div class="layout-topbar">
-    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
-        <i class="pi pi-bars"></i>
-    </button>
+        <button
+            #menubutton
+            class="p-link layout-menu-button layout-topbar-button"
+            (click)="layoutService.onMenuToggle()"
+        >
+            <i class="pi pi-bars"></i>
+        </button>
         <a class="layout-topbar-logo" routerLink="">
-            <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo' : 'logo_dark'}}.png" alt="logo">
+            <img
+                src="assets/layout/images/{{
+                    layoutService.config.colorScheme === 'light'
+                        ? 'logo'
+                        : 'logo_dark'
+                }}.png"
+                alt="logo"
+            />
             <!-- <img src="assets/layout/images/logo.png" alt="logo" /> -->
             <span>Happy World Trade</span>
         </a>
@@ -20,17 +31,25 @@
         <div
             #topbarmenu
             class="layout-topbar-menu"
-            (click)="logOut()"
             [ngClass]="{
                 'layout-topbar-menu-mobile-active':
                     layoutService.state.profileSidebarVisible
             }"
         >
-            <button class="p-link layout-topbar-button">
+            <button class="p-link layout-topbar-button" type="button" (click)="op1.toggle($event)">
+                <i class="pi pi-user"></i>
+                <span>Profile</span>
+            </button>
+            <p-overlayPanel #op1 [showCloseIcon]="true" [style]="{width: '250px'}">
+                <button pButton pRipple type="button" label="Edit" class="p-button-raised p-button-danger"></button>
+            </p-overlayPanel>
+
+            <button class="p-link layout-topbar-button" (click)="logOut()">
                 <i class="pi pi-sign-out"></i>
-                <span>Sign</span>
+                <span>Sign Out</span>
             </button>
         </div>
+
     </div>
     <app-loading-indeterminate></app-loading-indeterminate>
     <app-breadcrumb></app-breadcrumb>
