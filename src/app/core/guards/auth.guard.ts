@@ -7,7 +7,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
 
   if (authService.isLoggedIn()) {
-    
+
     const userRole = authService.getRole();
 
     if (userRole === 'client' && route.data['role'] && route.data['role'].includes('client')) {
@@ -22,6 +22,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
 
   } else {
+    authService.clearLocalStorage();
     router.navigate(['login']);
     return false;
   }
