@@ -20,6 +20,7 @@ import { NotificationComponent } from './features/notification/notification.comp
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { MenuCardComponent } from './shared/menu-card/menu-card.component';
 import { ClientDashboardComponent } from './features/client-dashboard/client-dashboard.component';
+import { UpdateProfileComponent } from './features/update-profile/update-profile.component';
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent,
