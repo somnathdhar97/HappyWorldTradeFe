@@ -203,7 +203,8 @@
                                     [class]="'client-badge status-' + investment.statusId">{{investment.statusId}}</span>
                             </td>
                             <td class="text-center">
-
+                                <button pButton pRipple label="Return" icon="pi pi-send"
+                                    class="p-button-sm p-button-danger" (click)="returnPayment(investment.id)"></button>
                             </td>
                         </tr>
                     </ng-template>
