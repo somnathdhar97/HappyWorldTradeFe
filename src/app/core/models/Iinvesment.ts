@@ -25,3 +25,11 @@ export interface IInsertInvestment {
     paymentMethodDoc: string;
     investmentDate: Date;
 }
+
+export interface IInvestmentReturn {
+    InvestmentId: number,
+    Amount: number,
+    PaymentMethod: number,
+    DocumnetNumber: string,
+    Remarks: string,
+}
