@@ -20,14 +20,14 @@
             <div class="flex justify-content-between mb-3">
                 <div>
                     <span class="block text-500 font-medium mb-3">Invest</span>
-                    <div class="text-900 font-medium text-xl">{{transactionAmount.totalCreditAmount | currency:'INR':'symbol':'1.2-2'}}</div>
+                    <div class="text-900 font-medium text-xl">{{transactionAmount?.totalCreditAmount | currency:'INR':'symbol':'1.2-2'}}</div>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
                     [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-money-bill text-orange-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">{{transactionAmount.totalDebitAmount | currency:'INR':'symbol':'1.2-2'}}</span>
+            <span class="text-green-500 font-medium">{{transactionAmount?.totalDebitAmount | currency:'INR':'symbol':'1.2-2'}}</span>
             <span class="text-500">Retuend</span>
         </div>
     </div>
