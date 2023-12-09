@@ -22,7 +22,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  clearLocalStorage(){
+  clearLocalStorage() {
     localStorage.clear();
   }
 
@@ -43,7 +43,7 @@ export class AuthService {
     }
   }
 
-  getRole(){
+  getRole() {
     try {
       const decodeToken = this.getDecodedAccessToken();
       return decodeToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
@@ -51,7 +51,7 @@ export class AuthService {
       return null;
     }
   }
-  
+
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
@@ -66,6 +66,14 @@ export class AuthService {
 
   CraeteNewAdmin(newAdminDetails: INewUser): Observable<IapiResponce> {
     return this.http.post<IapiResponce>('v1/User/NewUser', newAdminDetails).pipe(
+      catchError((error) => {
+        throw this.toastService.showError(error.message);
+      })
+    );
+  }
+
+  checkUserName(userName: string): Observable<IapiResponce> {
+    return this.http.get<IapiResponce>('v1/User/CheckUsernameAvailabilityty/' + userName).pipe(
       catchError((error) => {
         throw this.toastService.showError(error.message);
       })

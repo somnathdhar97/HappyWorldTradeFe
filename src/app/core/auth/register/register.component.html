@@ -27,7 +27,7 @@
                         <div class="p-formgrid grid">
                             <div class="field col">
                                 <label htmlFor="username">Username</label>
-                                <input pInputText id="username" type="text" formControlName="userName" />
+                                <input pInputText id="username" type="text" formControlName="userName"(focusout)="checkUsernameAvailability($event)"/>
                                 <span class="block" style="color: red;">
                                     <custom-mat-error [control]="errorControl['userName']"></custom-mat-error>
                                 </span>

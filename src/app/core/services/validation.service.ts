@@ -6,7 +6,7 @@ import { ValidationObj } from '../../shared/helper/patternValidation';
     providedIn: 'root',
 })
 export class ValidationService {
-    constructor() {}
+    constructor() { }
 
     validation(pattern: string, min: number, max: number, optional: any): any {
         switch (pattern) {
@@ -18,6 +18,9 @@ export class ValidationService {
 
             case 'Disable':
                 return [{ value: '', disabled: true }, [Validators.required]];
+
+            case 'Mobile':
+                return ['', Validators.compose([Validators.required, Validators.minLength(min), Validators.maxLength(max)])];
 
             case 'Not Required':
                 return ['', Validators.compose([Validators.minLength(min), Validators.maxLength(max)])];

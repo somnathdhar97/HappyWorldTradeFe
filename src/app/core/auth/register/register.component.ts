@@ -17,14 +17,14 @@ export class RegisterComponent implements OnInit {
   valCheck: string[] = ['remember'];
   newClientData: INewUser;
   registerForm: FormGroup;
-  constructor(private toastService: ToastService,public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
+  constructor(private toastService: ToastService, public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: this.vs.validation('Required', 0, 100, 100),
       email: this.vs.validation('Email', 0, 100, 100),
       userName: this.vs.validation('Required', 0, 100, 100),
-      mobileNo: this.vs.validation('Required', 10, 10, 100),
+      mobileNo: this.vs.validation('Mobile', 10, 10, 100),
       password: this.vs.validation('Required', 0, 100, 100),
       confirmPassword: this.vs.validation('Required', 0, 100, 100),
     });
@@ -36,33 +36,35 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
-      // this.apiService.register(this.registerForm.value).subscribe(resp => {
-      //   if (resp.apiStatus == 1) {
-      //     this.registerForm.reset();
-      //     this.router.navigate(['/login'])
-      //   } else {
-      //     this.registerForm.reset();
-      //     this.registerForm.markAllAsTouched();
-      //   }
-      // });
-      this.newClientData ={
-        name : this.registerForm.value.name,
-        username:this.registerForm.value.userName,
-        mobileNumber:this.registerForm.value.mobileNo,
-        password:this.registerForm.value.confirmPassword,
-        email:this.registerForm.value.email,
+      this.newClientData = {
+        name: this.registerForm.value.name,
+        username: this.registerForm.value.userName,
+        mobileNumber: this.registerForm.value.mobileNo,
+        password: this.registerForm.value.confirmPassword,
+        email: this.registerForm.value.email,
       }
-      this.authService.regisertNewClient(this.newClientData).subscribe((response)=>{
-        if(response.apiResponseStatus==1){
+      this.authService.regisertNewClient(this.newClientData).subscribe((response) => {
+        if (response.apiResponseStatus == 1) {
           this.toastService.showSuccess(response.message);
           this.router.navigate(['login']);
-        }else{
+        } else {
           this.toastService.showError(response.message);
         }
       });
     } else {
       this.registerForm.markAllAsTouched();
-      alert("Please fill all the fields carefully..!");
+      this.toastService.showError("Please fill all the fields carefully..!");
+    }
+  }
+
+  checkUsernameAvailability(e: any) {
+    if (e.target.value) {
+      this.authService.checkUserName(e.target.value).subscribe(resp => {
+        if (!resp.result) {
+          this.toastService.showError(resp.message);
+          this.registerForm.controls['userName'].reset();
+        }
+      })
     }
   }
 }
