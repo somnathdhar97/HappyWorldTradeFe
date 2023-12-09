@@ -46,6 +46,7 @@ export class NewAdminUserComponent {
       this.authService.CraeteNewAdmin(this.newAdminData).subscribe((response) => {
         if (response.apiResponseStatus == 1) {
           this.toastService.showSuccess(response.message);
+          this.router.navigate(['/admin-user']);
         } else {
           this.toastService.showError(response.message);
         }

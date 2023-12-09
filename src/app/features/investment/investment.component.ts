@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { IInvestments, IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -21,8 +21,14 @@ export class InvestmentComponent implements OnInit {
     private invesmentService: InvesmentService,
     private toastService: ToastService,
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(params => {
+      const paramValue = params['clientId'];
+      console.log(paramValue);
+    });
+  }
   ngOnInit(): void {
     this.allInvestments();;
     this.countInvesments();
@@ -44,8 +50,6 @@ export class InvestmentComponent implements OnInit {
     this.invesmentService.getStatusWiseInvesmentCount().subscribe((response) => {
       if (response.apiResponseStatus == 1) {
         this.invesmentsCouts = response.result;
-        console.log(this.invesmentsCouts);
-
       } else {
         this.toastService.showError(response.message);
       }

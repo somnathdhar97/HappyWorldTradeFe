@@ -27,9 +27,8 @@ export interface IInsertInvestment {
 }
 
 export interface IInvestmentReturn {
-    InvestmentId: number,
-    Amount: number,
-    PaymentMethod: number,
-    DocumnetNumber: string,
-    Remarks: string,
+    investmentId: number,
+    paymentMethodId: number,
+    paymentMethodDoc: string,
+    remarks: string,
 }

@@ -61,13 +61,12 @@ export class ReturnComponent implements OnInit {
   returnPayment() {
     if (this.returnPaymentForm.valid) {
       let returnPayload: IInvestmentReturn = {
-        InvestmentId: +this.route.snapshot.paramMap.get('investmentId'),
-        PaymentMethod: this.returnPaymentForm.value.paymentMethodId.id,
-        DocumnetNumber: this.returnPaymentForm.value.documentNo,
-        Remarks: this.returnPaymentForm.value.remarks,
-        Amount: this.returnPaymentForm.value.amount,
+        investmentId: +this.route.snapshot.paramMap.get('investmentId'),
+        paymentMethodId: this.returnPaymentForm.value.paymentMethodId.id,
+        paymentMethodDoc: this.returnPaymentForm.value.documentNo,
+        remarks: this.returnPaymentForm.value.remarks
       };
-      this.invesmentService.setReturnInvesment(returnPayload).subscribe((response)=>{
+      this.invesmentService.setReturnInvesment(returnPayload).subscribe((response) => {
         if (response.apiResponseStatus == 1) {
           this.toastService.showSuccess(response.message);
         } else {

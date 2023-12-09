@@ -1,8 +1,10 @@
 <div class="grid">
-    <app-menu-card class="col-12 xl:col-3" [routerLink]="['admin-user']" applicationName="Admin User" logo="admin-user"/>
-    <app-menu-card class="col-12 xl:col-3" [routerLink]="['client']" applicationName="Clients" logo="clients"/>
-    <app-menu-card class="col-12 xl:col-3" [routerLink]="['invest']" applicationName="Investments" logo="investment"/>
-    <app-menu-card class="col-12 xl:col-3" [routerLink]="['notification']" applicationName="Notifications" logo="notification"/>
+    <app-menu-card class="col-12 xl:col-3" [routerLink]="['admin-user']" applicationName="Admin User"
+        logo="admin-user" />
+    <app-menu-card class="col-12 xl:col-3" [routerLink]="['client']" applicationName="Clients" logo="clients" />
+    <app-menu-card class="col-12 xl:col-3" [routerLink]="['invest']" applicationName="Investments" logo="investment" />
+    <app-menu-card class="col-12 xl:col-3" [routerLink]="['notification']" applicationName="Notifications"
+        logo="notification" />
     <div class="col-12 lg:col-6 xl:col-3">
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
@@ -10,7 +12,8 @@
                     <span class="block text-500 font-medium mb-3">Investments</span>
                     <div class="text-900 font-medium text-xl">{{invesmentsCouts?.allInvesments}}</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
                 </div>
             </div>
@@ -25,7 +28,8 @@
                     <span class="block text-500 font-medium mb-3">Invest</span>
                     <div class="text-900 font-medium text-xl">₹2,100</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-money-bill text-orange-500 text-xl"></i>
                 </div>
             </div>
@@ -40,7 +44,8 @@
                     <span class="block text-500 font-medium mb-3">Returend</span>
                     <div class="text-900 font-medium text-xl">{{invesmentsCouts?.returnedInvesments}}</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-reply text-cyan-500 text-xl"></i>
                 </div>
             </div>
@@ -55,7 +60,8 @@
                     <span class="block text-500 font-medium mb-3">Clients</span>
                     <div class="text-900 font-medium text-xl">{{clientsCounts?.subscriber}} Active</div>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-purple-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-users text-purple-500 text-xl"></i>
                 </div>
             </div>
@@ -65,7 +71,7 @@
     </div>
     <div class="col-12 xl:col-6">
         <div class="card">
-            <h5>Recent Investments</h5>
+            <h5>Upcoming Investments</h5>
             <!-- <p-table [value]="products" [paginator]="true" [rows]="5" responsiveLayout="scroll">
                 <ng-template pTemplate="header">
                     <tr>
@@ -99,18 +105,20 @@
 
             <!-- <span class="block text-600 font-medium mb-3">TODAY</span> -->
             <div *ngIf="notifications?.length > 0; else noNotifications">
-            <ul class="p-0 mx-0 mt-0 mb-4 list-none">
-                <li *ngFor="let notification of notifications" class="flex align-items-center py-2 border-bottom-1 surface-border">
-                  <div class="w-3rem h-3rem flex align-items-center justify-content-center border-circle" [ngClass]="getBackgroundColorClass(notification.type)">
-                    <i [ngClass]="getIconClass(notification.type)"></i>
-                  </div>
-                  <span class="text-900 line-height-3 ml-3">{{ notification.message }}</span>
-                </li>
-              </ul>
+                <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                    <li *ngFor="let notification of notifications"
+                        class="flex align-items-center py-2 border-bottom-1 surface-border">
+                        <div class="w-3rem h-3rem flex align-items-center justify-content-center border-circle"
+                            [ngClass]="getBackgroundColorClass(notification.type)">
+                            <i [ngClass]="getIconClass(notification.type)"></i>
+                        </div>
+                        <span class="text-900 line-height-3 ml-3">{{ notification.message }}</span>
+                    </li>
+                </ul>
             </div>
             <ng-template #noNotifications>
                 <p>No new notifications</p>
-              </ng-template>
+            </ng-template>
             <!-- <ul class="p-0 mx-0 mt-0 mb-4 list-none">
                 <li class="flex align-items-center py-2 border-bottom-1 surface-border">
                     <div class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
@@ -128,6 +136,5 @@
                 </li>
             </ul> -->
         </div>
+    </div>
 </div>
-</div>
-

@@ -3,6 +3,7 @@ import { IChangeStatus, IClient, IStatusWiseClient } from 'src/app/core/models/I
 import { ClientService } from 'src/app/core/services/client.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Table } from 'primeng/table';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class ClientComponent implements OnInit {
   loading: boolean = true;
   constructor(
     private clientService: ClientService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) { }
   ngOnInit(): void {
     this.getAllClient();
@@ -61,5 +63,9 @@ export class ClientComponent implements OnInit {
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  newInvest(clientId: number) {
+    // this.router.navigate(['invest', clientId]);
   }
 }

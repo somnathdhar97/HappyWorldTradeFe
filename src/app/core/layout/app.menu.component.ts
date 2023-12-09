@@ -17,31 +17,36 @@ export class AppMenuComponent implements OnInit {
         if (this.authService.getRole() == 'admin') {
             this.model = [
                 {
-                    label: 'Create',
+                    label: 'Admin User',
                     items: [
-                        { label: 'Create User', icon: 'pi pi-fw pi-user-plus', routerLink: ['createuser'] },
-                        { label: 'Create notice', icon: 'pi pi-fw pi-bell', routerLink: ['notification'] }
+                        { label: 'Manage Admin Users', icon: 'pi pi-fw pi-user-plus', routerLink: ['admin-user'] },
                     ]
                 },
                 {
-                    label: 'Invest',
+                    label: 'Client',
                     items: [
-                        { label: 'Invest Money', icon: 'pi pi-fw pi-dollar', routerLink: ['invest'] }
+                        { label: 'Manage Clients', icon: 'pi pi-fw pi-dollar', routerLink: ['client'] }
                     ]
                 },
                 {
-                    label: 'Return',
+                    label: 'Investment',
                     items: [
-                        { label: 'Return Payment', icon: 'pi pi-fw pi-caret-left', routerLink: ['return'] }
+                        { label: 'Manage Investments', icon: 'pi pi-fw pi-dollar', routerLink: ['invest'] }
+                    ]
+                },
+                {
+                    label: 'Notification',
+                    items: [
+                        { label: 'Manage Notifications', icon: 'pi pi-fw pi-bell', routerLink: ['notification'] }
                     ]
                 }
             ];
         } else if (this.authService.getRole() == 'client') {
             this.model = [
                 {
-                    label: 'Invest',
+                    label: 'Investment',
                     items: [
-                        { label: 'Invest Money', icon: 'pi pi-fw pi-dollar', routerLink: ['invest'] }
+                        { label: 'Investments', icon: 'pi pi-fw pi-dollar', routerLink: ['invest'] }
                     ]
                 }
             ];
