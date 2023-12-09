@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutService } from 'src/app/core/layout/service/app.layout.service';
+import { IPaymentMethod, IReturn } from 'src/app/core/models/master';
 import { ApiService } from 'src/app/core/services/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MasterService } from 'src/app/core/services/master.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidationService } from 'src/app/core/services/validation.service';
 
 @Component({
@@ -14,43 +17,47 @@ import { ValidationService } from 'src/app/core/services/validation.service';
 export class ReturnComponent implements OnInit {
 
   returnPaymentForm: FormGroup;
-  cities: any[] = [];
+  paymentMethods: IPaymentMethod[] = [];
 
-  constructor(public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
+  constructor(public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute, private masterService: MasterService, private toastService: ToastService) {
+  }
 
   ngOnInit(): void {
-
     this.returnPaymentForm = this.fb.group({
-      userId: this.vs.validation('Required', 0, 100, 100),
-      investmentId: this.vs.validation('Required', 0, 100, 100),
-      schemeName: this.vs.validation('Required', 0, 100, 100),
-      tenure: this.vs.validation('Required', 0, 100, 100),
+      paymentMethodId: this.vs.validation('Required', 0, 100, 100),
+      documentNo: this.vs.validation('Required', 0, 100, 100),
+      remarks: this.vs.validation('Not Required', 0, 500, 500),
       amount: this.vs.validation('Required', 0, 100, 100),
-      returnAmout: this.vs.validation('Disable', 0, 100, 100),
-      rate: this.vs.validation('Required', 0, 100, 100),
-      investmentDate: this.vs.validation('Required', 0, 100, 100),
     });
-
-    this.cities = [
-      { label: 'New York', value: { id: 1, name: 'New York', code: 'NY' } },
-      { label: 'Rome', value: { id: 2, name: 'Rome', code: 'RM' } },
-      { label: 'London', value: { id: 3, name: 'London', code: 'LDN' } },
-      { label: 'Istanbul', value: { id: 4, name: 'Istanbul', code: 'IST' } },
-      { label: 'Paris', value: { id: 5, name: 'Paris', code: 'PRS' } }
-    ];
-
+    this.allPaymentMethod();
   }
 
   get errorControl() {
     return this.returnPaymentForm.controls;
   }
 
+  allPaymentMethod() {
+    this.masterService.getPaymentMethods().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
+        this.paymentMethods = response.result;
+      } else {
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+
   returnPayment() {
     if (this.returnPaymentForm.valid) {
-      console.log(this.returnPaymentForm.value);
-      // this.apiService.register(this.returnPaymentForm.value).subscribe(resp => {
+      let returnPayload: IReturn = {
+        InvestmentId: +this.route.snapshot.paramMap.get('investmentId'),
+        PaymentMethod: this.returnPaymentForm.value.paymentMethodId.id,
+        DocumnetNumber: this.returnPaymentForm.value.documentNo,
+        Remarks: this.returnPaymentForm.value.remarks,
+        Amount: this.returnPaymentForm.value.amount,
+      };
+      // this.apiService.register(returnPayload).subscribe(resp => {
       //   if (resp.apiStatus == 1) {
-      //     alert("Created successfully..!")
+      //     this.toastService.showSuccess("Created successfully..!")
       //     this.returnPaymentForm.reset();
       //     this.router.navigate(['/dashboard'])
       //   } else {
@@ -61,7 +68,7 @@ export class ReturnComponent implements OnInit {
       // this.router.navigate(['/dashboard'])
     } else {
       this.returnPaymentForm.markAllAsTouched();
-      alert("Please fill all the fields carefully..!");
+      this.toastService.showError("Please fill all the fields carefully..!");
     }
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { IInvestments, IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -15,11 +16,12 @@ export class InvestmentComponent implements OnInit {
   invesmentsCouts: IStatusWiseInvesment;
   loading: boolean = true;
   selectedCard: number;
-  userRole : string;
+  userRole: string;
   constructor(
     private invesmentService: InvesmentService,
     private toastService: ToastService,
-    private authService : AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
   ngOnInit(): void {
     this.allInvestments();;
@@ -74,5 +76,9 @@ export class InvestmentComponent implements OnInit {
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  returnPayment(investmentId: number) {
+    this.router.navigate(['return', investmentId]);
   }
 }

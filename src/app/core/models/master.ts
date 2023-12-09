@@ -31,3 +31,11 @@ export interface IInvestment {
     PaymentMethod: number,
     DocumnetNumber: string,
 }
+
+export interface IReturn {
+    InvestmentId: number,
+    Amount: number,
+    PaymentMethod: number,
+    DocumnetNumber: string,
+    Remarks: string,
+}
