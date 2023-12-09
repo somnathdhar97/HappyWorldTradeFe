@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { IStatusWiseClient } from 'src/app/core/models/IClient';
 import { IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
 import { INotification } from 'src/app/core/models/notification';
+import { ITransactionAmount } from 'src/app/core/models/transaction';
 import { ClientService } from 'src/app/core/services/client.service';
 import { InvesmentService } from 'src/app/core/services/invesment.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { TransactionService } from 'src/app/core/services/transaction.service';
 
 @Component({
   selector: 'app-client-dashboard',
@@ -16,13 +18,18 @@ export class ClientDashboardComponent {
   notifications: INotification[][];
   invesmentsCouts: IStatusWiseInvesment;
   clientsCounts: IStatusWiseClient;
+  transactionAmount:ITransactionAmount;
   constructor(
-    private invesmentService: InvesmentService, private clientService: ClientService, private notificationService: NotificationService,
+    private invesmentService: InvesmentService,
+    private clientService: ClientService,
+    private notificationService: NotificationService,
+    private transactionService:TransactionService,
     private toastService: ToastService
   ) { }
   ngOnInit(): void {
     this.countInvesments();
     this.allActiveNotifications();
+    this.totalTransactionAmount();
   }
   countInvesments() {
     this.invesmentService.getStatusWiseInvesmentCount().subscribe((response) => {
@@ -31,6 +38,15 @@ export class ClientDashboardComponent {
         console.log(this.invesmentsCouts);
 
       } else {
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+  totalTransactionAmount(){
+    this.transactionService.getTotalTransactionAmount().subscribe((response)=>{
+      if(response.apiResponseStatus==1){
+        this.transactionAmount = response.result;
+      }else{
         this.toastService.showError(response.message);
       }
     });
