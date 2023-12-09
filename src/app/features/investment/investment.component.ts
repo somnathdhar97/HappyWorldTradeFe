@@ -22,13 +22,7 @@ export class InvestmentComponent implements OnInit {
     private toastService: ToastService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {
-    this.route.params.subscribe(params => {
-      const paramValue = params['clientId'];
-      console.log(paramValue);
-    });
-  }
+  ) { }
   ngOnInit(): void {
     this.allInvestments();;
     this.countInvesments();

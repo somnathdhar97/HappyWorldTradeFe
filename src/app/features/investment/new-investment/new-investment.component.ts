@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IInsertInvestment } from 'src/app/core/models/Iinvesment';
 import { IInvestment, IPaymentMethod, IScheme, ITenure, IUser } from 'src/app/core/models/master';
 import { InvesmentService } from 'src/app/core/services/invesment.service';
@@ -20,7 +21,7 @@ export class NewInvestmentComponent implements OnInit {
   users: IUser[] = [];
   paymentMethods: IPaymentMethod[] = [];
 
-  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService,private invesmentService:InvesmentService) { }
+  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService,private invesmentService:InvesmentService, private router : Router) { }
   ngOnInit(): void {
     this.investmentForm = this.fb.group({
       userName: this.vs.validation('Required', 0, 100, 100),
@@ -112,6 +113,7 @@ export class NewInvestmentComponent implements OnInit {
       this.invesmentService.setNewInvesment(this.investmentData).subscribe((response)=>{
         if (response.apiResponseStatus == 1) {
           this.toastService.showSuccess(response.message);
+          this.router.navigate(['/invest']);
         } else {
           this.toastService.showError(response.message);
         }

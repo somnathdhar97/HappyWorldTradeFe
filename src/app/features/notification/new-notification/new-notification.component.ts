@@ -16,13 +16,14 @@ import { ValidationService } from 'src/app/core/services/validation.service';
 })
 export class NewNotificationComponent {
   noticeForm: FormGroup;
-  notificationModel:INotification;
-  constructor(private toastService: ToastService,private notificationService: NotificationService,public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
+  notificationModel: INotification;
+  constructor(private toastService: ToastService, private notificationService: NotificationService, public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.noticeForm = this.fb.group({
       noticeHeading: this.vs.validation('Required', 0, 100, 100),
       noticeMessage: this.vs.validation('Required', 0, 100, 100),
+      noticeType: this.vs.validation('Required', 0, 100, 100),
       effectiveFrom: this.vs.validation('Required', 0, 100, 100),
       effectiveTo: this.vs.validation('Required', 0, 100, 100),
     });
@@ -37,21 +38,22 @@ export class NewNotificationComponent {
       console.log(this.noticeForm.value);
       this.notificationModel = {
         name: this.noticeForm.value.noticeHeading,
-        message:this.noticeForm.value.noticeMessage,
-        type:1,
-        validFrom:this.noticeForm.value.effectiveFrom,
-        validTo:this.noticeForm.value.effectiveTo
+        message: this.noticeForm.value.noticeMessage,
+        type: this.noticeForm.value.noticeType,
+        validFrom: this.noticeForm.value.effectiveFrom,
+        validTo: this.noticeForm.value.effectiveTo
       }
-      this.notificationService.setNewNotification(this.notificationModel).subscribe((response)=>{
-        if(response.apiResponseStatus==1){
-            this.toastService.showSuccess(response.message);
-        }else{
+      this.notificationService.setNewNotification(this.notificationModel).subscribe((response) => {
+        if (response.apiResponseStatus == 1) {
+          this.toastService.showSuccess(response.message);
+          this.router.navigate(['notification']);
+        } else {
           this.toastService.showError(response.message);
         }
       });
     } else {
       this.noticeForm.markAllAsTouched();
-      alert("Please fill all the fields carefully..!");
+      this.toastService.showError("Please fill all the fields carefully..!");
     }
   }
 }
