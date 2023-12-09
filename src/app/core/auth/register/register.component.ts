@@ -67,4 +67,13 @@ export class RegisterComponent implements OnInit {
       })
     }
   }
+
+  checkConfirPasswordMatchedOrNot(e: any) {
+    if (e.target.value) {
+      if (e.target.value !== this.registerForm.value.password) {
+        this.toastService.showError('Password and Confirm Password are not same.');
+        this.registerForm.controls['confirmPassword'].reset();
+      }
+    }
+  }
 }
