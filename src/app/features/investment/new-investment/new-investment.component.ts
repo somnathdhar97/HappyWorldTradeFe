@@ -15,13 +15,13 @@ import { ValidationService } from 'src/app/core/services/validation.service';
 })
 export class NewInvestmentComponent implements OnInit {
   investmentForm: FormGroup;
-  investmentData:IInsertInvestment;
+  investmentData: IInsertInvestment;
   schemes: IScheme[] = [];
   tenures: ITenure[] = [];
   users: IUser[] = [];
   paymentMethods: IPaymentMethod[] = [];
 
-  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService,private invesmentService:InvesmentService, private router : Router) { }
+  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService, private invesmentService: InvesmentService, private router: Router) { }
   ngOnInit(): void {
     this.investmentForm = this.fb.group({
       userName: this.vs.validation('Required', 0, 100, 100),
@@ -33,6 +33,7 @@ export class NewInvestmentComponent implements OnInit {
       paymentMethod: this.vs.validation('Required', 0, 100, 100),
       documentNo: this.vs.validation('Required', 0, 100, 100),
       investmentDate: this.vs.validation('Required', 0, 100, 100),
+      remarks: this.vs.validation('Required', 0, 100, 100),
     });
     this.allScheme();
     this.allTenure();
@@ -44,7 +45,6 @@ export class NewInvestmentComponent implements OnInit {
     this.masterService.getTenures().subscribe((response) => {
       if (response.apiResponseStatus == 1) {
         this.tenures = response.result;
-
       } else {
         this.toastService.showError(response.message);
       }
@@ -88,17 +88,6 @@ export class NewInvestmentComponent implements OnInit {
   }
 
   submit() {
-    let investPayload: IInvestment = {
-      UserId: this.investmentForm.value.userName.id,
-      SchemeId: this.investmentForm.value.scheme.id,
-      TenureId: this.investmentForm.value.tenure.id,
-      Amount: this.investmentForm.value.amount,
-      // RatePer: this.investmentForm.getRawValue().returnAmout,
-      RatePer: this.investmentForm.value.rate,
-      PaymentMethod: this.investmentForm.value.paymentMethod.id,
-      DocumnetNumber: this.investmentForm.value.documentNo,
-      InvesmentDate: this.investmentForm.value.investmentDate,
-    };
     if (this.investmentForm.valid) {
       this.investmentData = {
         userId: this.investmentForm.value.userName.id,
@@ -109,8 +98,11 @@ export class NewInvestmentComponent implements OnInit {
         paymentMethodId: this.investmentForm.value.paymentMethod.id,
         paymentMethodDoc: this.investmentForm.value.documentNo,
         investmentDate: this.investmentForm.value.investmentDate,
+        SchemeValue: this.investmentForm.value.scheme.value,
+        TenureValue: this.investmentForm.value.tenure.value,
+        Remarks: this.investmentForm.value.remarks,
       }
-      this.invesmentService.setNewInvesment(this.investmentData).subscribe((response)=>{
+      this.invesmentService.setNewInvesment(this.investmentData).subscribe((response) => {
         if (response.apiResponseStatus == 1) {
           this.toastService.showSuccess(response.message);
           this.router.navigate(['/invest']);

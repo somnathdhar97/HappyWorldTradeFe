@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { IInvestments, IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
@@ -17,6 +17,9 @@ export class InvestmentComponent implements OnInit {
   loading: boolean = true;
   selectedCard: number;
   userRole: string;
+
+  @ViewChild('filter') filter!: ElementRef;
+
   constructor(
     private invesmentService: InvesmentService,
     private toastService: ToastService,
@@ -78,5 +81,10 @@ export class InvestmentComponent implements OnInit {
 
   returnPayment(investmentId: number) {
     this.router.navigate(['return', investmentId]);
+  }
+
+  clear(table: Table) {
+    table.clear();
+    this.filter.nativeElement.value = '';
   }
 }

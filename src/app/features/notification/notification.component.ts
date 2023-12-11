@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { INotification, INotificationStatus } from 'src/app/core/models/notification';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -13,6 +13,8 @@ export class NotificationComponent implements OnInit {
   notifications: INotification[][];
   updateNotificationStatus: INotificationStatus;
   loading: boolean = true;
+
+  @ViewChild('filter') filter!: ElementRef;
   constructor(
     private notificationService: NotificationService,
     private toastService: ToastService
@@ -51,7 +53,12 @@ export class NotificationComponent implements OnInit {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 
-  deletNotification(notificationId : number){
+  deletNotification(notificationId: number) {
 
+  }
+
+  clear(table: Table) {
+    table.clear();
+    this.filter.nativeElement.value = '';
   }
 }

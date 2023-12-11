@@ -43,12 +43,11 @@
                         </div>
 
                         <div class="field col-12 md:col-6">
-                            <label for="schemename">Scheme</label>
-                            <p-dropdown [options]="schemes" formControlName="scheme" optionLabel="name"
-                                [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Scheme"
-                                [showClear]="true"></p-dropdown>
+                            <label htmlFor="amount">Amount</label>
+                            <input pInputText id="amount" type="number" formControlName="amount"
+                                placeholder="Enter amount." />
                             <span class="block" style="color: red;">
-                                <custom-mat-error [control]="errorControl['scheme']"></custom-mat-error>
+                                <custom-mat-error [control]="errorControl['amount']"></custom-mat-error>
                             </span>
                         </div>
 
@@ -63,11 +62,21 @@
                         </div>
 
                         <div class="field col-12 md:col-6">
-                            <label htmlFor="amount">Amount</label>
-                            <input pInputText id="amount" type="number" formControlName="amount"
-                                placeholder="Enter amount." />
+                            <label htmlFor="perRate">Percenatge Rate</label>
+                            <input pInputText id="perRate" type="number" formControlName="rate"
+                                placeholder="Enter percentage rate" />
                             <span class="block" style="color: red;">
-                                <custom-mat-error [control]="errorControl['amount']"></custom-mat-error>
+                                <custom-mat-error [control]="errorControl['rate']"></custom-mat-error>
+                            </span>
+                        </div>
+
+                        <div class="field col-12 md:col-6">
+                            <label for="schemename">Scheme</label>
+                            <p-dropdown [options]="schemes" formControlName="scheme" optionLabel="name"
+                                [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Scheme"
+                                [showClear]="true"></p-dropdown>
+                            <span class="block" style="color: red;">
+                                <custom-mat-error [control]="errorControl['scheme']"></custom-mat-error>
                             </span>
                         </div>
 
@@ -76,15 +85,6 @@
                             <input pInputText id="returnamount" type="number" formControlName="returnAmout" />
                             <span class="block" style="color: red;">
                                 <custom-mat-error [control]="errorControl['returnAmout']"></custom-mat-error>
-                            </span>
-                        </div>
-
-                        <div class="field col-12 md:col-6">
-                            <label htmlFor="perRate">Percenatge Rate</label>
-                            <input pInputText id="perRate" type="number" formControlName="rate"
-                                placeholder="Enter percentage rate" />
-                            <span class="block" style="color: red;">
-                                <custom-mat-error [control]="errorControl['rate']"></custom-mat-error>
                             </span>
                         </div>
 
@@ -115,6 +115,15 @@
                                 formControlName="investmentDate"></p-calendar>
                             <span class="block" style="color: red;">
                                 <custom-mat-error [control]="errorControl['investmentDate']"></custom-mat-error>
+                            </span>
+                        </div>
+
+                        <div class="field col-12 md:col-6">
+                            <label htmlFor="remarks">Remarks</label>
+                            <input pInputText id="remarks" type="text" formControlName="remarks"
+                                placeholder="Enter remarks" />
+                            <span class="block" style="color: red;">
+                                <custom-mat-error [control]="errorControl['remarks']"></custom-mat-error>
                             </span>
                         </div>
 

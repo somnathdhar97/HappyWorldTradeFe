@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IChangeStatus, IClient, IStatusWiseClient } from 'src/app/core/models/IClient';
 import { ClientService } from 'src/app/core/services/client.service';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -16,6 +16,8 @@ export class ClientComponent implements OnInit {
   allTypesOfClients: IStatusWiseClient;
   updateUserStatus: IChangeStatus;
   loading: boolean = true;
+
+  @ViewChild('filter') filter!: ElementRef;
   constructor(
     private clientService: ClientService,
     private toastService: ToastService,
@@ -67,5 +69,10 @@ export class ClientComponent implements OnInit {
 
   newInvest(clientId: number) {
     // this.router.navigate(['invest', clientId]);
+  }
+
+  clear(table: Table) {
+    table.clear();
+    this.filter.nativeElement.value = '';
   }
 }
