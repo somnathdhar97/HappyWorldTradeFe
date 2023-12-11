@@ -39,7 +39,7 @@ export class ReturnComponent implements OnInit {
       paymentMethodId: this.vs.validation('Required', 0, 100, 100),
       documentNo: this.vs.validation('Required', 0, 100, 100),
       remarks: this.vs.validation('Not Required', 0, 500, 500),
-      amount: this.vs.validation('Required', 0, 100, 100),
+      returnDate: this.vs.validation('Required', 0, 100, 100),
     });
     this.allPaymentMethod();
   }
@@ -64,11 +64,13 @@ export class ReturnComponent implements OnInit {
         investmentId: +this.route.snapshot.paramMap.get('investmentId'),
         paymentMethodId: this.returnPaymentForm.value.paymentMethodId.id,
         paymentMethodDoc: this.returnPaymentForm.value.documentNo,
-        remarks: this.returnPaymentForm.value.remarks
+        remarks: this.returnPaymentForm.value.remarks,
+        returnDate: this.returnPaymentForm.value.returnDate,
       };
       this.invesmentService.setReturnInvesment(returnPayload).subscribe((response) => {
         if (response.apiResponseStatus == 1) {
           this.toastService.showSuccess(response.message);
+          this.router.navigate(['invest']);
         } else {
           this.toastService.showError(response.message);
         }

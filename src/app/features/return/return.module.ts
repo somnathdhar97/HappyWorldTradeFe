@@ -10,6 +10,7 @@ import { ReturnComponent } from './return.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 import { CardModule } from 'primeng/card';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CardModule } from 'primeng/card';
     ReactiveFormsModule,
     CustomMatErrorModule,
     DropdownModule,
-    CardModule
+    CardModule,
+    CalendarModule
   ]
 })
 export class ReturnModule { }

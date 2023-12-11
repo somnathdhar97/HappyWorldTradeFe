@@ -34,4 +34,5 @@ export interface IInvestmentReturn {
     paymentMethodId: number,
     paymentMethodDoc: string,
     remarks: string,
+    returnDate: string,
 }
