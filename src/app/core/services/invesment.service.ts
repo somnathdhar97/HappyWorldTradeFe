@@ -49,7 +49,7 @@ export class InvesmentService {
   }
   setReturnInvesment(returnInvestmentData:IInvestmentReturn): Observable<IapiResponce> {
     return this.http
-        .post<IapiResponce>('v1/Investment/NewInvestment',returnInvestmentData)
+        .post<IapiResponce>('v1/Investment/InvestmentReturn',returnInvestmentData)
         .pipe(
             catchError((error) => {
                 throw this.toastService.showError(error.message);
