@@ -56,7 +56,7 @@
                             <th style="min-width: 12rem">
                                 <div class="flex justify-content-between align-items-center">
                                     Status
-                                    <p-columnFilter type="numeric" field="status" matchMode="equals" display="menu">
+                                    <p-columnFilter type="text" field="status" matchMode="equals" display="menu">
                                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                                             <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [style]="{'min-width': '12rem'}" >
                                                 <ng-template let-option pTemplate="item">
@@ -74,48 +74,48 @@
                             </th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-client>
+                    <ng-template pTemplate="body" let-admin>
                         <tr>
                             <td>
-                                {{client.name}}
+                                {{admin.name}}
                             </td>
                             <td>
-                                {{client.mobileNumber}}
+                                {{admin.mobileNumber}}
                             </td>
                             <td>
-                                {{client.email}}
+                                {{admin.email}}
                             </td>
                             <td>
-                                <span [class]="'client-badge status-' + client.status">{{client.StatusName}}</span>
+                                <span [class]="'admin-badge status-' + admin.status">{{admin.statusName}}</span>
                             </td>
                             <td class="text-center">
-                                <span class="p-buttonset" *ngIf="client.status==2">
-                                    <button pButton pRipple label="New Invest" icon="pi pi-plus" (click)="newInvest(client.id)"></button>
-                                    <button pButton pRipple label="Deactivate" icon="pi pi-ban" class="p-button-danger" (click)="changeUserStatus(client.id,3)"></button>
+                                <span class="p-buttonset" *ngIf="admin.status==2">
+                                    <button pButton pRipple label="New Invest" icon="pi pi-plus" (click)="newInvest(admin.id)"></button>
+                                    <button pButton pRipple label="Deactivate" icon="pi pi-ban" class="p-button-danger" (click)="changeUserStatus(admin.id,3)"></button>
                                 </span>
-                                <span class="p-buttonset" *ngIf="client.status==1">
-                                    <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-success" (click)="changeUserStatus(client.id,2)"></button>
-                                    <button pButton pRipple label="Later" icon="pi pi-clock" class="p-button-secondary" (click)="changeUserStatus(client.id,4)"></button>
+                                <span class="p-buttonset" *ngIf="admin.status==1">
+                                    <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-success" (click)="changeUserStatus(admin.id,2)"></button>
+                                    <button pButton pRipple label="Later" icon="pi pi-clock" class="p-button-secondary" (click)="changeUserStatus(admin.id,4)"></button>
                                     <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button>
                                 </span>
-                                <span class="p-buttonset" *ngIf="client.status==4">
-                                    <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-success" (click)="changeUserStatus(client.id,2)"></button>
+                                <span class="p-buttonset" *ngIf="admin.status==4">
+                                    <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-success" (click)="changeUserStatus(admin.id,2)"></button>
                                     <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button>
                                 </span>
-                                <span class="p-buttonset" *ngIf="client.status==3">
-                                    <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-success" (click)="changeUserStatus(client.id,2)"></button>
+                                <span class="p-buttonset" *ngIf="admin.status==3">
+                                    <button pButton pRipple label="Active" icon="pi pi-check" class="p-button-success" (click)="changeUserStatus(admin.id,2)"></button>
                                 </span>
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
-                            <td colspan="8">No customers found.</td>
+                            <td colspan="8">No Admins found.</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="loadingbody">
                         <tr>
-                            <td colspan="8">Loading customers data. Please wait.</td>
+                            <td colspan="8">Loading admins data. Please wait.</td>
                         </tr>
                     </ng-template>
                 </p-table>
