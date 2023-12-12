@@ -28,14 +28,14 @@
                 </div>
             </div>
             <span class="text-green-500 font-medium">{{transactionAmount?.totalDebitAmount | currency:'INR':'symbol':'1.2-2'}}</span>
-            <span class="text-500">Retuend</span>
+            <span class="text-500"> Returned</span>
         </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-4">
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-500 font-medium mb-3">Returend</span>
+                    <span class="block text-500 font-medium mb-3">Returned</span>
                     <div class="text-900 font-medium text-xl">{{invesmentsCouts?.returnedInvesments}}</div>
                 </div>
                 <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
@@ -44,35 +44,95 @@
                 </div>
             </div>
             <span class="text-green-500 font-medium">{{invesmentsCouts?.retrunPendingInvesments}}</span>
-            <span class="text-500">Return Pending</span>
+            <span class="text-500"> Return Pending</span>
         </div>
     </div>
 
     <div class="col-12 xl:col-6">
         <div class="card">
             <h5>Recent Investments</h5>
-            <!-- <p-table [value]="products" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+            <p-table #dt [value]="recentInvestments" dataKey="id" [rows]="10" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    <div class="flex justify-content-between flex-column sm:flex-row">
+                        <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
+                        <span class="p-input-icon-left mb-2">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" #filter (input)="onGlobalFilter(dt, $event)" placeholder="Search Keyword" class="w-full"/>
+                        </span>
+                    </div>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Image</th>
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th>View</th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Investment ID
+                                <p-columnFilter type="text" field="mobileNumber" display="menu" placeholder="Search by Investment ID"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 10rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Return Amount
+                                <p-columnFilter type="text" field="email" display="menu" placeholder="Search by return amount"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 10rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Installment No.
+                                <p-columnFilter type="text" field="email" display="menu" placeholder="Search by return amount"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 10rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Installment Date
+                                <p-columnFilter type="text" field="email" display="menu" placeholder="Search by return amount"></p-columnFilter>
+                            </div>
+                        </th>
+                        <!-- <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Status
+                                <p-columnFilter type="numeric" field="status" matchMode="equals" display="menu">
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [style]="{'min-width': '12rem'}" >
+                                            <ng-template let-option pTemplate="item">
+                                                <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </div>
+                        </th> -->
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-returns>
                     <tr>
-                        <td style="width: 15%; min-width: 5rem;">
-                            <img src="assets/demo/images/product/{{product.image}}" class="shadow-4" alt="{{product.name}}" width="50">
+                        <td>
+                            {{returns.mobileNumber}}
                         </td>
-                        <td style="width: 35%; min-width: 7rem;">{{product.name}}</td>
-                        <td style="width: 35%; min-width: 8rem;">{{product.price | currency:'USD'}}</td>
-                        <td style="width: 15%;">
-                            <button pButton pRipple type="button" icon="pi pi-search" class="p-button p-component p-button-text p-button-icon-only"></button>
+                        <td>
+                            {{returns.email}}
                         </td>
+                        <td>
+                            {{returns.email}}
+                        </td>
+                        <td>
+                            {{returns.email}}
+                        </td>
+                        <!-- <td>
+                            <span [class]="'client-badge status-' + client.status">{{client.status}}</span>
+                        </td> -->
                     </tr>
                 </ng-template>
-            </p-table> -->
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No recent investments found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="8">Loading recent investments data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
             <div>
                 <button pButton type="button" icon="pi pi-eye text-cyan-800 text-xl"
                     class="p-button-rounded p-button-text p-button-plain" [routerLink]="['/invest']"></button>

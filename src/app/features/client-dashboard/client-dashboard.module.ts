@@ -7,6 +7,9 @@ import { TableModule } from 'primeng/table';
 import { ClientDashboardComponent } from './client-dashboard.component';
 import { MenuModule } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -18,6 +21,11 @@ import { ButtonModule } from 'primeng/button';
     TableModule,
     MenuModule,
     ButtonModule,
+    MenuCardModule,
+    TableModule,
+    ToolbarModule,
+    CardModule,
+    InputTextModule
   ]
 })
 export class ClientDashboardModule { }

@@ -45,3 +45,7 @@ export interface IUpcomingReturn {
 export interface IPendingReturn {
 
 }
+
+export interface IRecenetInvestments {
+
+}

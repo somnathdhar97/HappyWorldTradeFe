@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Table } from 'primeng/table';
 import { IStatusWiseClient } from 'src/app/core/models/IClient';
-import { IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
+import { IRecenetInvestments, IStatusWiseInvesment } from 'src/app/core/models/Iinvesment';
 import { INotification } from 'src/app/core/models/notification';
 import { ITransactionAmount } from 'src/app/core/models/transaction';
 import { ClientService } from 'src/app/core/services/client.service';
@@ -18,12 +19,15 @@ export class ClientDashboardComponent {
   notifications: INotification[][];
   invesmentsCouts: IStatusWiseInvesment;
   clientsCounts: IStatusWiseClient;
-  transactionAmount:ITransactionAmount;
+  transactionAmount: ITransactionAmount;
+  recentInvestments: IRecenetInvestments[];
+  @ViewChild('filter') filter!: ElementRef;
+
   constructor(
     private invesmentService: InvesmentService,
     private clientService: ClientService,
     private notificationService: NotificationService,
-    private transactionService:TransactionService,
+    private transactionService: TransactionService,
     private toastService: ToastService
   ) { }
   ngOnInit(): void {
@@ -42,11 +46,11 @@ export class ClientDashboardComponent {
       }
     });
   }
-  totalTransactionAmount(){
-    this.transactionService.getTotalTransactionAmount().subscribe((response)=>{
-      if(response.apiResponseStatus==1){
+  totalTransactionAmount() {
+    this.transactionService.getTotalTransactionAmount().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
         this.transactionAmount = response.result;
-      }else{
+      } else {
         this.toastService.showError(response.message);
       }
     });
@@ -68,5 +72,14 @@ export class ClientDashboardComponent {
 
   getIconClass(type: number): string {
     return type === 2 ? 'pi pi-exclamation-circle text-xl text-blue-500' : 'pi pi-exclamation-triangle text-xl text-orange-500';
+  }
+
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  clear(table: Table) {
+    table.clear();
+    this.filter.nativeElement.value = '';
   }
 }
