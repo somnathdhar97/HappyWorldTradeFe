@@ -30,5 +30,5 @@ export interface IAdmins {
     mobileNumber: string;
     email?: string;
     status: string;
-    StatusName: string
+    StatusName: string;
 } 

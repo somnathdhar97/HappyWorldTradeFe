@@ -86,7 +86,7 @@
                                 {{client.email}}
                             </td>
                             <td>
-                                <span [class]="'client-badge status-' + client.status">{{client.status}}</span>
+                                <span [class]="'client-badge status-' + client.status">{{client.StatusName}}</span>
                             </td>
                             <td class="text-center">
                                 <span class="p-buttonset" *ngIf="client.status==2">
