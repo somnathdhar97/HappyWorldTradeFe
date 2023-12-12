@@ -13,6 +13,7 @@ export interface IInvestments {
     ratePer: number;
     invesmentDate: string;
     statusId: number;
+    status: string;
 }
 
 export interface IInsertInvestment {
@@ -24,9 +25,9 @@ export interface IInsertInvestment {
     paymentMethodId: number;
     paymentMethodDoc: string;
     investmentDate: Date;
-    SchemeValue : number;
-    TenureValue : number;
-    Remarks : string
+    SchemeValue: number;
+    TenureValue: number;
+    Remarks: string
 }
 
 export interface IInvestmentReturn {
@@ -35,4 +36,12 @@ export interface IInvestmentReturn {
     paymentMethodDoc: string,
     remarks: string,
     returnDate: string,
+}
+
+export interface IUpcomingReturn {
+
+}
+
+export interface IPendingReturn {
+
 }

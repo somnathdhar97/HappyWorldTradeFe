@@ -5,6 +5,10 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { MenuCardModule } from 'src/app/shared/menu-card/menu-card.module';
 import { TableModule } from 'primeng/table';
+import { ToolbarModule } from 'primeng/toolbar';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -12,7 +16,11 @@ import { TableModule } from 'primeng/table';
     CommonModule,
     DashboardRoutingModule,
     MenuCardModule,
-    TableModule
+    TableModule,
+    ToolbarModule,
+    CardModule,
+    InputTextModule,
+    ButtonModule,
   ]
 })
 export class DashboardModule { }
