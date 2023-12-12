@@ -20,6 +20,16 @@ export class ClientService {
             }),
         );
   }
+
+  getAdmins(): Observable<IapiResponce> {
+    return this.http
+        .get<IapiResponce>('v1/User/GetAdmins')
+        .pipe(
+            catchError((error) => {
+                throw this.toastService.showError(error.message);
+            }),
+        );
+  }
   getStatusWiseClients(): Observable<IapiResponce> {
     return this.http
         .get<IapiResponce>('v1/User/GetStatusWiseClients')

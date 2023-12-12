@@ -3,23 +3,32 @@ export interface IClient {
     name: string;
     mobileNumber: string;
     email?: string;
-    status:string
-} 
+    status: string
+}
 export interface INewUser {
     name: string;
-    username:string;
+    username: string;
     password: string
     mobileNumber: string;
     email?: string;
-} 
-export interface IStatusWiseClient{
+}
+export interface IStatusWiseClient {
     newUser: number;
     subscriber: number;
     incative: number;
     allUser: number;
 }
 
-export interface IChangeStatus{
+export interface IChangeStatus {
     id: number;
     status: number;
 }
+
+export interface IAdmins {
+    id: number;
+    name: string;
+    mobileNumber: string;
+    email?: string;
+    status: string;
+    StatusName: string
+} 
