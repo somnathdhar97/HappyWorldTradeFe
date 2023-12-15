@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,7 +18,16 @@ import { ValidationService } from 'src/app/core/services/validation.service';
 export class NewNotificationComponent {
   noticeForm: FormGroup;
   notificationModel: INotification;
-  constructor(private toastService: ToastService, private notificationService: NotificationService, public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
+  constructor(private toastService: ToastService,
+    private notificationService: NotificationService,
+    public layoutService: LayoutService,
+    public fb: FormBuilder,
+    private vs: ValidationService,
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
     this.noticeForm = this.fb.group({
@@ -40,8 +50,8 @@ export class NewNotificationComponent {
         name: this.noticeForm.value.noticeHeading,
         message: this.noticeForm.value.noticeMessage,
         type: this.noticeForm.value.noticeType,
-        validFrom: this.noticeForm.value.effectiveFrom,
-        validTo: this.noticeForm.value.effectiveTo
+        validFrom: this.datePipe.transform(this.noticeForm.value.effectiveFrom, 'dd/MM/yyyy'),
+        validTo: this.datePipe.transform(this.noticeForm.value.effectiveTo, 'dd/MM/yyyy')
       }
       this.notificationService.setNewNotification(this.notificationModel).subscribe((response) => {
         if (response.apiResponseStatus == 1) {

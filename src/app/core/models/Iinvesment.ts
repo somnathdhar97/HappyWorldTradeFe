@@ -24,7 +24,7 @@ export interface IInsertInvestment {
     ratePer: number;
     paymentMethodId: number;
     paymentMethodDoc: string;
-    investmentDate: Date;
+    investmentDate: string;
     SchemeValue: number;
     TenureValue: number;
     Remarks: string

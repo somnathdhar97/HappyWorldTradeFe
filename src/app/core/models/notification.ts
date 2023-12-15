@@ -4,8 +4,8 @@ export interface INotification {
     message: string;
     type: number;
     status?: number;
-    validFrom: Date;
-    validTo: Date;
+    validFrom: string;
+    validTo: string;
 }
 export interface INotificationStatus {
     id?: number;

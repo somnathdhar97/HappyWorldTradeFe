@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,8 +32,8 @@ export class ReturnComponent implements OnInit {
     private masterService: MasterService,
     private toastService: ToastService,
     private invesmentService: InvesmentService,
-  ) {
-  }
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
     this.returnPaymentForm = this.fb.group({
@@ -65,7 +66,7 @@ export class ReturnComponent implements OnInit {
         paymentMethodId: this.returnPaymentForm.value.paymentMethodId.id,
         paymentMethodDoc: this.returnPaymentForm.value.documentNo,
         remarks: this.returnPaymentForm.value.remarks,
-        returnDate: this.returnPaymentForm.value.returnDate,
+        returnDate: this.datePipe.transform(this.returnPaymentForm.value.returnDate, 'dd/MM/yyyy'),
       };
       this.invesmentService.setReturnInvesment(returnPayload).subscribe((response) => {
         if (response.apiResponseStatus == 1) {

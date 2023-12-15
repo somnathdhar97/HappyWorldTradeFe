@@ -7,6 +7,7 @@ import { InvesmentService } from 'src/app/core/services/invesment.service';
 import { MasterService } from 'src/app/core/services/master.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidationService } from 'src/app/core/services/validation.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-investment',
@@ -21,7 +22,15 @@ export class NewInvestmentComponent implements OnInit {
   users: IUser[] = [];
   paymentMethods: IPaymentMethod[] = [];
 
-  constructor(private fb: FormBuilder, private vs: ValidationService, private toastService: ToastService, private masterService: MasterService, private invesmentService: InvesmentService, private router: Router) { }
+  constructor(private fb: FormBuilder,
+    private vs: ValidationService,
+    private toastService: ToastService,
+    private masterService: MasterService,
+    private invesmentService: InvesmentService,
+    private router: Router,
+    private datePipe: DatePipe
+  ) { }
+
   ngOnInit(): void {
     this.investmentForm = this.fb.group({
       userName: this.vs.validation('Required', 0, 100, 100),
@@ -97,7 +106,7 @@ export class NewInvestmentComponent implements OnInit {
         ratePer: this.investmentForm.value.rate,
         paymentMethodId: this.investmentForm.value.paymentMethod.id,
         paymentMethodDoc: this.investmentForm.value.documentNo,
-        investmentDate: this.investmentForm.value.investmentDate,
+        investmentDate: this.datePipe.transform(this.investmentForm.value.investmentDate, 'dd/MM/yyyy'),
         SchemeValue: this.investmentForm.value.scheme.value,
         TenureValue: this.investmentForm.value.tenure.value,
         Remarks: this.investmentForm.value.remarks,

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 // import { AppLayoutModule } from './layout/app.layout.module';
@@ -35,7 +35,7 @@ import { AdminUserComponent } from './features/admin-user/admin-user.component';
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
         CountryService, CustomerService, MessageService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        PhotoService, ProductService, DatePipe
     ],
     bootstrap: [AppComponent]
 })
