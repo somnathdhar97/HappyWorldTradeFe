@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   clientsCounts: IStatusWiseClient;
   transactionAmount: ITransactionAmount;
   upcomingReturns: IUpcomingReturn[];
+  todaysReturns: IUpcomingReturn[];
   pendingReturns: IPendingReturn[];
 
   @ViewChild('filter') filter!: ElementRef;
@@ -39,6 +40,8 @@ export class DashboardComponent implements OnInit {
     this.countInvesments();
     this.allActiveNotifications();
     this.totalTransactionAmount();
+    this.getAllUpcomingReturn();
+    this.getAllTodaysReturn();
   }
   countUsers() {
     this.clientService.getStatusWiseClients().subscribe((response) => {
@@ -109,4 +112,25 @@ export class DashboardComponent implements OnInit {
     table.clear();
     this.filter.nativeElement.value = '';
   }
+
+  getAllUpcomingReturn() {
+    this.invesmentService.getUpcomingReturn().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
+        this.upcomingReturns = response.result;
+      } else {
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+
+  getAllTodaysReturn() {
+    this.invesmentService.getTodayReturn().subscribe((response) => {
+      if (response.apiResponseStatus == 1) {
+        this.todaysReturns = response.result;
+      } else {
+        this.toastService.showError(response.message);
+      }
+    });
+  }
+
 }
