@@ -11,6 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from "primeng/calendar";
 import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 import { NewInvestmentComponent } from './new-investment.component';
+import { FileUploadModule } from 'primeng/fileupload';
 @NgModule({
   declarations: [NewInvestmentComponent],
   imports: [
@@ -26,6 +27,7 @@ import { NewInvestmentComponent } from './new-investment.component';
     FormsModule,
     ReactiveFormsModule,
     CustomMatErrorModule,
+    FileUploadModule
   ]
 })
 export class NewInvestmentModule { }
