@@ -39,16 +39,16 @@ export interface IInvestmentReturn {
 }
 
 export interface IUpcomingReturn {
-    Id: number;
-    ClientName: string;
-    SchemeName: string;
-    TenureNameWithValue: string;
-    Amount: number;
-    RatePer: number;
-    InvesmentDate: string; // Assuming the date is represented as a string (you can adjust this based on your needs)
-    StatusId: number;
-    Status: string;
-    Remarks: string;
+    id: number;
+    clientName: string;
+    schemeName: string;
+    tenureNameWithValue: string;
+    amount: number;
+    ratePer: number;
+    invesmentDate: string; // Assuming the date is represented as a string (you can adjust this based on your needs)
+    statusId: number;
+    status: string;
+    remarks: string;
 }
 
 export interface IPendingReturn {
