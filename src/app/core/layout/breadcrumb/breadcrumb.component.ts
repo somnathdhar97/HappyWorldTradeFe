@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../service/app.layout.service';
 import { BreadcrumbService } from '../service/breadcrumb-service.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -11,11 +12,21 @@ import { BreadcrumbService } from '../service/breadcrumb-service.service';
 })
 export class BreadcrumbComponent implements OnInit {
   breadcrumbs: Array<{ label: string, routerLink: string }> = [];
+  decodedToken: string;
+  userRole: string;
   home: MenuItem | undefined;
-  constructor(public layoutService: LayoutService,private breadcrumbService: BreadcrumbService, private router: Router, private activatedRoute: ActivatedRoute,private location: Location) { }
+
+  constructor(public layoutService: LayoutService,
+    private breadcrumbService: BreadcrumbService,
+    private router: Router, private activatedRoute: ActivatedRoute,
+    private location: Location,
+    private authService: AuthService) {
+    this.decodedToken = this.authService.getDecodedAccessToken();
+    this.userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  }
 
   ngOnInit(): void {
-    this.home = { icon: 'pi pi-home', routerLink: '/' };
+    this.home = this.userRole == 'admin' ? { icon: 'pi pi-home', routerLink: '/' } : this.userRole == 'client' ? { icon: 'pi pi-home', routerLink: 'clientDashboard' } : {};
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateBreadcrumbs(this.activatedRoute.root);
@@ -44,9 +55,9 @@ export class BreadcrumbComponent implements OnInit {
           //     breadcrumbLabel = queryParams['title'];
           //   }
           // }
-          
+
           // breadcrumbs.unshift({ label: breadcrumbLabel, routerLink: route.snapshot.url.map(segment => segment.path) });
-          breadcrumbs.unshift({ label: breadcrumbLabel, routerLink: this.router.url});
+          breadcrumbs.unshift({ label: breadcrumbLabel, routerLink: this.router.url });
         }
       }
       route = route.firstChild as ActivatedRoute;
@@ -57,14 +68,14 @@ export class BreadcrumbComponent implements OnInit {
     // Store breadcrumb data in local storage
     localStorage.setItem('breadcrumbs', JSON.stringify(this.breadcrumbs));
   }
-  pageReload(){
+  pageReload() {
     window.location.reload();
   }
-  goBack(){
+  goBack() {
     this.location.back();
     // let previousLink = '/';
     // console.log(this.breadcrumbs.length);
-    
+
     // if(this.breadcrumbs.length>1){
     //   previousLink = this.breadcrumbs.slice(-2, -1)[0].routerLink[0];
     // }

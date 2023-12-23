@@ -38,4 +38,12 @@ export class AppTopBarComponent {
     this.authService.clearLocalStorage();
     this.router.navigate(['login']);
   }
+
+  navigateToHome() {
+    if (this.userRole == 'admin') {
+      this.router.navigate(['']);
+    } else if (this.userRole == 'client') {
+      this.router.navigate(['clientDashboard']);
+    }
+  }
 }

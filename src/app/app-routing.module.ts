@@ -10,7 +10,7 @@ import { authGuard } from './core/guards/auth.guard';
             {
                 path: '', component: AppLayoutComponent, canActivate: [authGuard], data: { role: ['client', 'admin'] },
                 children: [
-                    { path: '', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
+                    { path: '', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'invest', canActivate: [authGuard], data: { role: ['client', 'admin'] }, loadChildren: () => import('./features/investment/investment.module').then(m => m.InvestmentModule) },
                     { path: 'return/:investmentId', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./features/return/return.module').then(m => m.ReturnModule) },
                     { path: 'createuser', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./core/auth/admin-registration/admin-registration.module').then(m => m.AdminRegistrationModule) },
