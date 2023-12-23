@@ -5,7 +5,7 @@ import { authGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: InvestmentComponent },
-  { path: 'new-investment', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./new-investment/new-investment.module').then(m => m.NewInvestmentModule) },
+  { path: 'new-investment', canActivate: [authGuard], data: { role: ['admin', 'client'] }, loadChildren: () => import('./new-investment/new-investment.module').then(m => m.NewInvestmentModule) },
 ];
 
 @NgModule({

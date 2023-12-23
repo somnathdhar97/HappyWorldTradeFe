@@ -32,7 +32,7 @@
                 <ng-template pTemplate="content">
                     <form [formGroup]="investmentForm" class="p-fluid p-formgrid grid">
 
-                        <div class="field col-12 md:col-6">
+                        <div class="field col-12 md:col-6" *ngIf="userRole == 'admin'">
                             <label for="user">User</label>
                             <p-dropdown [options]="users" formControlName="userName" optionLabel="name" [filter]="true"
                                 filterBy="name" [showClear]="true" placeholder="Select an user"
@@ -61,7 +61,7 @@
                             </span>
                         </div>
 
-                        <div class="field col-12 md:col-6">
+                        <div class="field col-12 md:col-6" *ngIf="userRole == 'admin'">
                             <label htmlFor="perRate">Percenatge Rate</label>
                             <input pInputText id="perRate" type="number" formControlName="rate"
                                 placeholder="Enter percentage rate" />

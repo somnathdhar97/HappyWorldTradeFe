@@ -3,6 +3,7 @@ export interface IStatusWiseInvesment {
     activeInvesments: number;
     returnedInvesments: number;
     retrunPendingInvesments: number;
+    unapprovedInvestments: number;
 }
 export interface IInvestments {
     id: number;

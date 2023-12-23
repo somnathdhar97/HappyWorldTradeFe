@@ -8,6 +8,7 @@ import { MasterService } from 'src/app/core/services/master.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidationService } from 'src/app/core/services/validation.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-new-investment',
@@ -24,14 +25,25 @@ export class NewInvestmentComponent implements OnInit {
 
   uploadedFiles: any[] = [];
 
+  decodedToken: string;
+  userRole: string;
+  userName: string;
+  userId: string;
+
   constructor(private fb: FormBuilder,
     private vs: ValidationService,
     private toastService: ToastService,
     private masterService: MasterService,
     private invesmentService: InvesmentService,
     private router: Router,
-    private datePipe: DatePipe
-  ) { }
+    private datePipe: DatePipe,
+    private authService: AuthService
+  ) {
+    this.decodedToken = this.authService.getDecodedAccessToken();
+    this.userId = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    this.userName = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    this.userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  }
 
   ngOnInit(): void {
     this.investmentForm = this.fb.group({
@@ -69,7 +81,14 @@ export class NewInvestmentComponent implements OnInit {
     });
     this.allScheme();
     this.allTenure();
-    this.allUser();
+    if (this.userRole == 'admin') {
+      this.allUser();
+    } else if (this.userRole == 'client') {
+      this.investmentForm.controls['userName'].clearValidators();
+      this.investmentForm.controls['userName'].updateValueAndValidity();
+      this.investmentForm.controls['rate'].clearValidators();
+      this.investmentForm.controls['rate'].updateValueAndValidity();
+    }
     this.allPaymentMethod();
   }
 
@@ -239,11 +258,11 @@ export class NewInvestmentComponent implements OnInit {
   submit() {
     if (this.investmentForm.valid) {
       this.investmentData = {
-        userId: this.investmentForm.value.userName.id,
+        userId: this.userRole == 'admin' ? this.investmentForm.value.userName.id : this.userRole == 'client' ? this.userId : '',
         schemeId: this.investmentForm.value.scheme.id,
         tenureId: this.investmentForm.value.tenure.id,
         amount: this.investmentForm.value.amount,
-        ratePer: this.investmentForm.value.rate,
+        ratePer: this.userRole == 'admin' ? this.investmentForm.value.rate : this.userRole == 'admin' ? this.investmentForm.value.rate : 0,
         paymentMethodId: this.investmentForm.value.paymentMethod.id,
         // paymentMethodDoc: this.investmentForm.value.documentNo,
         investmentDate: this.datePipe.transform(this.investmentForm.value.investmentDate, 'dd/MM/yyyy'),
@@ -251,14 +270,18 @@ export class NewInvestmentComponent implements OnInit {
         TenureValue: this.investmentForm.value.tenure.value,
         Remarks: this.investmentForm.value.remarks,
       }
-      this.invesmentService.setNewInvesment(this.investmentData).subscribe((response) => {
-        if (response.apiResponseStatus == 1) {
-          this.toastService.showSuccess(response.message);
-          this.router.navigate(['/invest']);
-        } else {
-          this.toastService.showError(response.message);
-        }
-      });
+      if (this.userRole == 'admin') {
+        this.invesmentService.setNewInvesment(this.investmentData).subscribe((response) => {
+          if (response.apiResponseStatus == 1) {
+            this.toastService.showSuccess(response.message);
+            this.router.navigate(['/invest']);
+          } else {
+            this.toastService.showError(response.message);
+          }
+        });
+      } else if (this.userRole == 'client') {
+        console.log(this.investmentData);
+      }
     } else {
       this.investmentForm.markAllAsTouched();
       this.toastService.showError("Please fill all the fields carefully..!");
