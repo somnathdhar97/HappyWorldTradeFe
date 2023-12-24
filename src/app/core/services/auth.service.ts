@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastService } from './toast.service';
 import { Observable, catchError } from 'rxjs';
 import { IapiResponce } from '../models/iapi-responce';
-import { INewUser } from '../models/IClient';
+import { IForgetPassword, INewUser } from '../models/IClient';
 import { ILogincredentials } from '../models/iauth';
 import { jwtDecode } from 'jwt-decode';
 
@@ -79,4 +79,21 @@ export class AuthService {
       })
     );
   }
+
+  forgetPassword(forgetPassword: IForgetPassword): Observable<IapiResponce> {
+    return this.http.post<IapiResponce>('', forgetPassword).pipe(
+      catchError((error) => {
+        throw this.toastService.showError(error.message);
+      })
+    );
+  }
+
+  checkUserEmailExistOrNot(userEmailId: string): Observable<IapiResponce> {
+    return this.http.get<IapiResponce>('' + userEmailId).pipe(
+      catchError((error) => {
+        throw this.toastService.showError(error.message);
+      })
+    );
+  }
+
 }

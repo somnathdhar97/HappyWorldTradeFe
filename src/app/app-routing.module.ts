@@ -24,6 +24,7 @@ import { authGuard } from './core/guards/auth.guard';
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'login', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
             { path: 'registration', loadChildren: () => import('./core/auth/register/register.module').then(m => m.RegisterModule) },
+            { path: 'forget-password', loadChildren: () => import('./core/auth/forget-password/forget-password.module').then(m => m.ForgetPasswordModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })

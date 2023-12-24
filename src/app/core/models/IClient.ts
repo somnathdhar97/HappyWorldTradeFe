@@ -31,4 +31,9 @@ export interface IAdmins {
     email?: string;
     status: string;
     StatusName: string;
+}
+
+export interface IForgetPassword {
+    email?: string;
+    password: string;
 } 
