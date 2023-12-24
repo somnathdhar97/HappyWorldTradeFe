@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
+import { FieldsetModule } from 'primeng/fieldset';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/cus
     FormsModule,
     PasswordModule,
     ReactiveFormsModule,
-    CustomMatErrorModule
+    CustomMatErrorModule,
+    FieldsetModule
   ]
 })
 export class RegisterModule { }

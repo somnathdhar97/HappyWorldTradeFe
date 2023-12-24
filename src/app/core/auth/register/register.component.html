@@ -5,66 +5,141 @@
             <div class="w-full surface-card py-6 px-8 sm:px-6" style="border-radius:53px">
                 <h5 class="">Sign Up</h5>
                 <form [formGroup]="registerForm">
-                    <div class="p-fluid">
 
-                        <div class="p-formgrid grid">
-                            <div class="field col">
-                                <label htmlFor="name">Name</label>
-                                <input pInputText id="name" type="text" formControlName="name" />
-                                <span class="block" style="color: red;">
-                                    <custom-mat-error [control]="errorControl['name']"></custom-mat-error>
-                                </span>
+                    <p-fieldset legend="Personal Details" [toggleable]="true" class="line-height-1 m-0">
+
+                        <div class="p-fluid">
+                            <div class="p-formgrid grid">
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="name">Name</label>
+                                    <input pInputText id="name" type="text" formControlName="name" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['name']"></custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="email">Email</label>
+                                    <input pInputText id="email" type="email" formControlName="email" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['email']"></custom-mat-error>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="field col">
-                                <label htmlFor="email">Email</label>
-                                <input pInputText id="email" type="email" formControlName="email" />
-                                <span class="block" style="color: red;">
-                                    <custom-mat-error [control]="errorControl['email']"></custom-mat-error>
-                                </span>
+                            <div class="p-formgrid grid">
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="username">Username</label>
+                                    <input pInputText id="username" type="text" formControlName="userName"
+                                        (focusout)="checkUsernameAvailability($event)" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['userName']"></custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="mobile">Mobile</label>
+                                    <input pInputText id="mobile" type="text" formControlName="mobileNo" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['mobileNo']"></custom-mat-error>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-formgrid grid">
+                                <div class="field col-12 md:col-6">
+                                    <label for="password1">Password</label>
+                                    <p-password id="password1" formControlName="password" placeholder="Password"
+                                        [toggleMask]="true"></p-password>
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['password']"></custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <label for="confirmpassword">Confirm
+                                        Password</label>
+                                    <p-password id="confirmpassword" formControlName="confirmPassword"
+                                        placeholder="Confirm Password" [toggleMask]="true"
+                                        (focusout)="checkConfirPasswordMatchedOrNot($event)"></p-password>
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error
+                                            [control]="errorControl['confirmPassword']"></custom-mat-error>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="p-formgrid grid">
-                            <div class="field col">
-                                <label htmlFor="username">Username</label>
-                                <input pInputText id="username" type="text" formControlName="userName"
-                                    (focusout)="checkUsernameAvailability($event)" />
-                                <span class="block" style="color: red;">
-                                    <custom-mat-error [control]="errorControl['userName']"></custom-mat-error>
-                                </span>
+                    </p-fieldset>
+
+                    <p-fieldset legend="Bank Details" [toggleable]="true" [collapsed]=true class="line-height-1 m-0">
+
+                        <div class="p-fluid">
+                            <div class="p-formgrid grid">
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="bankname">Bank Name</label>
+                                    <input pInputText id="bankname" type="text" formControlName="bankName" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['bankName']"></custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="ifsc">IFSC</label>
+                                    <input pInputText id="ifsc" type="text" formControlName="ifsc" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['ifsc']"></custom-mat-error>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="field col">
-                                <label htmlFor="mobile">Mobile</label>
-                                <input pInputText id="mobile" type="text" formControlName="mobileNo" />
-                                <span class="block" style="color: red;">
-                                    <custom-mat-error [control]="errorControl['mobileNo']"></custom-mat-error>
-                                </span>
+                            <div class="p-formgrid grid">
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="branchname">Brach Name</label>
+                                    <input pInputText id="branchname" type="text" formControlName="branchName" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['branchName']"></custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="acno">Account Number</label>
+                                    <input pInputText id="acno" type="number" formControlName="acNumber" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['acNumber']"></custom-mat-error>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-formgrid grid">
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="confirmac">Confirm Account Number</label>
+                                    <input pInputText id="confirmac" type="number" formControlName="confirmAcNumber" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['confirmAcNumber']">
+                                        </custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="acholdername">Account Holder Name</label>
+                                    <input pInputText id="acholdername" type="text" formControlName="acHolderName" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['acHolderName']"></custom-mat-error>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-formgrid grid">
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="actype">Account Type</label>
+                                    <input pInputText id="actype" type="text" formControlName="acType" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['acType']">
+                                        </custom-mat-error>
+                                    </span>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <label htmlFor="pan">PAN</label>
+                                    <input pInputText id="pan" type="text" formControlName="pan" />
+                                    <span class="block" style="color: red;">
+                                        <custom-mat-error [control]="errorControl['pan']"></custom-mat-error>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="p-formgrid grid">
-                            <div class="field col">
-                                <label for="password1">Password</label>
-                                <p-password id="password1" formControlName="password" placeholder="Password"
-                                    [toggleMask]="true"></p-password>
-                                <span class="block" style="color: red;">
-                                    <custom-mat-error [control]="errorControl['password']"></custom-mat-error>
-                                </span>
-                            </div>
+                    </p-fieldset>
 
-                            <div class="field col">
-                                <label for="confirmpassword">Confirm
-                                    Password</label>
-                                <p-password id="confirmpassword" formControlName="confirmPassword"
-                                    placeholder="Confirm Password" [toggleMask]="true"
-                                    (focusout)="checkConfirPasswordMatchedOrNot($event)"></p-password>
-                                <span class="block" style="color: red;">
-                                    <custom-mat-error [control]="errorControl['confirmPassword']"></custom-mat-error>
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
                 </form>
                 <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl" (click)="register()"></button>
             </div>

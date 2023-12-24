@@ -27,6 +27,16 @@ export class RegisterComponent implements OnInit {
       mobileNo: this.vs.validation('Mobile', 10, 10, 100),
       password: this.vs.validation('Required', 0, 100, 100),
       confirmPassword: this.vs.validation('Required', 0, 100, 100),
+
+      bankName: this.vs.validation('Required', 0, 100, 100),
+      ifsc: this.vs.validation('Required', 0, 100, 100),
+      branchName: this.vs.validation('Required', 0, 100, 100),
+      acNumber: this.vs.validation('Required', 0, 100, 100),
+      confirmAcNumber: this.vs.validation('Required', 0, 100, 100),
+      acHolderName: this.vs.validation('Required', 0, 100, 100),
+      acType: this.vs.validation('Required', 0, 100, 100),
+      pan: this.vs.validation('Required', 0, 100, 100),
+
     });
   }
 
