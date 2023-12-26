@@ -9,6 +9,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidationService } from 'src/app/core/services/validation.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-new-investment',
@@ -23,12 +24,13 @@ export class NewInvestmentComponent implements OnInit {
   users: IUser[] = [];
   paymentMethods: IPaymentMethod[] = [];
 
-  uploadedFiles: any[] = [];
-
   decodedToken: string;
   userRole: string;
   userName: string;
   userId: string;
+  selectedFile: File = null;
+  paymentJson: any;
+
 
   constructor(private fb: FormBuilder,
     private vs: ValidationService,
@@ -37,7 +39,8 @@ export class NewInvestmentComponent implements OnInit {
     private invesmentService: InvesmentService,
     private router: Router,
     private datePipe: DatePipe,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
   ) {
     this.decodedToken = this.authService.getDecodedAccessToken();
     this.userId = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
@@ -142,9 +145,10 @@ export class NewInvestmentComponent implements OnInit {
     return this.investmentForm.value;
   }
 
-  onUpload(event: any) {
-    for (const file of event.files) {
-      this.uploadedFiles.push(file);
+  uploadFile(event: any) {
+    if (event.files[0]) {
+      this.selectedFile = event.files[0];
+      this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     }
   }
 
@@ -257,6 +261,33 @@ export class NewInvestmentComponent implements OnInit {
 
   submit() {
     if (this.investmentForm.valid) {
+      if (this.investmentForm.value.paymentMethod.id == 1) {
+        // UPI
+        this.paymentJson = {
+          fromUpi: this.investmentForm.value['fromUpi'],
+          toUpi: this.investmentForm.value['toUpi'],
+          transactionId: this.investmentForm.value['transactionId'],
+          name: this.investmentForm.value['name'],
+          mobile: this.investmentForm.value['mobile']
+        };
+      } else if (this.investmentForm.value.paymentMethod.id == 2) {
+        // NEFT
+        this.paymentJson = {
+          fromBank: this.investmentForm.value['fromBank'],
+          toBank: this.investmentForm.value['toBank'],
+          neftRef: this.investmentForm.value['neftRef'],
+          name: this.investmentForm.value['name'],
+          mobile: this.investmentForm.value['mobile']
+        };
+      } else if (this.investmentForm.value.paymentMethod.id == 3) {
+        // Cheque
+        this.paymentJson = {
+          toWhom: this.investmentForm.value['toWhom'],
+          chequeFRomBank: this.investmentForm.value['chequeFromBank'],
+          chequeNo: this.investmentForm.value['chequeNo'],
+          chequeDatedOn: this.investmentForm.value['chequeDatedOn']
+        };
+      }
       this.investmentData = {
         userId: this.userRole == 'admin' ? this.investmentForm.value.userName.id : this.userRole == 'client' ? this.userId : '',
         schemeId: this.investmentForm.value.scheme.id,
@@ -269,9 +300,10 @@ export class NewInvestmentComponent implements OnInit {
         SchemeValue: this.investmentForm.value.scheme.value,
         TenureValue: this.investmentForm.value.tenure.value,
         Remarks: this.investmentForm.value.remarks,
+        paymentDetailsJson: this.paymentJson
       }
       if (this.userRole == 'admin') {
-        this.invesmentService.setNewInvesment(this.investmentData).subscribe((response) => {
+        this.invesmentService.setNewInvesment(this.investmentData, this.selectedFile).subscribe((response) => {
           if (response.apiResponseStatus == 1) {
             this.toastService.showSuccess(response.message);
             this.router.navigate(['/invest']);

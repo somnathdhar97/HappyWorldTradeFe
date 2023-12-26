@@ -38,9 +38,12 @@ export class InvesmentService {
                 }),
             );
     }
-    setNewInvesment(newInvestmentData: IInsertInvestment): Observable<IapiResponce> {
+    setNewInvesment(newInvestmentData: IInsertInvestment, file: File): Observable<IapiResponce> {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('investmentData', JSON.stringify(newInvestmentData));
         return this.http
-            .post<IapiResponce>('v1/Investment/NewInvestment', newInvestmentData)
+            .post<IapiResponce>('v1/Investment/NewInvestment', formData)
             .pipe(
                 catchError((error) => {
                     throw this.toastService.showError(error.message);

@@ -28,7 +28,8 @@ export interface IInsertInvestment {
     investmentDate: string;
     SchemeValue: number;
     TenureValue: number;
-    Remarks: string
+    Remarks: string;
+    paymentDetailsJson: any;
 }
 
 export interface IInvestmentReturn {
