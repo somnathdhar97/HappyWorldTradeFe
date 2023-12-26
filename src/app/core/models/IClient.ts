@@ -12,6 +12,19 @@ export interface INewUser {
     mobileNumber: string;
     email?: string;
 }
+export interface IBankDetails {
+    bankName: string;
+    ifscCode: string;
+    branchName: string;
+    accountHolderName: string;
+    accountNumber: string;
+    pan: string;
+    accountType: number;
+  }
+export interface INewClinet{
+    personalDeatils:INewUser,
+    bankDeatils:IBankDetails,
+}
 export interface IStatusWiseClient {
     newUser: number;
     subscriber: number;

@@ -5,7 +5,7 @@ import { ValidationService } from '../../services/validation.service';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { INewUser } from '../../models/IClient';
+import { INewClinet, INewUser } from '../../models/IClient';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class RegisterComponent implements OnInit {
   valCheck: string[] = ['remember'];
-  newClientData: INewUser;
+  newClientData: INewClinet;
   registerForm: FormGroup;
   constructor(private toastService: ToastService, public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 
@@ -47,11 +47,22 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.registerForm.valid) {
       this.newClientData = {
-        name: this.registerForm.value.name,
-        username: this.registerForm.value.userName,
-        mobileNumber: this.registerForm.value.mobileNo,
-        password: this.registerForm.value.confirmPassword,
-        email: this.registerForm.value.email,
+        personalDeatils:{
+          name: this.registerForm.value.name,
+          username: this.registerForm.value.userName,
+          mobileNumber: this.registerForm.value.mobileNo,
+          password: this.registerForm.value.confirmPassword,
+          email: this.registerForm.value.email,
+        },
+        bankDeatils:{
+          bankName:this.registerForm.value.bankName,
+          ifscCode:this.registerForm.value.ifsc,
+          branchName:this.registerForm.value.branchName,
+          accountNumber:this.registerForm.value.acNumber.toString(),
+          accountHolderName:this.registerForm.value.acHolderName,
+          accountType:this.registerForm.value.acType,
+          pan:this.registerForm.value.pan,
+        }
       }
       this.authService.regisertNewClient(this.newClientData).subscribe((response) => {
         if (response.apiResponseStatus == 1) {
