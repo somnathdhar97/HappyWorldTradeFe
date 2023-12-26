@@ -218,8 +218,6 @@
 
                         <div class="field col-12 md:col-6">
                             <label htmlFor="investdate">Investment Date</label>
-                            <!-- <input pInputText id="investdate" type="date" formControlName="investmentDate"
-                            placeholder="Enter investment date." /> -->
                             <p-calendar [showIcon]="true" inputId="icon" id="investdate"
                                 formControlName="investmentDate"></p-calendar>
                             <span class="block" style="color: red;">
@@ -228,14 +226,9 @@
                         </div>
 
                         <div class="field col-12 md:col-6">
-                            <label htmlFor="investdate">Upload the image</label>
-                            <p-fileUpload (onUpload)="onUpload($event)" [multiple]="true" accept="image/*"
-                                [maxFileSize]="1000000">
-                                <ng-template pTemplate="content">
-                                    <ul *ngIf="uploadedFiles.length">
-                                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                                    </ul>
-                                </ng-template>
+                            <label>Upload the image</label>
+                            <p-fileUpload accept="image/*" [maxFileSize]="1000000" [customUpload]="true"
+                                (uploadHandler)="uploadFile($event)" [auto]="true">
                             </p-fileUpload>
                         </div>
 
