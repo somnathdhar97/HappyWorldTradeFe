@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IInsertInvestment } from 'src/app/core/models/Iinvesment';
+import { IInsertInvestment, IInsertNewInvestment } from 'src/app/core/models/Iinvesment';
 import { IInvestment, IPaymentMethod, IScheme, ITenure, IUser } from 'src/app/core/models/master';
 import { InvesmentService } from 'src/app/core/services/invesment.service';
 import { MasterService } from 'src/app/core/services/master.service';
@@ -23,6 +23,7 @@ export class NewInvestmentComponent implements OnInit {
   tenures: ITenure[] = [];
   users: IUser[] = [];
   paymentMethods: IPaymentMethod[] = [];
+  investmentPayload : IInsertNewInvestment;
 
   decodedToken: string;
   userRole: string;
@@ -288,22 +289,27 @@ export class NewInvestmentComponent implements OnInit {
           chequeDatedOn: this.investmentForm.value['chequeDatedOn']
         };
       }
-      this.investmentData = {
-        userId: this.userRole == 'admin' ? this.investmentForm.value.userName.id : this.userRole == 'client' ? this.userId : '',
-        schemeId: this.investmentForm.value.scheme.id,
-        tenureId: this.investmentForm.value.tenure.id,
-        amount: this.investmentForm.value.amount,
-        ratePer: this.userRole == 'admin' ? this.investmentForm.value.rate : this.userRole == 'admin' ? this.investmentForm.value.rate : 0,
-        paymentMethodId: this.investmentForm.value.paymentMethod.id,
-        // paymentMethodDoc: this.investmentForm.value.documentNo,
-        investmentDate: this.datePipe.transform(this.investmentForm.value.investmentDate, 'dd/MM/yyyy'),
-        SchemeValue: this.investmentForm.value.scheme.value,
-        TenureValue: this.investmentForm.value.tenure.value,
-        Remarks: this.investmentForm.value.remarks,
-        paymentDetailsJson: this.paymentJson
+      this.investmentPayload = {
+        investmentDetails : {
+            userId: this.userRole == 'admin' ? this.investmentForm.value.userName.id : this.userRole == 'client' ? this.userId : '',
+            schemeId: this.investmentForm.value.scheme.id,
+            tenureId: this.investmentForm.value.tenure.id,
+            amount: this.investmentForm.value.amount,
+            ratePer: this.userRole == 'admin' ? this.investmentForm.value.rate : this.userRole == 'admin' ? this.investmentForm.value.rate : 0,
+            paymentMethodId: this.investmentForm.value.paymentMethod.id,
+            // paymentMethodDoc: this.investmentForm.value.documentNo,
+            investmentDate: this.datePipe.transform(this.investmentForm.value.investmentDate, 'dd/MM/yyyy'),
+            SchemeValue: this.investmentForm.value.scheme.value,
+            TenureValue: this.investmentForm.value.tenure.value,
+            Remarks: this.investmentForm.value.remarks,
+        },
+        paymentDetailsJson : {
+            paymentDetails: this.paymentJson
+        }
       }
+
       if (this.userRole == 'admin') {
-        this.invesmentService.setNewInvesment(this.investmentData, this.selectedFile).subscribe((response) => {
+        this.invesmentService.setNewInvesment(this.investmentPayload, this.selectedFile).subscribe((response) => {
           if (response.apiResponseStatus == 1) {
             this.toastService.showSuccess(response.message);
             this.router.navigate(['/invest']);
@@ -312,7 +318,7 @@ export class NewInvestmentComponent implements OnInit {
           }
         });
       } else if (this.userRole == 'client') {
-        console.log(this.investmentData);
+        console.log(this.investmentPayload);
       }
     } else {
       this.investmentForm.markAllAsTouched();

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastService } from './toast.service';
 import { Observable, catchError } from 'rxjs';
 import { IapiResponce } from '../models/iapi-responce';
-import { IInsertInvestment, IInvestmentReturn, IUpcomingReturn } from '../models/Iinvesment';
+import { IInsertInvestment, IInsertNewInvestment, IInvestmentReturn, IUpcomingReturn } from '../models/Iinvesment';
 
 @Injectable({
     providedIn: 'root'
@@ -38,7 +38,7 @@ export class InvesmentService {
                 }),
             );
     }
-    setNewInvesment(newInvestmentData: IInsertInvestment, file: File): Observable<IapiResponce> {
+    setNewInvesment(newInvestmentData: IInsertNewInvestment, file: File): Observable<IapiResponce> {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('investmentData', JSON.stringify(newInvestmentData));
