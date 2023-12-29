@@ -17,11 +17,6 @@ export interface IInvestments {
     status: string;
 }
 
-export interface IInsertNewInvestment {
-    investmentDetails: IInsertInvestment;
-    paymentDetailsJson: any;
-}
-
 export interface IInsertInvestment {
     userId: number;
     schemeId: number;
@@ -57,6 +52,6 @@ export interface IUpcomingReturn {
     remarks: string;
 }
 
-export interface IPendingReturn {}
+export interface IPendingReturn { }
 
-export interface IRecenetInvestments {}
+export interface IRecenetInvestments { }
