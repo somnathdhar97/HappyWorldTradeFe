@@ -114,7 +114,7 @@
             <ng-template pTemplate="content">
                 <p-table #dt1 [value]="investments" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
                     styleClass="p-datatable-gridlines" [paginator]="true"
-                    [globalFilterFields]="['clientName','schemeName','tenureNameWithValue','amount','ratePer','invesmentDate','status']"
+                    [globalFilterFields]="['clientName','schemeName','tenureNameWithValue','amount','ratePer','invesmentDate','status', 'paymentDetails']"
                     responsiveLayout="scroll">
                     <ng-template pTemplate="caption">
                         <div class="flex justify-content-between flex-column sm:flex-row">
@@ -176,7 +176,7 @@
                                     Status
                                     <p-columnFilter type="text" field="status" display="menu"
                                         placeholder="Search by status"></p-columnFilter>
-                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <!-- <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                                         <p-dropdown [ngModel]="value" [options]="statuses"
                                             (onChange)="filter($event.value)" placeholder="Any"
                                             [style]="{'min-width': '12rem'}">
@@ -185,8 +185,22 @@
                                                     [class]="'customer-badge status-' + option.value">{{option.label}}</span>
                                             </ng-template>
                                         </p-dropdown>
-                                    </ng-template>
+                                    </ng-template> -->
 
+                                </div>
+                            </th>
+                            <th style="min-width: 10rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Payment Details
+                                    <p-columnFilter type="text" field="paymentDetails" display="menu"
+                                        placeholder="Search by payment details"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="min-width: 10rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Investment Attachment
+                                    <p-columnFilter type="text" field="investmentAttachment"
+                                        display="menu"></p-columnFilter>
                                 </div>
                             </th>
                             <th style="min-width: 8rem" *ngIf="userRole == 'admin'">
@@ -219,6 +233,12 @@
                             <td>
                                 <span
                                     [class]="'client-badge status-' + investment.statusId">{{investment.status}}</span>
+                            </td>
+                            <td>
+                                {{investment.paymentDetails}}
+                            </td>
+                            <td>
+                                {{investment.investmentAttachment}}
                             </td>
                             <td class="text-center" *ngIf="userRole == 'admin'">
                                 <button pButton pRipple label="Return" icon="pi pi-send"

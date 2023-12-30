@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
   styleUrls: ['./investment.component.scss']
 })
 export class InvestmentComponent implements OnInit {
-  investments: IInvestments[][];
+  investments: IInvestments[];
   invesmentsCouts: IStatusWiseInvesment;
   loading: boolean = true;
   selectedCard: number;
@@ -68,6 +68,11 @@ export class InvestmentComponent implements OnInit {
     this.invesmentService.getAllInvesments().subscribe((response) => {
       if (response.apiResponseStatus == 1) {
         this.investments = response.result;
+        this.investments.forEach(element => {
+          if (element.paymentDetails != null) {
+            element.paymentDetails = JSON.parse(element.paymentDetails)
+          }
+        });
         this.loading = false;
       } else {
         this.toastService.showError(response.message);

@@ -15,6 +15,8 @@ export interface IInvestments {
     invesmentDate: string;
     statusId: number;
     status: string;
+    investmentAttachment: Uint8Array;
+    paymentDetails: string;
 }
 
 export interface IInsertInvestment {
