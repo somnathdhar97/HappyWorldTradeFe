@@ -8,8 +8,10 @@ import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { InvestmentComponent } from './investment.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogComponent } from '../dialog/dialog.component';
 @NgModule({
-  declarations: [InvestmentComponent],
+  declarations: [InvestmentComponent, DialogComponent],
   imports: [
     CommonModule,
     InvestmentRoutingModule,
@@ -17,7 +19,8 @@ import { InvestmentComponent } from './investment.component';
     ButtonModule,
     ToolbarModule,
     TableModule,
-    InputTextModule
+    InputTextModule,
+    DynamicDialogModule
   ]
 })
 export class InvestmentModule { }

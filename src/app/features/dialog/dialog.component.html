@@ -1,0 +1,21 @@
+<div>
+    <div *ngIf="payDetails.paymentMethodId == 1">
+        <ul>
+            <strong>
+                <li>Name : {{payDetails.paymentDetails.name}}</li>
+            </strong>
+            <strong>
+                <li>Transaction Id : {{payDetails.paymentDetails.transactionId}}</li>
+            </strong>
+            <strong>
+                <li>Form Upi : {{payDetails.paymentDetails.fromUpi}}</li>
+            </strong>
+            <strong>
+                <li>To Upi : {{payDetails.paymentDetails.toUpi}}</li>
+            </strong>
+            <strong>
+                <li>Mobile : {{payDetails.paymentDetails.mobile}}</li>
+            </strong>
+        </ul>
+    </div>
+</div>

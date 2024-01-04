@@ -28,6 +28,15 @@ $gutter: 1rem; //for primeflex grid system
     margin-bottom: 10px;
 }
 
-.surface-ground{
+.surface-ground {
     margin-top: 20px;
+}
+
+.p-dialog .p-dialog-header {
+    border-bottom: 0 none;
+    background: #669f5f !important;
+    color: #343a40;
+    padding: 1.5rem;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
 }

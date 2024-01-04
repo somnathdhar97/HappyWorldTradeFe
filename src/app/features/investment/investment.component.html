@@ -235,10 +235,14 @@
                                     [class]="'client-badge status-' + investment.statusId">{{investment.status}}</span>
                             </td>
                             <td>
-                                {{investment.paymentDetails}}
+                                <button pButton pRipple label="View" icon="pi pi-eye"
+                                    class="p-button-sm p-button-success"
+                                    (click)="show('Payment Details',investment.paymentDetails,investment.paymentMethodId)"></button>
                             </td>
                             <td>
-                                {{investment.investmentAttachment}}
+                                <!-- {{investment.investmentAttachment}} -->
+                                <button pButton pRipple label="View" icon="pi pi-eye"
+                                    class="p-button-sm p-button-success"></button>
                             </td>
                             <td class="text-center" *ngIf="userRole == 'admin'">
                                 <button pButton pRipple label="Return" icon="pi pi-send"
