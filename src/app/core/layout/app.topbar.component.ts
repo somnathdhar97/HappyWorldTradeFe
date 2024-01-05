@@ -46,4 +46,8 @@ export class AppTopBarComponent {
       this.router.navigate(['clientDashboard']);
     }
   }
+
+  goToView(userid: string) {
+    this.router.navigate(['updateProfile', userid]);
+  }
 }

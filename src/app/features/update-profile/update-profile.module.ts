@@ -11,6 +11,7 @@ import { CardModule } from 'primeng/card';
 
 import { UpdateProfileRoutingModule } from './update-profile-routing.module';
 import { UpdateProfileComponent } from './update-profile.component';
+import { FieldsetModule } from 'primeng/fieldset';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UpdateProfileComponent } from './update-profile.component';
     ReactiveFormsModule,
     CustomMatErrorModule,
     DropdownModule,
-    CardModule
+    CardModule,
+    FieldsetModule
   ]
 })
 export class UpdateProfileModule { }

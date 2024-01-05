@@ -36,7 +36,7 @@
                 </div>
                 <div class="text-center mt-3">
                     <button pButton pRipple type="button" label="View Profile" class="p-button-raised p-button-danger"
-                        style="width: 100%;" [routerLink]="['updateProfile']" (click)="op1.toggle($event)"></button>
+                        style="width: 100%;" (click)="op1.toggle($event);goToView(this.userId);"></button>
                 </div>
 
             </p-overlayPanel>

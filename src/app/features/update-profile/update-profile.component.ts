@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutService } from 'src/app/core/layout/service/app.layout.service';
+import { IUserFullDetails } from 'src/app/core/models/iuser';
 import { ApiService } from 'src/app/core/services/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidationService } from 'src/app/core/services/validation.service';
 
 @Component({
@@ -14,16 +16,53 @@ import { ValidationService } from 'src/app/core/services/validation.service';
 export class UpdateProfileComponent {
   profileUpdateForm: FormGroup;
   cities: any[] = [];
+  userId: number;
+  userDetails: IUserFullDetails;
 
-  constructor(public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
+  constructor(public layoutService: LayoutService,
+    public fb: FormBuilder,
+    private vs: ValidationService,
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
-
     this.profileUpdateForm = this.fb.group({
+      name: [],
+      email: [],
+      userName: [],
+      mobileNo: [],
       password: this.vs.validation('Required', 0, 100, 100),
-      investmentId: this.vs.validation('Required', 0, 100, 100),
+      confirmPassword: this.vs.validation('Required', 0, 100, 100),
+      bankName: [],
+      ifsc: [],
+      branchName: [],
+      acNumber: [],
+      confirmAcNumber: [],
+      acHolderName: [],
+      acType: [],
+      pan: [],
     });
 
+    this.userId = +this.route.snapshot.paramMap.get('userid');
+    this.apiService.getFullUserDetailsById(this.userId).subscribe(resp => {
+      this.userDetails = resp[0];
+      this.profileUpdateForm.patchValue({
+        name: this.userDetails.name,
+        email: this.userDetails.email,
+        userName: this.userDetails.username,
+        mobileNo: this.userDetails.mobileNumber,
+        bankName: this.userDetails.bankName,
+        ifsc: this.userDetails.ifscCode,
+        branchName: this.userDetails.branchName,
+        acNumber: this.userDetails.accountNumber?.trim(),
+        acHolderName: this.userDetails.accountHolderName,
+        acType: this.userDetails.accountType,
+      })
+    })
   }
 
   get errorControl() {
@@ -47,6 +86,15 @@ export class UpdateProfileComponent {
     } else {
       this.profileUpdateForm.markAllAsTouched();
       alert("Please fill all the fields carefully..!");
+    }
+  }
+
+  checkConfirPasswordMatchedOrNot(e: any) {
+    if (e.target.value) {
+      if (e.target.value !== this.profileUpdateForm.value.password) {
+        this.toastService.showError('Password and Confirm Password are not same.');
+        this.profileUpdateForm.controls['confirmPassword'].reset();
+      }
     }
   }
 }
