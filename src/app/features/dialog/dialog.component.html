@@ -1,21 +1,25 @@
 <div>
-    <div *ngIf="payDetails.paymentMethodId == 1">
+    <div *ngIf="dialogData.paymentMethodId == 1">
         <ul>
             <strong>
-                <li>Name : {{payDetails.paymentDetails.name}}</li>
+                <li>Name : {{dialogData.paymentDetails.name}}</li>
             </strong>
             <strong>
-                <li>Transaction Id : {{payDetails.paymentDetails.transactionId}}</li>
+                <li>Transaction Id : {{dialogData.paymentDetails.transactionId}}</li>
             </strong>
             <strong>
-                <li>Form Upi : {{payDetails.paymentDetails.fromUpi}}</li>
+                <li>Form Upi : {{dialogData.paymentDetails.fromUpi}}</li>
             </strong>
             <strong>
-                <li>To Upi : {{payDetails.paymentDetails.toUpi}}</li>
+                <li>To Upi : {{dialogData.paymentDetails.toUpi}}</li>
             </strong>
             <strong>
-                <li>Mobile : {{payDetails.paymentDetails.mobile}}</li>
+                <li>Mobile : {{dialogData.paymentDetails.mobile}}</li>
             </strong>
         </ul>
     </div>
+</div>
+
+<div *ngIf="dialogData.file">
+    <img [src]="dialogData.file | attachment">
 </div>

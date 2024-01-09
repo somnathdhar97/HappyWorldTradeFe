@@ -22,6 +22,7 @@ import { MenuCardComponent } from './shared/menu-card/menu-card.component';
 import { ClientDashboardComponent } from './features/client-dashboard/client-dashboard.component';
 import { UpdateProfileComponent } from './features/update-profile/update-profile.component';
 import { AdminUserComponent } from './features/admin-user/admin-user.component';
+import { AttachmentPipe } from './shared/helper/attachment.pipe';
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent,

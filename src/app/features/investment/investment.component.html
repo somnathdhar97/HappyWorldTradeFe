@@ -240,9 +240,9 @@
                                     (click)="show('Payment Details',investment.paymentDetails,investment.paymentMethodId)"></button>
                             </td>
                             <td>
-                                <!-- {{investment.investmentAttachment}} -->
                                 <button pButton pRipple label="View" icon="pi pi-eye"
-                                    class="p-button-sm p-button-success"></button>
+                                    class="p-button-sm p-button-success"
+                                    (click)="viewFile(investment.attachmentData)"></button>
                             </td>
                             <td class="text-center" *ngIf="userRole == 'admin'">
                                 <button pButton pRipple label="Return" icon="pi pi-send"

@@ -8,11 +8,12 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class DialogComponent implements OnInit {
 
-  payDetails: any;
+  dialogData: any;
 
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
-    this.payDetails = this.config.data;
+    this.dialogData = this.config.data;
+    console.log(this.dialogData);
   }
 }

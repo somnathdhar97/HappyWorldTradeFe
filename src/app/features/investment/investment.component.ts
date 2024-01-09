@@ -115,4 +115,16 @@ export class InvestmentComponent implements OnInit {
     });
   }
 
+  viewFile(file: any) {
+    this.ref = this.dialogService.open(DialogComponent, {
+      data: {
+        file
+      },
+      header: 'Uploaded File',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true,
+    });
+  }
+
 }
