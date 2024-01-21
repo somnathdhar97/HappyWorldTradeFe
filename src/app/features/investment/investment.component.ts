@@ -65,6 +65,11 @@ export class InvestmentComponent implements OnInit {
     this.invesmentService.getInvesmentsByStatus(statusId).subscribe((response) => {
       if (response.apiResponseStatus == 1) {
         this.investments = response.result;
+        this.investments.forEach(element => {
+          if (element.paymentDetails != null) {
+            element.paymentDetails = JSON.parse(element.paymentDetails)
+          }
+        });
         this.loading = false;
       } else {
         this.toastService.showError(response.message);
@@ -125,6 +130,10 @@ export class InvestmentComponent implements OnInit {
       baseZIndex: 10000,
       maximizable: true,
     });
+  }
+
+  approveInvestment(investmentId: number) {
+    console.log(investmentId);
   }
 
 }

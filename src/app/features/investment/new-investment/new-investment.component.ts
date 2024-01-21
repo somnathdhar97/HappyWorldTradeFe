@@ -293,7 +293,7 @@ export class NewInvestmentComponent implements OnInit {
         schemeId: this.investmentForm.value.scheme.id,
         tenureId: this.investmentForm.value.tenure.id,
         amount: this.investmentForm.value.amount,
-        ratePer: this.userRole == 'admin' ? this.investmentForm.value.rate : this.userRole == 'admin' ? this.investmentForm.value.rate : 0,
+        ratePer: this.userRole == 'admin' ? this.investmentForm.value.rate : this.userRole == 'client' ? 1 : 1,
         paymentMethodId: this.investmentForm.value.paymentMethod.id,
         // paymentMethodDoc: this.investmentForm.value.documentNo,
         investmentDate: this.datePipe.transform(this.investmentForm.value.investmentDate, 'dd/MM/yyyy'),
@@ -301,19 +301,14 @@ export class NewInvestmentComponent implements OnInit {
         TenureValue: this.investmentForm.value.tenure.value,
         Remarks: this.investmentForm.value.remarks
       }
-
-      if (this.userRole == 'admin') {
-        this.invesmentService.setNewInvesment(this.investmentData, this.paymentJson, this.selectedFile).subscribe((response) => {
-          if (response.apiResponseStatus == 1) {
-            this.toastService.showSuccess(response.message);
-            this.router.navigate(['/invest']);
-          } else {
-            this.toastService.showError(response.message);
-          }
-        });
-      } else if (this.userRole == 'client') {
-        console.log(this.investmentData);
-      }
+      this.invesmentService.setNewInvesment(this.investmentData, this.paymentJson, this.selectedFile).subscribe((response) => {
+        if (response.apiResponseStatus == 1) {
+          this.toastService.showSuccess(response.message);
+          this.router.navigate(['/invest']);
+        } else {
+          this.toastService.showError(response.message);
+        }
+      });
     } else {
       this.investmentForm.markAllAsTouched();
       this.toastService.showError("Please fill all the fields carefully..!");
