@@ -110,7 +110,7 @@ export class InvestmentComponent implements OnInit {
   show(heading: string, paymentDetails: any, paymentMethodId: number) {
     this.ref = this.dialogService.open(DialogComponent, {
       data: {
-        paymentDetails, paymentMethodId
+        paymentDetails, paymentMethodId, mode: 'Read Payment Details'
       },
       header: heading,
       width: '40%',
@@ -123,7 +123,7 @@ export class InvestmentComponent implements OnInit {
   viewFile(file: any) {
     this.ref = this.dialogService.open(DialogComponent, {
       data: {
-        file
+        file, mode: 'Read File'
       },
       header: 'Uploaded File',
       contentStyle: { overflow: 'auto' },
@@ -134,6 +134,16 @@ export class InvestmentComponent implements OnInit {
 
   approveInvestment(investmentId: number) {
     console.log(investmentId);
+    this.ref = this.dialogService.open(DialogComponent, {
+      data: {
+        investmentId, mode: 'Approve Investment'
+      },
+      header: 'Approve Investment',
+      width: '40%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true,
+    });
   }
 
 }

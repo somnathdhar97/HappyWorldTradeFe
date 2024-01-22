@@ -23,3 +23,35 @@
 <div *ngIf="dialogData.file">
     <img [src]="dialogData.file | attachment">
 </div>
+
+
+
+<div *ngIf="dialogData.mode == 'Approve Investment'">
+    <div class="col-12">
+        <div class="stepsdemo-content">
+            <p-card>
+                <ng-template pTemplate="content">
+                    <form [formGroup]="approveInvestmentForm" class="p-fluid p-formgrid grid">
+
+                        <div class="field col-12">
+                            <label htmlFor="perRate">Percenatge Rate</label>
+                            <input pInputText id="perRate" type="number" formControlName="percentageRate"
+                                placeholder="Enter percentage rate" />
+                            <!-- <span class="block" style="color: red;">
+                                <custom-mat-error
+                                    [control]="approveInvestmentForm.controls.percentageRate"></custom-mat-error>
+                            </span> -->
+                        </div>
+
+                    </form>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="grid grid-nogutter justify-content-end">
+                        <p-button label="Submit" icon="pi pi-save" styleClass="p-button-raised p-button-success"
+                            (click)="submit()"></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>
