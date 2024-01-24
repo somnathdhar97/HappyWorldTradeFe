@@ -9,10 +9,8 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { InvestmentComponent } from './investment.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { DialogComponent } from '../dialog/dialog.component';
-import { AttachmentPipe } from 'src/app/shared/helper/attachment.pipe';
 @NgModule({
-  declarations: [InvestmentComponent, DialogComponent, AttachmentPipe],
+  declarations: [InvestmentComponent],
   imports: [
     CommonModule,
     InvestmentRoutingModule,

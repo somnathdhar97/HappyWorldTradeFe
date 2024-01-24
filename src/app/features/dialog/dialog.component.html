@@ -24,8 +24,6 @@
     <img [src]="dialogData.file | attachment">
 </div>
 
-
-
 <div *ngIf="dialogData.mode == 'Approve Investment'">
     <div class="col-12">
         <div class="stepsdemo-content">
@@ -37,10 +35,10 @@
                             <label htmlFor="perRate">Percenatge Rate</label>
                             <input pInputText id="perRate" type="number" formControlName="percentageRate"
                                 placeholder="Enter percentage rate" />
-                            <!-- <span class="block" style="color: red;">
+                            <span class="block" style="color: red;">
                                 <custom-mat-error
                                     [control]="approveInvestmentForm.controls.percentageRate"></custom-mat-error>
-                            </span> -->
+                            </span>
                         </div>
 
                     </form>

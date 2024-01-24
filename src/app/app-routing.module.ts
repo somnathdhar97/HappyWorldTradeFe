@@ -19,6 +19,7 @@ import { authGuard } from './core/guards/auth.guard';
                     { path: 'clientDashboard', canActivate: [authGuard], data: { role: ['client'] }, loadChildren: () => import('./features/client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule) },
                     { path: 'updateProfile/:userid', canActivate: [authGuard], data: { role: ['client', 'admin'] }, loadChildren: () => import('./features/update-profile/update-profile.module').then(m => m.UpdateProfileModule) },
                     { path: 'admin-user', canActivate: [authGuard], data: { role: ['admin'] }, loadChildren: () => import('./features/admin-user/admin-user.module').then(m => m.AdminUserModule) },
+                    { path: 'dialog', canActivate: [authGuard], data: { role: ['admin,client'] }, loadChildren: () => import('./features/dialog/dialog.module').then(m => m.DialogModule) },
                 ]
             },
             { path: '', redirectTo: 'login', pathMatch: 'full' },
