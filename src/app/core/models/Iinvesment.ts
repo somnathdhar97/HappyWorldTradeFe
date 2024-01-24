@@ -57,3 +57,8 @@ export interface IUpcomingReturn {
 export interface IPendingReturn { }
 
 export interface IRecenetInvestments { }
+
+export interface approveInvestments {
+    id: number;
+    percentageRate: number;
+}

@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="dialogData.mode == 'Read Payment Details'">
     <div *ngIf="dialogData.paymentMethodId == 1">
         <ul>
             <strong>
@@ -20,8 +20,10 @@
     </div>
 </div>
 
-<div *ngIf="dialogData.file">
-    <img [src]="dialogData.file | attachment">
+<div *ngIf="dialogData.mode == 'Read File'">
+    <div *ngIf="dialogData.file">
+        <img [src]="dialogData.file | attachment">
+    </div>
 </div>
 
 <div *ngIf="dialogData.mode == 'Approve Investment'">

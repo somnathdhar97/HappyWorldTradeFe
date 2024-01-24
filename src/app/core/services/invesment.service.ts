@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastService } from './toast.service';
 import { Observable, catchError } from 'rxjs';
 import { IapiResponce } from '../models/iapi-responce';
-import { IInsertInvestment, IInvestmentReturn, IUpcomingReturn } from '../models/Iinvesment';
+import { IInsertInvestment, IInvestmentReturn, IUpcomingReturn, approveInvestments } from '../models/Iinvesment';
 
 @Injectable({
     providedIn: 'root'
@@ -72,6 +72,16 @@ export class InvesmentService {
     getTodayReturn(): Observable<IapiResponce> {
         return this.http
             .get<IapiResponce>('v1/Investment/GetTodayInvesments')
+            .pipe(
+                catchError((error) => {
+                    throw this.toastService.showError(error.message);
+                }),
+            );
+    }
+
+    approveInvesment(approveInvestment: approveInvestments): Observable<IapiResponce> {
+        return this.http
+            .put<IapiResponce>('v1/Investment/ApproveInvestment', approveInvestment)
             .pipe(
                 catchError((error) => {
                     throw this.toastService.showError(error.message);
