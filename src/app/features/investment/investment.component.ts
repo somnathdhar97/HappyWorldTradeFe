@@ -144,6 +144,12 @@ export class InvestmentComponent implements OnInit {
       baseZIndex: 10000,
       maximizable: true,
     });
+
+    this.ref.onClose.subscribe((result) => {
+      setTimeout(() => {
+        this.ngOnInit();
+      }, 500);
+    });
   }
 
 }

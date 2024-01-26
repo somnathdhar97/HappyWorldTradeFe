@@ -48,6 +48,7 @@ export class DialogComponent implements OnInit {
       this.investmentService.approveInvesment(this.approveInvestment).subscribe(resp => {
         if (resp.apiResponseStatus == 1) {
           this.toastService.showSuccess(resp.message);
+          this.ref.close();
         } else {
           this.toastService.showError(resp.message);
         }
