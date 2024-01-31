@@ -35,8 +35,9 @@
                     <span>Role : {{userRole}}</span><br>
                 </div>
                 <div class="text-center mt-3">
-                    <button pButton pRipple type="button" label="View Profile" class="p-button-raised p-button-danger"
-                        style="width: 100%;" (click)="op1.toggle($event);goToView(this.userId);"></button>
+                    <button pButton pRipple type="button" label="View / Update Profile"
+                        class="p-button-raised p-button-danger" style="width: 100%;"
+                        (click)="op1.toggle($event);goToView(this.userId);"></button>
                 </div>
 
             </p-overlayPanel>

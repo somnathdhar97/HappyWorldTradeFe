@@ -20,6 +20,9 @@ export class UpdateProfileComponent {
   userDetails: IUserFullDetails;
   accountType: any[] = [];
 
+  decodedToken: string;
+  userRole: string;
+
   constructor(public layoutService: LayoutService,
     public fb: FormBuilder,
     private vs: ValidationService,
@@ -28,7 +31,10 @@ export class UpdateProfileComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) { }
+  ) {
+    this.decodedToken = this.authService.getDecodedAccessToken();
+    this.userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  }
 
   ngOnInit(): void {
     this.accountType = [

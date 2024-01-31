@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="stepsdemo-content">
             <p-card>
-                <ng-template pTemplate="title">Update Profile</ng-template>
+                <ng-template pTemplate="title">View / Update Profile</ng-template>
                 <ng-template pTemplate="subtitle">
                     <!-- Enter Permisiion Name -->
                 </ng-template>
@@ -71,8 +71,8 @@
 
                         </p-fieldset>
 
-                        <p-fieldset legend="Bank Details" [toggleable]="true" [collapsed]=true
-                            class="line-height-1 m-0">
+                        <p-fieldset legend="Bank Details" [toggleable]="true" [collapsed]=true class="line-height-1 m-0"
+                            *ngIf="userRole !== 'admin'">
 
                             <div class="p-fluid">
                                 <div class="p-formgrid grid">
