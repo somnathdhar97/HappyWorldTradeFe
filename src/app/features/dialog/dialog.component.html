@@ -18,6 +18,42 @@
             </strong>
         </ul>
     </div>
+    <div *ngIf="dialogData.paymentMethodId == 2">
+        <ul>
+            <strong>
+                <li>Name : {{dialogData.paymentDetails}}</li>
+            </strong>
+            <strong>
+                <li>Mobile : {{dialogData.paymentDetails}}</li>
+            </strong>
+            <strong>
+                <li>From Bank : {{dialogData.paymentDetails}}</li>
+            </strong>
+            <strong>
+                <li>To Bank : {{dialogData.paymentDetails}}</li>
+            </strong>
+            <strong>
+                <li>NEFT Reference : {{dialogData.paymentDetails}}</li>
+            </strong>
+
+        </ul>
+    </div>
+    <div *ngIf="dialogData.paymentMethodId == 3">
+        <ul>
+            <strong>
+                <li>Cheque Number : {{dialogData.paymentDetails}}</li>
+            </strong>
+            <strong>
+                <li>Cheque From Bank : {{dialogData.paymentDetails}}</li>
+            </strong>
+            <strong>
+                <li>To Whom : {{dialogData.paymentDetails}}</li>
+            </strong>
+            <strong>
+                <li>Cheque Dated On : {{dialogData.paymentDetails}}</li>
+            </strong>
+        </ul>
+    </div>
 </div>
 
 <div *ngIf="dialogData.mode == 'Read File'">
