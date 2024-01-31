@@ -9,6 +9,7 @@ import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { CustomMatErrorModule } from 'src/app/shared/helper/custom-mat-error/custom-mat-error.module';
 import { FieldsetModule } from 'primeng/fieldset';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FieldsetModule } from 'primeng/fieldset';
     PasswordModule,
     ReactiveFormsModule,
     CustomMatErrorModule,
-    FieldsetModule
+    FieldsetModule,
+    DropdownModule,
   ]
 })
 export class RegisterModule { }

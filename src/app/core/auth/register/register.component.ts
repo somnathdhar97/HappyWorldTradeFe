@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   valCheck: string[] = ['remember'];
   newClientData: INewClinet;
   registerForm: FormGroup;
+  accountType: any[] = [];
   constructor(private toastService: ToastService, public layoutService: LayoutService, public fb: FormBuilder, private vs: ValidationService, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -36,8 +37,12 @@ export class RegisterComponent implements OnInit {
       acHolderName: this.vs.validation('Required', 0, 100, 100),
       acType: this.vs.validation('Required', 0, 100, 100),
       pan: this.vs.validation('Required', 0, 100, 100),
-
     });
+
+    this.accountType = [
+      { name: 'Current', value: 1 },
+      { name: 'Savings', value: 2 },
+    ];
   }
 
   get errorControl() {
@@ -47,21 +52,21 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.registerForm.valid) {
       this.newClientData = {
-        personalDeatils:{
+        personalDeatils: {
           name: this.registerForm.value.name,
           username: this.registerForm.value.userName,
           mobileNumber: this.registerForm.value.mobileNo,
           password: this.registerForm.value.confirmPassword,
           email: this.registerForm.value.email,
         },
-        bankDeatils:{
-          bankName:this.registerForm.value.bankName,
-          ifscCode:this.registerForm.value.ifsc,
-          branchName:this.registerForm.value.branchName,
-          accountNumber:this.registerForm.value.acNumber.toString(),
-          accountHolderName:this.registerForm.value.acHolderName,
-          accountType:this.registerForm.value.acType,
-          pan:this.registerForm.value.pan,
+        bankDeatils: {
+          bankName: this.registerForm.value.bankName,
+          ifscCode: this.registerForm.value.ifsc,
+          branchName: this.registerForm.value.branchName,
+          accountNumber: this.registerForm.value.acNumber.toString(),
+          accountHolderName: this.registerForm.value.acHolderName,
+          accountType: this.registerForm.value.acType.value,
+          pan: this.registerForm.value.pan,
         }
       }
       this.authService.regisertNewClient(this.newClientData).subscribe((response) => {

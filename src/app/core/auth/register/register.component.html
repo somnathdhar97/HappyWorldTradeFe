@@ -121,11 +121,12 @@
                             </div>
                             <div class="p-formgrid grid">
                                 <div class="field col-12 md:col-6">
-                                    <label htmlFor="actype">Account Type</label>
-                                    <input pInputText id="actype" type="text" formControlName="acType" />
+                                    <label for="accounttype">Account Type</label>
+                                    <p-dropdown [options]="accountType" formControlName="acType" optionLabel="name"
+                                        [filter]="true" filterBy="name" [showClear]="true"
+                                        placeholder="Select Account Type" [showClear]="true"></p-dropdown>
                                     <span class="block" style="color: red;">
-                                        <custom-mat-error [control]="errorControl['acType']">
-                                        </custom-mat-error>
+                                        <custom-mat-error [control]="errorControl['acType']"></custom-mat-error>
                                     </span>
                                 </div>
                                 <div class="field col-12 md:col-6">
