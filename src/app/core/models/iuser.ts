@@ -20,4 +20,5 @@ export interface IUserFullDetails {
     accountNumber?: string | null;
     accountHolderName?: string | null;
     accountType?: number | null;
+    pan?: string | null;
 }

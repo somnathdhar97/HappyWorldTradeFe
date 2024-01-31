@@ -18,6 +18,7 @@ export class UpdateProfileComponent {
   cities: any[] = [];
   userId: number;
   userDetails: IUserFullDetails;
+  accountType: any[] = [];
 
   constructor(public layoutService: LayoutService,
     public fb: FormBuilder,
@@ -30,6 +31,11 @@ export class UpdateProfileComponent {
   ) { }
 
   ngOnInit(): void {
+    this.accountType = [
+      { name: 'Current', value: 1 },
+      { name: 'Savings', value: 2 },
+    ];
+
     this.profileUpdateForm = this.fb.group({
       name: [],
       email: [],
@@ -60,13 +66,20 @@ export class UpdateProfileComponent {
         branchName: this.userDetails.branchName,
         acNumber: this.userDetails.accountNumber?.trim(),
         acHolderName: this.userDetails.accountHolderName,
-        acType: this.userDetails.accountType,
+        acType: this.accType?.name,
+        pan: this.userDetails.pan,
       })
-    })
+    });
   }
 
   get errorControl() {
     return this.profileUpdateForm.controls;
+  }
+
+  get accType(): any {
+    return this.accountType.find((elm: any) => {
+      return elm.value == this.userDetails?.accountType;
+    });
   }
 
   updateProfile() {
