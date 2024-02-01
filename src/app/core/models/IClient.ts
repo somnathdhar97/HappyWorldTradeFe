@@ -3,7 +3,8 @@ export interface IClient {
     name: string;
     mobileNumber: string;
     email?: string;
-    status: string
+    status: string;
+    statusName: string;
 }
 export interface INewUser {
     name: string;
