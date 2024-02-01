@@ -18,6 +18,11 @@ export const authGuard: CanActivateFn = (route, state) => {
       return true;
     }
 
+    if (userRole === 'client' && route.data['role'] && route.data['role'].includes('admin')) {
+      router.navigate(['clientDashboard']);
+      return true;
+    }
+
     router.navigate(['notfound']);
     return false;
 

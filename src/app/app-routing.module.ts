@@ -22,7 +22,6 @@ import { authGuard } from './core/guards/auth.guard';
                     { path: 'dialog', canActivate: [authGuard], data: { role: ['admin,client'] }, loadChildren: () => import('./features/dialog/dialog.module').then(m => m.DialogModule) },
                 ]
             },
-            { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'login', loadChildren: () => import('./core/auth/login/login.module').then(m => m.LoginModule) },
             { path: 'registration', loadChildren: () => import('./core/auth/register/register.module').then(m => m.RegisterModule) },
             { path: 'forget-password', loadChildren: () => import('./core/auth/forget-password/forget-password.module').then(m => m.ForgetPasswordModule) },
